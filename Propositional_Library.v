@@ -194,27 +194,27 @@ Proof.
   - apply SatD.
 Qed.
 
-(* 
+
 (* prova top-down *) 
 Theorem  transitive_deduction_td:
-   forall (Gamma Delta:theory) (A B C:formula) ,
-      (A::Gamma |= B) /\ (B::Delta |= C) -> (A::Gamma++Delta |= C).
+    forall (Gamma Delta:theory) (A B C:formula) ,
+        (A::Gamma |= B) /\ (B::Delta |= C) -> (A::Gamma++Delta |= C).
 Proof.
-  intros. 
-  unfold entails in *. 
-  destruct H as [H1 H2]. 
-  intros. 
-  simpl in H.
-    destruct H as [left right].
-    pose right as x. apply theorySAT_union in x.
-    destruct x as [x1 x2].
-    assert ( theorySAT p (A::Gamma)). simpl. split. assumption. assumption.
-    pose H as y. apply H1 in y.
-    assert ( theorySAT p (B::Delta)). simpl. split. assumption. assumption. 
-    pose H0 as z.
-    apply H2 in z.
-    assumption.
-Qed.*)
+    intros. 
+    unfold entails in *. 
+    destruct H as [H1 H2]. 
+    intros. 
+    simpl in H.
+        destruct H as [left right].
+        pose right as x. apply theorySAT_union in x.
+        destruct x as [x1 x2].
+        assert ( theorySAT p (A::Gamma)). simpl. split. assumption. assumption.
+        pose H as y. apply H1 in y.
+        assert ( theorySAT p (B::Delta)). simpl. split. assumption. assumption. 
+        pose H0 as z.
+        apply H2 in z.
+        assumption.
+Qed.
 
 (*********Machado's code*********)
 
