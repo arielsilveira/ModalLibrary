@@ -1,52 +1,56 @@
-DIGEST efd92497962d7674f0b9cae4edf8ee11
+DIGEST 772a0011306f75ab62cd3c91cde99ba7
 FModal_Library
-ind 75:81 <> formula
-constr 98:100 <> Lit
-constr 134:136 <> Neg
-constr 174:176 <> Box
-constr 214:216 <> Dia
-constr 254:256 <> And
-constr 305:306 <> Or
-constr 356:362 <> Implies
-R116:119 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R120:126 Modal_Library <> formula ind
-R113:115 Coq.Init.Datatypes <> nat ind
-R156:159 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R160:166 Modal_Library <> formula ind
-R149:155 Modal_Library <> formula ind
-R196:199 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R200:206 Modal_Library <> formula ind
-R189:195 Modal_Library <> formula ind
-R236:239 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R240:246 Modal_Library <> formula ind
-R229:235 Modal_Library <> formula ind
-R276:279 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R287:290 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R291:297 Modal_Library <> formula ind
-R280:286 Modal_Library <> formula ind
-R269:275 Modal_Library <> formula ind
-R327:330 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R338:341 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R342:348 Modal_Library <> formula ind
-R331:337 Modal_Library <> formula ind
-R320:326 Modal_Library <> formula ind
-R378:381 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R389:392 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R393:399 Modal_Library <> formula ind
-R382:388 Modal_Library <> formula ind
-R371:377 Modal_Library <> formula ind
-R585:591 Modal_Library <> Implies constr
-not 568:568 <> ::x_'.->'_x
-R660:661 Modal_Library <> Or constr
-not 643:643 <> ::x_'.\/'_x
-R734:736 Modal_Library <> And constr
-not 717:717 <> ::x_'./\'_x
-R808:810 Modal_Library <> Neg constr
-not 791:791 <> ::'.~'_x
-R883:885 Modal_Library <> Box constr
-not 866:866 <> ::'.[]'_x
-R964:966 Modal_Library <> Dia constr
-not 947:947 <> ::'.<>'_x
+R80:84 Coq.Arith.Arith <> <> lib
+R86:89 Coq.Lists.List <> <> lib
+R91:97 Coq.Lists.ListSet <> <> lib
+R99:107 Coq.Logic.Classical <> <> lib
+ind 121:127 <> formula
+constr 144:146 <> Lit
+constr 180:182 <> Neg
+constr 220:222 <> Box
+constr 260:262 <> Dia
+constr 300:302 <> And
+constr 351:352 <> Or
+constr 402:408 <> Implies
+R162:165 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R166:172 Modal_Library <> formula ind
+R159:161 Coq.Init.Datatypes <> nat ind
+R202:205 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R206:212 Modal_Library <> formula ind
+R195:201 Modal_Library <> formula ind
+R242:245 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R246:252 Modal_Library <> formula ind
+R235:241 Modal_Library <> formula ind
+R282:285 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R286:292 Modal_Library <> formula ind
+R275:281 Modal_Library <> formula ind
+R322:325 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R333:336 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R337:343 Modal_Library <> formula ind
+R326:332 Modal_Library <> formula ind
+R315:321 Modal_Library <> formula ind
+R373:376 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R384:387 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R388:394 Modal_Library <> formula ind
+R377:383 Modal_Library <> formula ind
+R366:372 Modal_Library <> formula ind
+R424:427 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R435:438 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R439:445 Modal_Library <> formula ind
+R428:434 Modal_Library <> formula ind
+R417:423 Modal_Library <> formula ind
+R597:603 Modal_Library <> Implies constr
+not 580:580 <> ::x_'.->'_x
+R672:673 Modal_Library <> Or constr
+not 655:655 <> ::x_'.\/'_x
+R746:748 Modal_Library <> And constr
+not 729:729 <> ::x_'./\'_x
+R820:822 Modal_Library <> Neg constr
+not 803:803 <> ::'.~'_x
+R895:897 Modal_Library <> Box constr
+not 878:878 <> ::'.[]'_x
+R970:972 Modal_Library <> Dia constr
+not 953:953 <> ::'.<>'_x
 R1045:1047 Modal_Library <> Lit constr
 not 1028:1028 <> ::'#'_x
 def 1166:1169 <> size
