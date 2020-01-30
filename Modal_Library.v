@@ -4,6 +4,8 @@
 
 *)
 
+Require Import Arith List ListSet Classical.
+
 Inductive formula : Set :=
     | Lit          : nat -> formula
     | Neg          : formula -> formula
@@ -12,16 +14,16 @@ Inductive formula : Set :=
     | And          : formula -> formula -> formula
     | Or           : formula -> formula -> formula
     | Implies      : formula -> formula -> formula 
-    (* | formula_Prop : formula *)
 .
+
 (* Tentar ver como colocar se uma fórmula é modal ou proposicional *)
 (* Ver a precedencia dos operadores unários *)
 Notation " X .-> Y "  := (Implies X Y) (at level 13, right associativity).
 Notation " X .\/ Y "  := (Or X Y)      (at level 12, left associativity).
 Notation " X ./\ Y"   := (And X Y)     (at level 11, left associativity).
 Notation " .~ X "     := (Neg X)       (at level 10, right associativity).
-Notation " .[] X "    := (Box X)             (at level 10, right associativity).
-Notation " .<> X "    := (Dia X)             (at level 10, right associativity).
+Notation " .[] X "    := (Box X)       (at level 10, right associativity).
+Notation " .<> X "    := (Dia X)       (at level 10, right associativity).
 Notation " # X "      := (Lit X)       (at level 1, no associativity).
 
 (* Calcula o tamanho de uma fórmula com base na lógica modal *)
@@ -42,6 +44,13 @@ Definition ex3 := .~.~ .<> #0 .-> .[] #1.
     
 Check size ex1.
 Compute size ex3.
+
+Ltac prop_world p w := 
+(* Comando Compute para ver se esta funcionando o Ltac *)
+(* https://github.com/coq/coq/wiki/Ltac *)
+(* https://coq.inria.fr/refman/proof-engine/ltac.html#grammar-token-cpattern *)
+
+(* Ideia: prop_world formula [world_1; world_2;...;world_n]*)
 (* 
     P -> 2^w
     p0 -> []
