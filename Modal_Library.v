@@ -6,14 +6,14 @@
 
 Require Import Arith List ListSet Classical.
 
-Inductive formula : Set :=
-    | Lit          : nat -> formula
-    | Neg          : formula -> formula
-    | Box          : formula -> formula
-    | Dia          : formula -> formula
-    | And          : formula -> formula -> formula
-    | Or           : formula -> formula -> formula
-    | Implies      : formula -> formula -> formula 
+Inductive formulaModal : Set :=
+    | Lit          : nat -> formulaModal
+    | Neg          : formulaModal -> formulaModal
+    | Box          : formulaModal -> formulaModal
+    | Dia          : formulaModal -> formulaModal
+    | And          : formulaModal -> formulaModal -> formulaModal
+    | Or           : formulaModal -> formulaModal -> formulaModal
+    | Implies      : formulaModal -> formulaModal -> formulaModal 
 .
 
 (* Tentar ver como colocar se uma fórmula é modal ou proposicional *)
@@ -27,8 +27,8 @@ Notation " .<> X "    := (Dia X)       (at level 10, right associativity).
 Notation " # X "      := (Lit X)       (at level 1, no associativity).
 
 (* Calcula o tamanho de uma fórmula com base na lógica modal *)
-Fixpoint size (f:formula) : nat :=
-    match f with
+Fixpoint size (f:formulaModal) : nat :=
+    match f with 
     | Lit      x     => 1
     | Neg      p1    => 1 + (size p1)
     | Box      p1    => 1 + (size p1)
@@ -36,7 +36,7 @@ Fixpoint size (f:formula) : nat :=
     | And      p1 p2 => 1 + (size p1) + (size p2)
     | Or       p1 p2 => 1 + (size p1) + (size p2)
     | Implies  p1 p2 => 1 + (size p1) + (size p2)
-    end.
+end.
 
 Definition ex1 := .<> #0 .\/ #1.
 Definition ex2 := #1 .-> .[] .~ #2 .-> .<> #0 .\/ (#1 .\/ #2).
@@ -44,6 +44,15 @@ Definition ex3 := .~.~ .<> #0 .-> .[] #1.
     
 Check size ex1.
 Compute size ex3.
+
+
+
+Theorem verify_world : (l : natlist )
+    (r : Acessibility) (w : l) (p : formula), 
+    w |= p.
+Proof.
+Qed.
+
 
 Ltac prop_world p w := 
 (* Comando Compute para ver se esta funcionando o Ltac *)
@@ -62,6 +71,8 @@ Ltac prop_world p w :=
 
 
 *)
+
+(* Theorem test : 1 <> 2. *)
 (* Começar a construção de um modelo *)
 (* Começar o desenvolvimento de mundos *)
 (* Rever as anotações criadas pela Kaqui *)
