@@ -1,4 +1,4 @@
-DIGEST a2c1c9f27ef07295c0753792de3773d7
+DIGEST a8394573a11bd1739830e5c1d6dd8d83
 FModal_Library
 R80:84 Coq.Arith.Arith <> <> lib
 R86:89 Coq.Lists.List <> <> lib
@@ -53,72 +53,79 @@ R1055:1057 Modal_Library <> Dia constr
 not 1038:1038 <> ::'.<>'_x
 R1130:1132 Modal_Library <> Lit constr
 not 1113:1113 <> ::'#'_x
-def 1251:1254 <> size
-R1259:1270 Modal_Library <> formulaModal ind
-R1275:1277 Coq.Init.Datatypes <> nat ind
-R1292:1292 Modal_Library <> f var
-R1306:1308 Modal_Library <> Lit constr
-R1332:1334 Modal_Library <> Neg constr
-R1351:1354 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1362:1362 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1355:1358 Modal_Library <> size def
-R1370:1372 Modal_Library <> Box constr
-R1389:1392 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1400:1400 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1393:1396 Modal_Library <> size def
-R1408:1410 Modal_Library <> Dia constr
-R1427:1430 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1438:1438 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1431:1434 Modal_Library <> size def
-R1446:1448 Modal_Library <> And constr
-R1477:1480 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1488:1488 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1465:1468 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1476:1476 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1469:1472 Modal_Library <> size def
-R1481:1484 Modal_Library <> size def
-R1496:1497 Modal_Library <> Or constr
-R1527:1530 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1538:1538 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1515:1518 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1526:1526 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1519:1522 Modal_Library <> size def
-R1531:1534 Modal_Library <> size def
-R1546:1552 Modal_Library <> Implies constr
-R1577:1580 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1588:1588 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1565:1568 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1576:1576 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1569:1572 Modal_Library <> size def
-R1581:1584 Modal_Library <> size def
-def 1607:1609 <> ex1
-R1620:1624 Modal_Library <> ::x_'.\/'_x not
-R1614:1617 Modal_Library <> ::'.<>'_x not
-R1618:1618 Modal_Library <> ::'#'_x not
-R1625:1625 Modal_Library <> ::'#'_x not
-def 1640:1642 <> ex2
-R1649:1653 Modal_Library <> ::x_'.->'_x not
-R1647:1647 Modal_Library <> ::'#'_x not
-R1663:1667 Modal_Library <> ::x_'.->'_x not
-R1654:1657 Modal_Library <> ::'.[]'_x not
-R1658:1660 Modal_Library <> ::'.~'_x not
-R1661:1661 Modal_Library <> ::'#'_x not
-R1674:1679 Modal_Library <> ::x_'.\/'_x not
-R1689:1689 Modal_Library <> ::x_'.\/'_x not
-R1668:1671 Modal_Library <> ::'.<>'_x not
-R1672:1672 Modal_Library <> ::'#'_x not
-R1682:1686 Modal_Library <> ::x_'.\/'_x not
-R1680:1680 Modal_Library <> ::'#'_x not
-R1687:1687 Modal_Library <> ::'#'_x not
-def 1703:1705 <> ex3
-R1721:1725 Modal_Library <> ::x_'.->'_x not
-R1710:1711 Modal_Library <> ::'.~'_x not
-R1712:1714 Modal_Library <> ::'.~'_x not
-R1715:1718 Modal_Library <> ::'.<>'_x not
-R1719:1719 Modal_Library <> ::'#'_x not
-R1726:1729 Modal_Library <> ::'.[]'_x not
+def 1251:1259 <> sizeModal
+R1264:1275 Modal_Library <> formulaModal ind
+R1280:1282 Coq.Init.Datatypes <> nat ind
+R1297:1297 Modal_Library <> f var
+R1311:1313 Modal_Library <> Lit constr
+R1337:1339 Modal_Library <> Neg constr
+R1356:1359 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1372:1372 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1360:1368 Modal_Library <> sizeModal def
+R1380:1382 Modal_Library <> Box constr
+R1399:1402 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1415:1415 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1403:1411 Modal_Library <> sizeModal def
+R1423:1425 Modal_Library <> Dia constr
+R1442:1445 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1458:1458 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1446:1454 Modal_Library <> sizeModal def
+R1466:1468 Modal_Library <> And constr
+R1502:1505 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1518:1518 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1485:1488 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1501:1501 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1489:1497 Modal_Library <> sizeModal def
+R1506:1514 Modal_Library <> sizeModal def
+R1526:1527 Modal_Library <> Or constr
+R1562:1565 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1578:1578 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1545:1548 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1561:1561 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1549:1557 Modal_Library <> sizeModal def
+R1566:1574 Modal_Library <> sizeModal def
+R1586:1592 Modal_Library <> Implies constr
+R1622:1625 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1638:1638 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1605:1608 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1621:1621 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1609:1617 Modal_Library <> sizeModal def
+R1626:1634 Modal_Library <> sizeModal def
+def 1657:1659 <> ex1
+R1670:1674 Modal_Library <> ::x_'.\/'_x not
+R1664:1667 Modal_Library <> ::'.<>'_x not
+R1668:1668 Modal_Library <> ::'#'_x not
+R1675:1675 Modal_Library <> ::'#'_x not
+def 1690:1692 <> ex2
+R1699:1703 Modal_Library <> ::x_'.->'_x not
+R1697:1697 Modal_Library <> ::'#'_x not
+R1713:1717 Modal_Library <> ::x_'.->'_x not
+R1704:1707 Modal_Library <> ::'.[]'_x not
+R1708:1710 Modal_Library <> ::'.~'_x not
+R1711:1711 Modal_Library <> ::'#'_x not
+R1724:1729 Modal_Library <> ::x_'.\/'_x not
+R1739:1739 Modal_Library <> ::x_'.\/'_x not
+R1718:1721 Modal_Library <> ::'.<>'_x not
+R1722:1722 Modal_Library <> ::'#'_x not
+R1732:1736 Modal_Library <> ::x_'.\/'_x not
 R1730:1730 Modal_Library <> ::'#'_x not
-R1745:1748 Modal_Library <> size def
-R1750:1752 Modal_Library <> ex1 def
-R1763:1766 Modal_Library <> size def
-R1768:1770 Modal_Library <> ex3 def
+R1737:1737 Modal_Library <> ::'#'_x not
+def 1753:1755 <> ex3
+R1771:1775 Modal_Library <> ::x_'.->'_x not
+R1760:1761 Modal_Library <> ::'.~'_x not
+R1762:1764 Modal_Library <> ::'.~'_x not
+R1765:1768 Modal_Library <> ::'.<>'_x not
+R1769:1769 Modal_Library <> ::'#'_x not
+R1776:1779 Modal_Library <> ::'.[]'_x not
+R1780:1780 Modal_Library <> ::'#'_x not
+R1795:1803 Modal_Library <> sizeModal def
+R1805:1807 Modal_Library <> ex1 def
+R1818:1826 Modal_Library <> sizeModal def
+R1828:1830 Modal_Library <> ex3 def
+ind 1844:1850 <> natlist
+constr 1864:1866 <> nil
+constr 1870:1873 <> cons
+R1867:1867 Modal_Library <> natlist ind
+R1880:1882 Coq.Init.Datatypes <> nat ind
+R1890:1896 Modal_Library <> natlist ind
+R1898:1898 Modal_Library <> natlist ind
