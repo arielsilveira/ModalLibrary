@@ -38,17 +38,50 @@ Fixpoint sizeModal (f:formulaModal) : nat :=
     | Implies  p1 p2 => 1 + (sizeModal p1) + (sizeModal p2)
 end.
 
-Definition ex1 := .<> #0 .\/ #1.
-Definition ex2 := #1 .-> .[] .~ #2 .-> .<> #0 .\/ (#1 .\/ #2).
-Definition ex3 := .~.~ .<> #0 .-> .[] #1.
+Definition ex1 := #0 .\/ #1.
+Definition ex2 := #1 .-> .~ #2 .-> #0 .\/ (#1 .\/ #2).
+Definition ex3 := .~.~ #0 .-> #1.
     
+(* Definition list_world : list nat := 3 :: 2 :: nil. *)
+
 Check sizeModal ex1.
 Compute sizeModal ex3.
 
-Inductive natlist : Type :=
-| nil
-| cons (n : nat) (l : natlist).
+Fixpoint literals (f:formulaModal) : set nat :=
+match f with 
+| Lit      x     => set_add eq_nat_dec x (empty_set nat)
+| Dia      p1    => literals p1
+| Box      p1    => literals p1
+| Neg      p1    => literals p1
+| And      p1 p2 => set_union eq_nat_dec (literals p1) (literals p2)
+| Or       p1 p2 => set_union eq_nat_dec (literals p1) (literals p2)
+| Implies  p1 p2 => set_union eq_nat_dec (literals p1) (literals p2) 
+end.
 
+Fixpoint valuation (p: nat -> bool) (f:formulaModal) : bool :=
+match f with
+| Lit     x        => p x
+| Box     x1       => [] (valuation p x1)
+| Dia     x1       => .<> (valuation p x1)
+| Neg     x1       => negb (valuation p x1)
+| And     x1 x2    => (valuation p x1) && (valuation p x2)
+| Or      x1 x2    => (valuation p x1) || (valuation p x2)
+| Implies x1 x2    => (negb (valuation p x1)) || (valuation p x2)
+end.
+
+Check literals ex2.
+(* 
+
+(* Example of basic literal valuation *)
+
+Fixpoint evenb (x:nat) : bool :=
+match x with
+  | O   => true
+  | S x => negb (evenb x)
+end.
+
+Check   valuation evenb ex1.
+Compute valuation evenb ex1.
 
 (* Inductive World := natlist. *)
 (* Definition world : natlist. *)
