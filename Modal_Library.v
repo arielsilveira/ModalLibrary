@@ -58,17 +58,17 @@ match f with
 | Implies  p1 p2 => set_union eq_nat_dec (literals p1) (literals p2) 
 end.
 
-Fixpoint valuation (p: nat -> bool) (f:formulaModal) : bool :=
+(*Fixpoint valuation (p: nat -> bool) (f:formulaModal) : bool :=
 match f with
 | Lit     x        => p x
-| Box     x1       => [] (valuation p x1)
-| Dia     x1       => .<> (valuation p x1)
+| Box     x1       => .[] (valuation p x1) //REVER ESTE TRECHO PARA ANÁLISE DE MUNDOS POSSÍVEIS
+| Dia     x1       => .<> (valuation p x1)  //REVER ESTE TRECHO PARA ANÁLISE DE MUNDOS POSSÍVEIS
 | Neg     x1       => negb (valuation p x1)
 | And     x1 x2    => (valuation p x1) && (valuation p x2)
 | Or      x1 x2    => (valuation p x1) || (valuation p x2)
 | Implies x1 x2    => (negb (valuation p x1)) || (valuation p x2)
 end.
-
+*)
 Check literals ex2.
 (* 
 

@@ -86,7 +86,7 @@ Compute literals ex2.
 
 (* Semantics of propositional logic is a function that evaluates a formula based on
    a valuation for literals and truth tables for logical operations *)
-
+ 
 Fixpoint valuation (p: nat -> bool) (f:formula) : bool :=
 match f with
 | Lit     x        => p x

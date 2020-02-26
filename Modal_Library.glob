@@ -1,4 +1,4 @@
-DIGEST b39599bfbcc9f1baf9a2c3cc0400f685
+DIGEST ac45f4b7c2f88da7029003b436ecd6da
 FModal_Library
 R80:84 Coq.Arith.Arith <> <> lib
 R86:89 Coq.Lists.List <> <> lib
@@ -148,3 +148,5 @@ R2245:2253 Coq.Lists.ListSet <> set_union def
 R2281:2288 Modal_Library <> literals def
 R2267:2274 Modal_Library <> literals def
 R2255:2264 Coq.Arith.Peano_dec <> eq_nat_dec syndef
+R2844:2851 Modal_Library <> literals def
+R2853:2855 Modal_Library <> ex2 def
