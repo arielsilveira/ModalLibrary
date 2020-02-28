@@ -16,7 +16,7 @@ será visto cada uma das restrições. Página 29
 - Provar cada metapropriedade do capítulo 2.4 
 - Regras: De Morgan, Necessitação e Axiomas 
 
-Definição de proposição com mundo
+### Definição de proposição com mundo
 
     P -> 2^w
     p0 -> []
