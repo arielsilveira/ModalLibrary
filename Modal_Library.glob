@@ -1,4 +1,4 @@
-DIGEST 15ac3c28ab66ba4cb71b5dd5d27bca6e
+DIGEST bb3647ab5afa5d39d115b6abca18a7b0
 FModal_Library
 R80:84 Coq.Arith.Arith <> <> lib
 R86:89 Coq.Lists.List <> <> lib
@@ -260,3 +260,24 @@ R3404:3404 Modal_Library <> R var
 R3507:3539 Modal_Library <> list_worlds_relations_list_worlds def
 R3547:3560 Modal_Library <> relation_world def
 R3541:3545 Modal_Library <> world def
+def 3575:3584 <> lista_prop
+R3588:3591 Coq.Init.Datatypes <> list ind
+R3593:3595 Coq.Init.Datatypes <> nat ind
+R3600:3602 Modal_Library <> ::'['_']' not
+R3613:3622 Modal_Library <> lista_prop def
+def 3798:3807 <> prop_world
+R3816:3827 Modal_Library <> formulaModal ind
+R3835:3838 Coq.Init.Datatypes <> list ind
+R3840:3842 Coq.Init.Datatypes <> nat ind
+R3847:3850 Coq.Init.Datatypes <> list ind
+R3865:3867 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
+R3853:3864 Modal_Library <> formulaModal ind
+R3868:3871 Coq.Init.Datatypes <> list ind
+R3873:3875 Coq.Init.Datatypes <> nat ind
+R3891:3894 Coq.Init.Datatypes <> :list_scope:x_'++'_x not
+R3881:3890 Modal_Library <> lista_prop def
+R3895:3895 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R3906:3906 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R3896:3899 Coq.Init.Datatypes <> pair constr
+R3905:3905 Modal_Library <> w var
+R3901:3903 Modal_Library <> phi var

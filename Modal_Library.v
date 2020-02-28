@@ -96,7 +96,17 @@ Fixpoint list_worlds_relations_list_worlds (w : list nat) (R : list (nat * nat))
 (* Return a list with all relations, where each position is a list of relation *)
 Compute list_worlds_relations_list_worlds world relation_world.
 
-[(prop, [worlds]);(prop, [worlds]);(prop, [worlds]);(prop, [worlds])]
+Definition lista_prop : list nat := [ ].
+Compute lista_prop.
+
+(* Rever essa parte para saber como deixar um vetor de pair com uma lista em snd *)
+(* [(prop, [worlds]);(prop, [worlds]);(prop, [worlds]);(prop, [worlds])] *)
+
+Definition prop_world (phi : formulaModal) (w : list nat) : list (formulaModal * list nat) :=
+lista_prop ++ [pair phi w].
+
+Compute prop_world (#1 ./\ #2) [1;2;3;4].
+Check lista_prop.
 
 (*Fixpoint valuation (p: nat -> bool) (f:formulaModal) : bool :=
 match f with
@@ -109,19 +119,17 @@ match f with
 | Implies x1 x2    => (negb (valuation p x1)) || (valuation p x2)
 end.
 *)
-(* Check literals ex2. *)
-(* 
 
 (* Example of basic literal valuation *)
 
-Fixpoint evenb (x:nat) : bool :=
+(* Fixpoint evenb (x:nat) : bool :=
 match x with
   | O   => true
   | S x => negb (evenb x)
 end.
 
 Check   valuation evenb ex1.
-Compute valuation evenb ex1.
+Compute valuation evenb ex1. *)
 
 (* Inductive World := natlist. *)
 (* Definition world : natlist. *)
@@ -136,12 +144,13 @@ Proof.
 Qed.
 
  *)
-(* Ltac prop_world p w :=  *)
+(* Definition prop_world (phi : formulaModal) (w : list nat) -> list (nat * list nat) :=
+match  p [phi :: w].  *)
 (* Comando Compute para ver se esta funcionando o Ltac *)
 (* https://github.com/coq/coq/wiki/Ltac *)
 (* https://coq.inria.fr/refman/proof-engine/ltac.html#grammar-token-cpattern *)
-
-(* Ideia: prop_world formula [world_1; world_2;...;world_n]*)
+Definition Ideia  prop_worlphi (f : formulaModal) (w : list nat) -> list (nat * list nat) :=
+[phi :: w].mula [world_1; world_2;...;world_n]*)
 (* 
     P -> 2^w
     p0 -> []
