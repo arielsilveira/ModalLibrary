@@ -58,6 +58,46 @@ match f with
 | Implies  p1 p2 => set_union eq_nat_dec (literals p1) (literals p2) 
 end.
 
+Notation "[ ]" := nil.
+Notation "x :: l" := (cons x l)
+                     (at level 60, right associativity).
+Notation "[ x ; .. ; y ]" := (cons x .. (cons y nil) ..).
+
+
+Definition world := [0;1;2;3;4].
+Definition relation_world := [(0,1);(1,1);(1,2);(2,0);(2,3);(3,1);(3,3);(3,4)].
+
+Fixpoint eqb (n m : nat) : bool :=
+  match n with
+  | O => match m with
+         | O => true
+         | S m' => false
+         end
+  | S n' => match m with
+            | O => false
+            | S m' => eqb n' m'
+            end
+  end.
+
+(* Search world relation with all worlds on lists *)
+Fixpoint world_relations_list_worlds (w : nat) (R : list (nat * nat)) : list nat :=
+match R with
+    | nil => nil
+    | h :: t => if eqb (fst h) w then (snd h) :: (world_relations_list_worlds w t) else (world_relations_list_worlds w t)
+end.
+
+(* Search all worlds relations with all worlds on lists *)
+Fixpoint list_worlds_relations_list_worlds (w : list nat) (R : list (nat * nat)) : list (list nat) :=
+    match w with
+    | nil => nil
+    | h :: t => (world_relations_list_worlds h R) :: (list_worlds_relations_list_worlds t R)
+    end.
+
+(* Return a list with all relations, where each position is a list of relation *)
+Compute list_worlds_relations_list_worlds world relation_world.
+
+[(prop, [worlds]);(prop, [worlds]);(prop, [worlds]);(prop, [worlds])]
+
 (*Fixpoint valuation (p: nat -> bool) (f:formulaModal) : bool :=
 match f with
 | Lit     x        => p x
@@ -69,7 +109,7 @@ match f with
 | Implies x1 x2    => (negb (valuation p x1)) || (valuation p x2)
 end.
 *)
-Check literals ex2.
+(* Check literals ex2. *)
 (* 
 
 (* Example of basic literal valuation *)
