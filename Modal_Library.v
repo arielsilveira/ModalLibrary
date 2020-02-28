@@ -44,8 +44,8 @@ Definition ex3 := .~.~ #0 .-> #1.
     
 (* Definition list_world : list nat := 3 :: 2 :: nil. *)
 
-Check sizeModal ex1.
-Compute sizeModal ex3.
+(* Check sizeModal ex1.
+Compute sizeModal ex3. *)
 
 Fixpoint literals (f:formulaModal) : set nat :=
 match f with 
@@ -63,9 +63,6 @@ Notation "x :: l" := (cons x l)
                      (at level 60, right associativity).
 Notation "[ x ; .. ; y ]" := (cons x .. (cons y nil) ..).
 
-
-Definition world := [0;1;2;3;4].
-Definition relation_world := [(0,1);(1,1);(1,2);(2,0);(2,3);(3,1);(3,3);(3,4)].
 
 Fixpoint eqb (n m : nat) : bool :=
   match n with
@@ -93,43 +90,39 @@ Fixpoint list_worlds_relations_list_worlds (w : list nat) (R : list (nat * nat))
     | h :: t => (world_relations_list_worlds h R) :: (list_worlds_relations_list_worlds t R)
     end.
 
-(* Return a list with all relations, where each position is a list of relation *)
-Compute list_worlds_relations_list_worlds world relation_world.
+(* Exemplo de teste *)
+
+Definition world := [0;1;2;3;4].
+Definition relation_world := [(0,1);(1,1);(1,2);(2,0);(2,3);(3,1);(3,3);(3,4)].
+
+Definition x := list_worlds_relations_list_worlds world relation_world.
+Compute x.
 
 Definition lista_prop : list nat := [ ].
 Compute lista_prop.
 
-(* Rever essa parte para saber como deixar um vetor de pair com uma lista em snd *)
-(* [(prop, [worlds]);(prop, [worlds]);(prop, [worlds]);(prop, [worlds])] *)
+(* Fim do exemplo de teste *)
 
+
+(* Anotações importantes para próximo uso *)
+(* 
+    Dar uma olhada em argumentos implícitos, passar como parâmetro e salvá-las
+    Construir um Definition que recebe esse argumento, tal como vetor vazio,
+    desta forma, concateno o retorno da lista com este argumento. Como por exemplo
+    [] ++ (funcao mundos relações)
+
+
+    [(prop, [worlds]);(prop, [worlds]);(prop, [worlds]);(prop, [worlds])]
+*)
+
+
+(* Rever essa parte para saber como deixar um vetor de pair com uma lista em snd *)
 Definition prop_world (phi : formulaModal) (w : list nat) : list (formulaModal * list nat) :=
 lista_prop ++ [pair phi w].
 
 Compute prop_world (#1 ./\ #2) [1;2;3;4].
 Check lista_prop.
 
-(*Fixpoint valuation (p: nat -> bool) (f:formulaModal) : bool :=
-match f with
-| Lit     x        => p x
-| Box     x1       => .[] (valuation p x1) //REVER ESTE TRECHO PARA ANÁLISE DE MUNDOS POSSÍVEIS
-| Dia     x1       => .<> (valuation p x1)  //REVER ESTE TRECHO PARA ANÁLISE DE MUNDOS POSSÍVEIS
-| Neg     x1       => negb (valuation p x1)
-| And     x1 x2    => (valuation p x1) && (valuation p x2)
-| Or      x1 x2    => (valuation p x1) || (valuation p x2)
-| Implies x1 x2    => (negb (valuation p x1)) || (valuation p x2)
-end.
-*)
-
-(* Example of basic literal valuation *)
-
-(* Fixpoint evenb (x:nat) : bool :=
-match x with
-  | O   => true
-  | S x => negb (evenb x)
-end.
-
-Check   valuation evenb ex1.
-Compute valuation evenb ex1. *)
 
 (* Inductive World := natlist. *)
 (* Definition world : natlist. *)
@@ -146,32 +139,3 @@ Qed.
  *)
 (* Definition prop_world (phi : formulaModal) (w : list nat) -> list (nat * list nat) :=
 match  p [phi :: w].  *)
-(* Comando Compute para ver se esta funcionando o Ltac *)
-(* https://github.com/coq/coq/wiki/Ltac *)
-(* https://coq.inria.fr/refman/proof-engine/ltac.html#grammar-token-cpattern *)
-Definition Ideia  prop_worlphi (f : formulaModal) (w : list nat) -> list (nat * list nat) :=
-[phi :: w].mula [world_1; world_2;...;world_n]*)
-(* 
-    P -> 2^w
-    p0 -> []
-    p1 -> [w2, w4]
-    p2 -> [w1, w3]
-
-    Construir o Ltac para gravar cada proposição 
-     presente em um mundo
-
-
-*)
-
-(* Theorem test : 1 <> 2. *)
-(* Começar a construção de um modelo *)
-(* Começar o desenvolvimento de mundos *)
-(* Rever as anotações criadas pela Kaqui *)
-(* Uma proposição vai ter uma lista de mundos *)
-(* Ver como funciona a construção do Ltac *)
-(* Saber como construir uma fórmula modal *)
-(* Modelar os diferentes sistemas (K, B, D, T, 4, 5...) *)
-(* Diferentes propriedades de cada um modelo, dessa forma
-será visto cada uma das restrições. Página 29 *)
-(* Provar cada metapropriedade do capítulo 2.4 *)
-(* Regras: De Morgan, Necessitação e Axiomas *)
