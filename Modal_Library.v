@@ -122,14 +122,53 @@ match worlds with
                 else verify_prop t world f
 end.
 
+(* 
+    Interessante ._.
+    Preciso ver isso melhor
+    Mas serve para definir a caixa e diamante receberam proposições
+        e defini-las como prova.
+    É uma sintaxe de extensão e interpretação de escopo
+    URL: https://coq.inria.fr/refman/user-extensions/syntax-extensions.html
+*)
+Inductive caixa (A : Prop) : Prop :=
+    c : A -> .[] A
+where ".[] A" := (caixa A) : type_scope.
+
+Inductive diamante (A : Prop) : Prop :=
+    d : A -> .<> A
+where ".<> A" := (diamante A) : type_scope.
+
+
+Fixpoint formulaSAT (v: nat -> Prop) (A:formulaModal) : Prop :=
+match A with
+| Lit     x        => v x
+| Neg     x1       => ~ (formulaSAT v x1)
+| Box     x1       => .[] (formulaSAT v x1)
+| Dia     x1       => .<> (formulaSAT v x1)
+| And     x1 x2    => (formulaSAT v x1) /\ (formulaSAT v x2)
+| Or      x1 x2    => (formulaSAT v x1) \/ (formulaSAT v x2)
+| Implies x1 x2    => ~ (formulaSAT v x1) \/ (formulaSAT v x2)
+end.
+
+(* Example of basic literal valuation *)
+
+Fixpoint evenP (x:nat) : Prop :=
+match x with
+  | O   => True
+  | S x => not (evenP x)
+end.
+
 (* Compute 0 |= # 1 ./\ # 2. *)
 
 (* ----------------------- *)
 (* Init - Exemplo de teste *)
 
-Definition ex1 := #0 .\/ #1.
-Definition ex2 := #1 .-> .~ #2 .-> #0 .\/ (#1 .\/ #2).
+Definition ex1 := .[] #0 .\/ #1.
+Definition ex2 := #1 .-> .~ .[] #2 .-> #0 .\/ .[](.<> #1 .\/ #2).
 Definition ex3 := .~.~ #0 .-> #1.
+Check formulaSAT.
+Compute formulaSAT evenP ex2.
+
 
 Definition world := [0;1;2;3;4]. (*Precisa ver se é necessário isso*)
 Definition relation_world := [(0,1);(1,1);(1,2);(2,0);(2,3);(3,1);(3,3);(3,4)].

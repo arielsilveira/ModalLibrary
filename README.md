@@ -3,6 +3,8 @@
 
 Desenvolvimento futuro 
 
+- Descobrir como construir
+
 - Theorem test : 1 <> 2. 
 - Começar a construção de um modelo 
 - Começar o desenvolvimento de mundos 
