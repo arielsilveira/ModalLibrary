@@ -38,15 +38,6 @@ Fixpoint sizeModal (f:formulaModal) : nat :=
     | Implies  p1 p2 => 1 + (sizeModal p1) + (sizeModal p2)
 end.
 
-Definition ex1 := #0 .\/ #1.
-Definition ex2 := #1 .-> .~ #2 .-> #0 .\/ (#1 .\/ #2).
-Definition ex3 := .~.~ #0 .-> #1.
-    
-(* Definition list_world : list nat := 3 :: 2 :: nil. *)
-
-(* Check sizeModal ex1.
-Compute sizeModal ex3. *)
-
 Fixpoint literals (f:formulaModal) : set nat :=
 match f with 
 | Lit      x     => set_add eq_nat_dec x (empty_set nat)
@@ -58,6 +49,9 @@ match f with
 | Implies  p1 p2 => set_union eq_nat_dec (literals p1) (literals p2) 
 end.
 
+(* 
+    Constroi uma nova notação para listas
+*)
 Notation "[ ]" := nil.
 Notation "x :: l" := (cons x l)
                      (at level 60, right associativity).
@@ -76,66 +70,90 @@ Fixpoint eqb (n m : nat) : bool :=
             end
   end.
 
-(* Search world relation with all worlds on lists *)
+(* 
+    Recebe um mundo e o conjunto de relações como parâmetro
+    Retorna uma lista de mundos que há uma relação. 
+*)
 Fixpoint world_relations_list_worlds (w : nat) (R : list (nat * nat)) : list nat :=
 match R with
     | nil => nil
-    | h :: t => if eqb (fst h) w then (snd h) :: (world_relations_list_worlds w t) else (world_relations_list_worlds w t)
+    | h :: t => if eqb (fst h) w then (snd h) :: (world_relations_list_worlds w t) 
+                else (world_relations_list_worlds w t)
 end.
 
-(* Search all worlds relations with all worlds on lists *)
+(* 
+    Recebe o conjunto total de mundos
+    Retorna o uma lista onde cada posição da lista é uma lista
+        de todos os mundos que a posição relaciona
+    *)
 Fixpoint list_worlds_relations_list_worlds (w : list nat) (R : list (nat * nat)) : list (list nat) :=
     match w with
     | nil => nil
     | h :: t => (world_relations_list_worlds h R) :: (list_worlds_relations_list_worlds t R)
     end.
 
-(* Exemplo de teste *)
 
-Definition world := [0;1;2;3;4].
+(* 
+    Verifica se o mundo está contido na lista da proposição
+    Recebe uma lista de mundos e um mundo qualquer
+    Retorna um valor booleano referente o mundo estiver contido ou não
+*)
+
+Fixpoint verify_world (worlds : list nat) (world : nat) : bool :=
+match worlds with
+    | nil => false
+    | h :: t => if eqb h world then true
+                else verify_world t world
+end.
+
+(* 
+    Verifica se uma proposição é valida em um mundo
+    Recebe uma lista de pares onde:
+        [(proposição, [mundos que possuem a proposição]); ...],
+        um mundo qualquer e uma proposição.
+    
+    Retorna um valor booleano, caso a proposição seja verdadeira
+        no mundo passado pelo parâmetro.
+*)
+Fixpoint verify_prop (worlds : list (nat * list nat)) (world : nat) (f : nat) : bool :=
+match worlds with
+    | nil => false
+    | h :: t => if eqb (fst h) f then verify_world (snd h) world
+                else verify_prop t world f
+end.
+
+(* Compute 0 |= # 1 ./\ # 2. *)
+
+(* ----------------------- *)
+(* Init - Exemplo de teste *)
+
+Definition ex1 := #0 .\/ #1.
+Definition ex2 := #1 .-> .~ #2 .-> #0 .\/ (#1 .\/ #2).
+Definition ex3 := .~.~ #0 .-> #1.
+
+Definition world := [0;1;2;3;4]. (*Precisa ver se é necessário isso*)
 Definition relation_world := [(0,1);(1,1);(1,2);(2,0);(2,3);(3,1);(3,3);(3,4)].
+Definition prop_in_world := [(0,[0;1]); (1, [0;1;2;3;4])].
 
-Definition x := list_worlds_relations_list_worlds world relation_world.
+(* Definition x := list_worlds_relations_list_worlds world relation_world. *)
+Definition x := world_relations_list_worlds 1 relation_world.
 Compute x.
+Compute prop_in_world.
+Check literals.
+Compute literals ex1.
+Compute verify_prop prop_in_world 2 0.
 
 Definition lista_prop : list nat := [ ].
 Compute lista_prop.
 
-(* Fim do exemplo de teste *)
-
-
-(* Anotações importantes para próximo uso *)
-(* 
-    Dar uma olhada em argumentos implícitos, passar como parâmetro e salvá-las
-    Construir um Definition que recebe esse argumento, tal como vetor vazio,
-    desta forma, concateno o retorno da lista com este argumento. Como por exemplo
-    [] ++ (funcao mundos relações)
-
-
-    [(prop, [worlds]);(prop, [worlds]);(prop, [worlds]);(prop, [worlds])]
-*)
+(* End - Exemplo de teste *)
+(* ---------------------- *)
 
 
 (* Rever essa parte para saber como deixar um vetor de pair com uma lista em snd *)
-Definition prop_world (phi : formulaModal) (w : list nat) : list (formulaModal * list nat) :=
+(* Definition prop_world (phi : formulaModal) (w : list nat) : list (formulaModal * list nat) :=
 lista_prop ++ [pair phi w].
 
 Compute prop_world (#1 ./\ #2) [1;2;3;4].
 Check lista_prop.
-
-
-(* Inductive World := natlist. *)
-(* Definition world : natlist. *)
-(* Inductive Model : Type :=
-    | w : natlist
-    | R : w -> w -> Prop. *)
-
-(* Theorem verify_world : (l : natlist )
-    (r : Acessibility) (w : l) (p : formula), 
-    w |= p.
-Proof.
-Qed.
-
- *)
-(* Definition prop_world (phi : formulaModal) (w : list nat) -> list (nat * list nat) :=
-match  p [phi :: w].  *)
+*)

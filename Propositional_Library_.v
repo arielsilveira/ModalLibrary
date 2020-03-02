@@ -103,7 +103,7 @@ match x with
   | O   => true
   | S x => negb (evenb x)
 end.
-
+ 
 Check   valuation evenb ex1.
 Compute valuation evenb ex1.
 
@@ -125,7 +125,7 @@ match x with
   | O   => True
   | S x => not (evenP x)
 end.
-
+Compute ex1.
 Check   formulaSAT evenP ex1.
 Compute formulaSAT evenP ex1. 
 
@@ -145,6 +145,8 @@ Definition entails (Gamma:theory) (A:formula) : Prop :=
 forall (v: nat -> Prop), theorySAT v Gamma -> formulaSAT v A.
 
 Notation " A |= B " := (entails A B) (at level 110, no associativity).
+
+Compute # 1::# 2::nil |= # 1.
 
 (***** structural properties of deduction ****)
 

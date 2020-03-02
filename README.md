@@ -27,3 +27,14 @@ será visto cada uma das restrições. Página 29
 - Comando Compute para ver se esta funcionando o Ltac 
 - https://github.com/coq/coq/wiki/Ltac 
 - https://coq.inria.fr/refman/proof-engine/ltac.html#grammar-token-cpattern 
+
+
+ ### Anotações importantes para próximo uso 
+ 
+- Dar uma olhada em argumentos implícitos, passar como parâmetro e salvá-las
+- Construir um Definition que recebe esse argumento, tal como vetor vazio,
+    desta forma, concateno o retorno da lista com este argumento. Como por exemplo:
+    - [] ++ (funcao mundos relações)
+
+
+    [(prop, [worlds]);(prop, [worlds]);(prop, [worlds]);(prop, [worlds])]
