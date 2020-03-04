@@ -92,6 +92,22 @@ Fixpoint list_worlds_relations_list_worlds (w : list nat) (R : list (nat * nat))
     | h :: t => (world_relations_list_worlds h R) :: (list_worlds_relations_list_worlds t R)
     end.
 
+Inductive Relation (Worlds : list nat): nat -> nat -> Prop :=
+| r:
+    forall world_x world_y,
+    In world_x Worlds -> In world_y Worlds -> Relation Worlds world_x world_y.
+
+
+Record Mode : Type :={
+    W : list nat;
+    x : nat;
+    y : nat;
+    R : Relation W x x;
+}.
+
+Check Mode {W: [1;2;3]} {x: 1} {y: 2} {R: W x y}.
+
+Definition R := (W * W).
 
 (* 
     Verifica se o mundo está contido na lista da proposição
