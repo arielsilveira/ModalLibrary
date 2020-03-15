@@ -70,50 +70,12 @@ Fixpoint eqb (n m : nat) : bool :=
             end
   end.
 
-(* 
-    Recebe um mundo e o conjunto de relações como parâmetro
-    Retorna uma lista de mundos que há uma relação. 
-*)
-Fixpoint world_relations_list_worlds (w : nat) (R : list (nat * nat)) : list nat :=
-match R with
-    | nil => nil
-    | h :: t => if eqb (fst h) w then (snd h) :: (world_relations_list_worlds w t) 
-                else (world_relations_list_worlds w t)
-end.
-
-(* Fixpoint validate_relation (w: W) *)
-
-(* 
-    Recebe o conjunto total de mundos
-    Retorna o uma lista onde cada posição da lista é uma lista
-        de todos os mundos que a posição relaciona
-    *)
-Fixpoint list_worlds_relations_list_worlds (w : list nat) (R : list (nat * nat)) : list (list nat) :=
-    match w with
-    | nil => nil
-    | h :: t => (world_relations_list_worlds h R) :: (list_worlds_relations_list_worlds t R)
-    end.
-
-
 Inductive Relation (Worlds : list nat): nat -> nat -> Prop :=
 | r:
     forall world_x world_y,
     In world_x Worlds -> In world_y Worlds -> Relation Worlds world_x world_y.
     
-
-Theorem test: Relation [1;2;3] 2 5 -> False.
-Proof.
-    intros. inversion H. inversion H1. inversion H4. inversion H4. inversion H5.
-    inversion H5. inversion H6. inversion H6.
-Qed.
-http://adam.chlipala.net/cpdt/html/Match.html
-Ltac relation_apply l w1 w2 := apply r; simpl; auto; simpl; auto.
-
-Example ex1: Relation [1; 2; 3] 2 3.
-Proof.
-    relation_apply 2 2 5.
-Qed.
-
+(* http://adam.chlipala.net/cpdt/html/Match.html *)
 
 Example ex1: Relation [1; 2; 3] 2 3.
 Proof.
@@ -128,17 +90,11 @@ Proof.
   discriminate H5. inversion H5. discriminate H6. inversion H6.
 Qed.
 
-Theorem test1: Relation [1;2;3] 2 5 -> False.
+Example ex3: Relation [1;2;3] 2 5 -> False.
 Proof.
   intros. inversion H. inversion H1. discriminate H4. inversion H4. 
   discriminate H5. inversion H5. discriminate H6. inversion H6.
 Qed.
-
-Definition acessibility (w: list nat) (x y : nat): Prop := Relation w x y.
-
-Check acessibility [1;2;3] 1 5.
-
-(* Lemma test: Relation [1;2;3] 2 5. *)
 
 
 Definition acessibility_relation (l : list nat) (p : (nat * nat)): bool :=
