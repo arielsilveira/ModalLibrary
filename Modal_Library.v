@@ -91,7 +91,7 @@ match W with
                 else verify w t 
 end.
 
-Notation "xRy" := (acessibility_relation [1;2;3] (x,y)) (at level 111, no associativity).
+Notation "w #X R w' #Y" := (acessibility_relation [1;2;3] (X, Y)) (at level 111, no associativity).
 
 Record Mode : Type :={
     W : list nat;
@@ -169,37 +169,6 @@ match x with
   | O   => True
   | S x => not (evenP x)
 end.
-
-(* Compute 0 |= # 1 ./\ # 2. *)
-
-(* ----------------------- *)
-(* Init - Exemplo de teste *)
-
-(* Definition ex1 := .[] #0 .\/ #1.
-Definition ex2 := #1 .-> .~ .[] #2 .-> #0 .\/ .[](.<> #1 .\/ #2).
-Definition ex3 := .~.~ #0 .-> #1. *)
-Check formulaSAT.
-(* Compute formulaSAT evenP ex2. *)
-
-
-Definition world := [0;1;2;3;4]. (*Precisa ver se é necessário isso*)
-Definition relation_world := [(0,1);(1,1);(1,2);(2,0);(2,3);(3,1);(3,3);(3,4)].
-Definition prop_in_world := [(0,[0;1]); (1, [0;1;2;3;4])].
-
-(* Definition x := list_worlds_relations_list_worlds world relation_world. *)
-(* Definition x := world_relations_list_worlds 1 relation_world. *)
-Compute x.
-Compute prop_in_world.
-Check literals.
-(* Compute literals ex1. *)
-Compute verify_prop prop_in_world 2 0.
-
-Definition lista_prop : list nat := [ ].
-Compute lista_prop.
-
-(* End - Exemplo de teste *)
-(* ---------------------- *)
-
 
 (* Rever essa parte para saber como deixar um vetor de pair com uma lista em snd *)
 (* Definition prop_world (phi : formulaModal) (w : list nat) : list (formulaModal * list nat) :=

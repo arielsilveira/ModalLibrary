@@ -1,27 +1,113 @@
-DIGEST d9e3ff77f25b7eb0c3bfa68e43f2cc06
+DIGEST c0684782117ea111239f6d9f920eab6f
 Fexemplos
 R15:27 Modal_Library <> <> lib
-def 72:74 <> ex1
-R77:84 Modal_Library <> Relation ind
-R86:86 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R88:89 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R91:92 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R94:94 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R116:116 Modal_Library <> r constr
-R116:116 Modal_Library <> r constr
-def 171:173 <> ex2
-R176:176 Coq.Init.Logic <> :type_scope:'~'_x not
-R177:184 Modal_Library <> Relation ind
-R186:186 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R188:189 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R191:192 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R194:194 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R217:219 Coq.Init.Logic <> not def
-def 367:369 <> ex3
-R392:395 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R396:400 Coq.Init.Logic <> False ind
-R372:379 Modal_Library <> Relation ind
-R381:381 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R383:383 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R385:385 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R387:387 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+def 106:110 <> form1
+R121:125 Modal_Library <> ::x_'.\/'_x not
+R115:118 Modal_Library <> ::'.[]'_x not
+R119:119 Modal_Library <> ::'#'_x not
+R126:126 Modal_Library <> ::'#'_x not
+def 141:145 <> form2
+R152:156 Modal_Library <> ::x_'.->'_x not
+R150:150 Modal_Library <> ::'#'_x not
+R166:170 Modal_Library <> ::x_'.->'_x not
+R157:159 Modal_Library <> ::'.~'_x not
+R160:163 Modal_Library <> ::'.[]'_x not
+R164:164 Modal_Library <> ::'#'_x not
+R173:177 Modal_Library <> ::x_'.\/'_x not
+R171:171 Modal_Library <> ::'#'_x not
+R178:181 Modal_Library <> ::'.[]'_x not
+R195:195 Modal_Library <> ::'.[]'_x not
+R188:192 Modal_Library <> ::x_'.\/'_x not
+R182:185 Modal_Library <> ::'.<>'_x not
+R186:186 Modal_Library <> ::'#'_x not
+R193:193 Modal_Library <> ::'#'_x not
+def 209:213 <> form3
+R225:229 Modal_Library <> ::x_'.->'_x not
+R218:219 Modal_Library <> ::'.~'_x not
+R220:222 Modal_Library <> ::'.~'_x not
+R223:223 Modal_Library <> ::'#'_x not
+R230:230 Modal_Library <> ::'#'_x not
+def 274:278 <> world
+R283:283 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R285:285 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R287:287 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R289:289 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R291:291 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R293:293 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+def 346:359 <> relation_world
+R364:364 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R370:370 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R376:376 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R382:382 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R388:388 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R394:394 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R400:400 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R406:406 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R412:412 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R407:407 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R409:409 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R411:411 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R401:401 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R403:403 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R405:405 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R395:395 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R397:397 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R399:399 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R389:389 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R391:391 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R393:393 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R383:383 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R385:385 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R387:387 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R377:377 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R379:379 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R381:381 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R371:371 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R373:373 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R375:375 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R365:365 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R367:367 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R369:369 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+def 426:438 <> prop_in_world
+R443:443 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R453:454 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R471:471 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R455:455 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R457:458 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R470:470 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R459:459 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R461:461 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R463:463 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R465:465 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R467:467 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R469:469 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R444:444 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R446:446 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R452:452 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R447:447 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R449:449 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R451:451 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+def 509:511 <> ex1
+R514:521 Modal_Library <> Relation ind
+R523:523 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R525:526 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R528:529 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R531:531 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R553:553 Modal_Library <> r constr
+R553:553 Modal_Library <> r constr
+def 608:610 <> ex2
+R613:613 Coq.Init.Logic <> :type_scope:'~'_x not
+R614:621 Modal_Library <> Relation ind
+R623:623 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R625:626 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R628:629 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R631:631 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R654:656 Coq.Init.Logic <> not def
+def 804:806 <> ex3
+R829:832 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R833:837 Coq.Init.Logic <> False ind
+R809:816 Modal_Library <> Relation ind
+R818:818 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R820:820 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R822:822 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R824:824 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not

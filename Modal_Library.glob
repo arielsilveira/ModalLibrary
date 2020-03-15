@@ -1,4 +1,4 @@
-DIGEST 9f7de061de1e60c92a4e925d63e087d1
+DIGEST 10e792f8b0a7f7a5c3075723751ecba5
 FModal_Library
 R80:84 Coq.Arith.Arith <> <> lib
 R86:89 Coq.Lists.List <> <> lib
@@ -193,3 +193,7 @@ R3033:3033 Modal_Library <> w var
 R3066:3071 Modal_Library <> verify def
 R3073:3073 Modal_Library <> w var
 R3040:3043 Coq.Init.Logic <> True ind
+R3112:3132 Modal_Library <> acessibility_relation def
+R3142:3142 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3144:3145 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3147:3147 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
