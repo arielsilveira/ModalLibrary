@@ -77,29 +77,22 @@ Inductive Relation (Worlds : list nat): nat -> nat -> Prop :=
     
 (* http://adam.chlipala.net/cpdt/html/Match.html *)
 
-Example ex1: Relation [1; 2; 3] 2 3.
-Proof.
-  apply r.
-    - simpl. auto.
-    - simpl. auto.
-Qed.
+Definition W := list nat.
 
-Example ex2: ~Relation [1; 2; 3] 1 5.
-Proof.
-  unfold not. intros. inversion H. inversion H1. discriminate H4. inversion H4. 
-  discriminate H5. inversion H5. discriminate H6. inversion H6.
-Qed.
+Definition acessibility_relation (w: list nat) (x: nat * nat) : Prop := 
+ Relation w (fst x) (snd x).
 
-Example ex3: Relation [1;2;3] 2 5 -> False.
-Proof.
-  intros. inversion H. inversion H1. discriminate H4. inversion H4. 
-  discriminate H5. inversion H5. discriminate H6. inversion H6.
-Qed.
+Inductive Vazio : Prop.
 
+Fixpoint verify (w: nat) (W: list nat) : Prop :=
+match W with
+    | [] => Vazio
+    | h :: t => if eqb h w then True
+                else verify w t 
+end.
 
-Definition acessibility_relation (l : list nat) (p : (nat * nat)): bool :=
-    andb (member (fst p) l) (member y l)(. 
-)
+Notation "xRy" := (acessibility_relation [1;2;3] (x,y)) (at level 111, no associativity).
+
 Record Mode : Type :={
     W : list nat;
     x : nat;
@@ -108,14 +101,9 @@ Record Mode : Type :={
 }.
 
 
-Compute Relation [1; 2; 3] 2 2.
-Compute Relation [1;2;3] 2 5.
+(* Check Mode {W: [1;2;3]} {x: 1} {y: 2} {R: W x y}. *)
 
-
-
-Check Mode {W: [1;2;3]} {x: 1} {y: 2} {R: W x y}.
-
-Definition R := (W * W).
+(* Definition R := (W * W). *)
 
 (* 
     Verifica se o mundo está contido na lista da proposição
@@ -187,11 +175,11 @@ end.
 (* ----------------------- *)
 (* Init - Exemplo de teste *)
 
-Definition ex1 := .[] #0 .\/ #1.
+(* Definition ex1 := .[] #0 .\/ #1.
 Definition ex2 := #1 .-> .~ .[] #2 .-> #0 .\/ .[](.<> #1 .\/ #2).
-Definition ex3 := .~.~ #0 .-> #1.
+Definition ex3 := .~.~ #0 .-> #1. *)
 Check formulaSAT.
-Compute formulaSAT evenP ex2.
+(* Compute formulaSAT evenP ex2. *)
 
 
 Definition world := [0;1;2;3;4]. (*Precisa ver se é necessário isso*)
@@ -199,11 +187,11 @@ Definition relation_world := [(0,1);(1,1);(1,2);(2,0);(2,3);(3,1);(3,3);(3,4)].
 Definition prop_in_world := [(0,[0;1]); (1, [0;1;2;3;4])].
 
 (* Definition x := list_worlds_relations_list_worlds world relation_world. *)
-Definition x := world_relations_list_worlds 1 relation_world.
+(* Definition x := world_relations_list_worlds 1 relation_world. *)
 Compute x.
 Compute prop_in_world.
 Check literals.
-Compute literals ex1.
+(* Compute literals ex1. *)
 Compute verify_prop prop_in_world 2 0.
 
 Definition lista_prop : list nat := [ ].

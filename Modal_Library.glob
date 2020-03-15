@@ -1,4 +1,4 @@
-DIGEST 1b26115a58c94649c41b7087564f6eb5
+DIGEST 9f7de061de1e60c92a4e925d63e087d1
 FModal_Library
 R80:84 Coq.Arith.Arith <> <> lib
 R86:89 Coq.Lists.List <> <> lib
@@ -164,27 +164,32 @@ R2661:2662 Coq.Lists.List <> In def
 R2664:2670 Modal_Library <> world_y var
 R2640:2641 Coq.Lists.List <> In def
 R2643:2649 Modal_Library <> world_x var
-def 2781:2783 <> ex1
-R2786:2793 Modal_Library <> Relation ind
-R2795:2795 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R2797:2798 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R2800:2801 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R2803:2803 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R2825:2825 Modal_Library <> r constr
-R2825:2825 Modal_Library <> r constr
-def 2880:2882 <> ex2
-R2885:2885 Coq.Init.Logic <> :type_scope:'~'_x not
-R2886:2893 Modal_Library <> Relation ind
-R2895:2895 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R2897:2898 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R2900:2901 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R2903:2903 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R2926:2928 Coq.Init.Logic <> not def
-def 3076:3078 <> ex3
-R3101:3104 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R3105:3109 Coq.Init.Logic <> False ind
-R3081:3088 Modal_Library <> Relation ind
-R3090:3090 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R3092:3092 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R3094:3094 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R3096:3096 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+def 2784:2784 <> W
+R2789:2792 Coq.Init.Datatypes <> list ind
+R2794:2796 Coq.Init.Datatypes <> nat ind
+def 2811:2831 <> acessibility_relation
+R2837:2840 Coq.Init.Datatypes <> list ind
+R2842:2844 Coq.Init.Datatypes <> nat ind
+R2854:2856 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
+R2851:2853 Coq.Init.Datatypes <> nat ind
+R2857:2859 Coq.Init.Datatypes <> nat ind
+R2874:2881 Modal_Library <> Relation ind
+R2894:2896 Coq.Init.Datatypes <> snd def
+R2898:2898 Modal_Library <> x var
+R2886:2888 Coq.Init.Datatypes <> fst def
+R2890:2890 Modal_Library <> x var
+R2883:2883 Modal_Library <> w var
+rec 2913:2917 <> Vazio
+def 2937:2942 <> verify
+R2948:2950 Coq.Init.Datatypes <> nat ind
+R2957:2960 Coq.Init.Datatypes <> list ind
+R2962:2964 Coq.Init.Datatypes <> nat ind
+R2983:2983 Modal_Library <> W var
+R2996:2997 Modal_Library <> ::'['_']' not
+R3002:3006 Modal_Library <> Vazio indrec
+R3015:3018 Modal_Library <> ::x_'::'_x not
+R3027:3029 Modal_Library <> eqb def
+R3033:3033 Modal_Library <> w var
+R3066:3071 Modal_Library <> verify def
+R3073:3073 Modal_Library <> w var
+R3040:3043 Coq.Init.Logic <> True ind
