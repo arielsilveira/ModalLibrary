@@ -74,6 +74,19 @@ Inductive Relation : Prop :=
     | r : World -> World -> Relation
 .
 
+Check r (w 2) (w 9).
+
+
+Record Frame : Type :={
+    W : World; (*Recebe uma lista de mundos*)
+    R : Relation; (*Recebe uma lista de pares ordenados*)
+}.
+
+Record Model : Type :={
+    F : Frame; (*Frame de um modelo*)
+    v : nat -> World -> bool; (*Precisa ser visto como vai ser feito*)
+}.
+
 Fixpoint eqb (n m : nat) : bool :=
   match n with
   | O => match m with
@@ -86,10 +99,6 @@ Fixpoint eqb (n m : nat) : bool :=
             end
   end.
 
-Record Model : Type :={
-  W : World;
-  rsas : nat;
-}.
 
 Inductive Relation (Worlds : list nat): nat -> nat -> Prop :=
 | r :
