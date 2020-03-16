@@ -11,7 +11,7 @@ Definition world := [0;1;2;3;4]. (*Precisa ver se é necessário isso*)
 Definition relation_world := [(0,1);(1,1);(1,2);(2,0);(2,3);(3,1);(3,3);(3,4)].
 Definition prop_in_world := [(0,[0;1]); (1, [0;1;2;3;4])].
 
-(* Inicio dos exemplos *)
+(* Inicio dos exemplos de Relação *)
 Example ex1: Relation [1; 2; 3] 2 3.
 Proof.
   apply r.

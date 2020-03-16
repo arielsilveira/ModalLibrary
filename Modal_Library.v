@@ -6,6 +6,11 @@
 
 Require Import Arith List ListSet Classical Logic.
 
+(* Parameter A : Type.
+Parameter le : A -> Prop. 
+Infix "≤" := le : order_scope.
+*)
+
 Inductive formulaModal : Set :=
     | Lit          : nat -> formulaModal
     | Neg          : formulaModal -> formulaModal
@@ -57,6 +62,22 @@ Notation "x :: l" := (cons x l)
                      (at level 60, right associativity).
 Notation "[ x ; .. ; y ]" := (cons x .. (cons y nil) ..).
 
+Inductive World : Set :=
+    | w : nat -> World
+.
+
+Inductive Relation : Set :=
+    | r : World -> World -> Relation
+.
+
+Check [w 0; w 1; w 4].
+Check r (w 1) (w 2).
+
+Notation "w # X" := (w X) (at level 1, no associativity).
+
+Compute (w 3).
+
+Notation "w # X R w # Y" := (r (w X) (w Y)) (at level 111, no associativity).
 
 Fixpoint eqb (n m : nat) : bool :=
   match n with
@@ -69,6 +90,8 @@ Fixpoint eqb (n m : nat) : bool :=
             | S m' => eqb n' m'
             end
   end.
+
+
 
 Inductive Relation (Worlds : list nat): nat -> nat -> Prop :=
 | r:
@@ -91,7 +114,6 @@ match W with
                 else verify w t 
 end.
 
-Notation "w #X R w' #Y" := (acessibility_relation [1;2;3] (X, Y)) (at level 111, no associativity).
 
 Record Mode : Type :={
     W : list nat;
