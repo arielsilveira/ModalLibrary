@@ -65,19 +65,14 @@ Notation "[ x ; .. ; y ]" := (cons x .. (cons y nil) ..).
 Inductive World : Set :=
     | w : nat -> World
 .
-(* 
-Inductive Relation : Set :=
-    | r : World -> World -> Relation
-. *)
 
 Check [w 0; w 1; w 4].
-(* Check r (w 1) (w 2). *)
 
 Notation "w # X" := (w X) (at level 1, no associativity).
 
-Compute (w 3).
-
-(* Notation "w # X R w # Y" := (r (w X) (w Y)) (at level 111, no associativity). *)
+Inductive Relation : Prop :=
+    | r : World -> World -> Relation
+.
 
 Fixpoint eqb (n m : nat) : bool :=
   match n with
@@ -91,19 +86,24 @@ Fixpoint eqb (n m : nat) : bool :=
             end
   end.
 
-
+Record Model : Type :={
+  W : World;
+  rsas : nat;
+}.
 
 Inductive Relation (Worlds : list nat): nat -> nat -> Prop :=
-| r:
+| r :
     forall world_x world_y,
     In world_x Worlds -> In world_y Worlds -> Relation Worlds world_x world_y.
     
 (* http://adam.chlipala.net/cpdt/html/Match.html *)
 
-Definition W := list nat.
+(* Definition W := list nat. *)
 
-Definition acessibility_relation (w: list nat) (x: nat * nat) : Prop := 
+Definition acessibility_relation (w: list nat) (x: list (nat * nat)) : Prop := forall x,
  Relation w (fst x) (snd x).
+
+Compute acessibility_relation [1;2;3] [(2,1);(1,6)].
 
 Inductive Vazio : Prop.
 
@@ -115,12 +115,7 @@ match W with
 end.
 
 
-(* Record Mode : Type :={
-    W : list nat;
-    x : nat;
-    y : nat;
-    R : Relation W x x;
-}. *)
+
 
 
 (* Check Mode {W: [1;2;3]} {x: 1} {y: 2} {R: W x y}. *)
