@@ -65,19 +65,19 @@ Notation "[ x ; .. ; y ]" := (cons x .. (cons y nil) ..).
 Inductive World : Set :=
     | w : nat -> World
 .
-
+(* 
 Inductive Relation : Set :=
     | r : World -> World -> Relation
-.
+. *)
 
 Check [w 0; w 1; w 4].
-Check r (w 1) (w 2).
+(* Check r (w 1) (w 2). *)
 
 Notation "w # X" := (w X) (at level 1, no associativity).
 
 Compute (w 3).
 
-Notation "w # X R w # Y" := (r (w X) (w Y)) (at level 111, no associativity).
+(* Notation "w # X R w # Y" := (r (w X) (w Y)) (at level 111, no associativity). *)
 
 Fixpoint eqb (n m : nat) : bool :=
   match n with
@@ -115,12 +115,12 @@ match W with
 end.
 
 
-Record Mode : Type :={
+(* Record Mode : Type :={
     W : list nat;
     x : nat;
     y : nat;
     R : Relation W x x;
-}.
+}. *)
 
 
 (* Check Mode {W: [1;2;3]} {x: 1} {y: 2} {R: W x y}. *)
