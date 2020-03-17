@@ -100,14 +100,6 @@ match n with
                 else pertence t m
 end.
 
-Fixpoint teste (wld : list nat) (rlt : list (nat * nat)) : Prop :=
-match rlt with
-    | nil => False
-    | h :: t => if andb (pertence wld (fst h)) (pertence wld (snd h)) then h :: (teste wld t)
-            else teste wld t
-end.
-
-Definition teste_1 (wld : World) (rlt : Relation) : Set := teste_2 wld rlt.
 
 
 Record Frame : Type :={
@@ -121,21 +113,48 @@ Record Model : Type :={
 }.
 
 
+Notation "x && y" := (andb x y).
+Notation "x =? y" := (eqb x y) (at level 70) : nat_scope.
 
+Fixpoint eqb_World (x x' : World): bool :=
+  match x with
+    | w n => match x' with 
+              | w n' => if eqb n n' then true else false
+            end
+  end.
 
-Inductive Relation (Worlds : list nat): nat -> nat -> Prop :=
-| r :
-    forall world_x world_y,
-    In world_x Worlds -> In world_y Worlds -> Relation Worlds world_x world_y.
-    
-(* http://adam.chlipala.net/cpdt/html/Match.html *)
+Fixpoint In_World (x: World) (l: list World): bool :=
+  match l with
+    | nil => false
+    | h :: t => if eqb_World x h then true
+                else In_World x t
+  end.
+
+Fixpoint teste (Worlds : list World) (Relations : list (World * World)) : list (World * World) :=
+match Relations, Worlds with
+    | nil, _ => nil 
+    | _, nil => nil
+    | h :: t, h1 :: t1 => if (In_World (fst h) Worlds) && (In_World (snd h) Worlds) 
+                          then ((fst h, snd h) :: nil) ++ teste Worlds t
+                          else teste Worlds t
+end.
+
+Fixpoint pair_to_relation (l : list (World * World)) : list Relation :=
+  match l with
+    | nil => nil
+    | h :: t => (r (fst h) (snd h)) :: pair_to_relation t
+  end.
+
+Compute teste [w 1 ; w 2; w 3; w 4] [(w 3,w 6)].
+Compute pair_to_relation ( teste [w 1 ; w 2; w 3; w 4] [(w 1,w 2) ; (w 2,w 4); (w 3,w 6)] ).
+
 
 (* Definition W := list nat. *)
 
-Definition acessibility_relation (w: list nat) (x: list (nat * nat)) : Prop := forall x,
- Relation w (fst x) (snd x).
+(* Definition acessibility_relation (w: list nat) (x: list (nat * nat)) : Prop := forall x,
+ Relation w (fst x) (snd x). *)
 
-Compute acessibility_relation [1;2;3] [(2,1);(1,6)].
+(* Compute acessibility_relation [1;2;3] [(2,1);(1,6)]. *)
 
 Inductive Vazio : Prop.
 
