@@ -1,4 +1,4 @@
-DIGEST c5a57741d9a6f19456606f1f01483630
+DIGEST 63efacd81cc7915c300aa469bdc0f036
 FModal_Library
 R80:84 Coq.Arith.Arith <> <> lib
 R86:89 Coq.Lists.List <> <> lib
@@ -161,3 +161,57 @@ R2685:2689 Modal_Library <> ::x_'$'_x not
 R2693:2693 Modal_Library <> ::x_'$'_x not
 R2682:2682 Modal_Library <> w constr
 R2690:2690 Modal_Library <> w constr
+def 2786:2788 <> eqb
+R2797:2799 Coq.Init.Datatypes <> nat ind
+R2804:2807 Coq.Init.Datatypes <> bool ind
+R2820:2820 Modal_Library <> n var
+R2831:2831 Coq.Init.Datatypes <> O constr
+R2842:2842 Modal_Library <> m var
+R2860:2860 Coq.Init.Datatypes <> O constr
+R2865:2868 Coq.Init.Datatypes <> true constr
+R2881:2881 Coq.Init.Datatypes <> S constr
+R2889:2893 Coq.Init.Datatypes <> false constr
+R2912:2912 Coq.Init.Datatypes <> S constr
+R2926:2926 Modal_Library <> m var
+R2947:2947 Coq.Init.Datatypes <> O constr
+R2952:2956 Coq.Init.Datatypes <> false constr
+R2972:2972 Coq.Init.Datatypes <> S constr
+R2980:2982 Modal_Library <> eqb def
+def 3023:3030 <> pertence
+R3037:3040 Coq.Init.Datatypes <> list ind
+R3042:3044 Coq.Init.Datatypes <> nat ind
+R3052:3054 Coq.Init.Datatypes <> nat ind
+R3059:3062 Coq.Init.Datatypes <> bool ind
+R3073:3073 Modal_Library <> n var
+R3086:3088 Coq.Init.Datatypes <> nil constr
+R3093:3097 Coq.Init.Datatypes <> false constr
+R3106:3109 Modal_Library <> ::x_'::'_x not
+R3118:3120 Modal_Library <> eqb def
+R3124:3124 Modal_Library <> m var
+R3157:3164 Modal_Library <> pertence def
+R3168:3168 Modal_Library <> m var
+R3131:3134 Coq.Init.Datatypes <> true constr
+def 3185:3189 <> teste
+R3198:3201 Coq.Init.Datatypes <> list ind
+R3203:3205 Coq.Init.Datatypes <> nat ind
+R3215:3218 Coq.Init.Datatypes <> list ind
+R3224:3226 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
+R3221:3223 Coq.Init.Datatypes <> nat ind
+R3227:3229 Coq.Init.Datatypes <> nat ind
+R3249:3251 Modal_Library <> rlt var
+R3264:3266 Coq.Init.Datatypes <> nil constr
+R3271:3275 Coq.Init.Logic <> False ind
+R3284:3287 Modal_Library <> ::x_'::'_x not
+R3296:3299 Coq.Init.Datatypes <> andb def
+R3325:3332 Modal_Library <> pertence def
+R3339:3341 Coq.Init.Datatypes <> snd def
+R3334:3336 Modal_Library <> wld var
+R3302:3309 Modal_Library <> pertence def
+R3316:3318 Coq.Init.Datatypes <> fst def
+R3311:3313 Modal_Library <> wld var
+R3388:3392 Modal_Library <> teste def
+R3394:3396 Modal_Library <> wld var
+R3353:3357 Modal_Library <> ::x_'::'_x not
+R3369:3369 Modal_Library <> ::x_'::'_x not
+R3358:3362 Modal_Library <> teste def
+R3364:3366 Modal_Library <> wld var

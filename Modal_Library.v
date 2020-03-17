@@ -79,18 +79,7 @@ Check [w 0; w 1; w 4].
 Check r (w 2) (w 9).
 Check (w 4) $ (w 5).
 
-Definition verify_relation (W : World) (R : Relation) : Prop := forall .
-
-
-Record Frame : Type :={
-    W : World; (*Recebe uma lista de mundos*)
-    R : Relation; (*Recebe uma lista de pares ordenados*)
-}.
-
-Record Model : Type :={
-    F : Frame; (*Frame de um modelo*)
-    v : formulaModal -> World -> bool; (*Precisa ser visto como vai ser feito*)
-}.
+(* Definition verify_relation (W : World) (R : Relation) : Prop := forall . *)
 
 Fixpoint eqb (n m : nat) : bool :=
   match n with
@@ -103,6 +92,35 @@ Fixpoint eqb (n m : nat) : bool :=
             | S m' => eqb n' m'
             end
   end.
+
+Fixpoint pertence (n : list nat) (m : nat) : bool :=
+match n with
+    | nil => false
+    | h :: t => if eqb h m then true
+                else pertence t m
+end.
+
+Fixpoint teste (wld : list nat) (rlt : list (nat * nat)) : Prop :=
+match rlt with
+    | nil => False
+    | h :: t => if andb (pertence wld (fst h)) (pertence wld (snd h)) then h :: (teste wld t)
+            else teste wld t
+end.
+
+Definition teste_1 (wld : World) (rlt : Relation) : Set := teste_2 wld rlt.
+
+
+Record Frame : Type :={
+    W : World; (*Recebe uma lista de mundos*)
+    R : Relation; (*Recebe uma lista de pares ordenados*)
+}.
+
+Record Model : Type :={
+    F : Frame; (*Frame de um modelo*)
+    v : formulaModal -> World -> bool; (*Precisa ser visto como vai ser feito*)
+}.
+
+
 
 
 Inductive Relation (Worlds : list nat): nat -> nat -> Prop :=
