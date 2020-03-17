@@ -66,15 +66,20 @@ Inductive World : Set :=
     | w : nat -> World
 .
 
-Check [w 0; w 1; w 4].
-
-Notation "w # X" := (w X) (at level 1, no associativity).
 
 Inductive Relation : Prop :=
     | r : World -> World -> Relation
 .
 
+
+Notation "w # X" := (w X) (at level 1, no associativity).
+Notation "x $ y" := (r x y) (at level 1, no associativity).
+
+Check [w 0; w 1; w 4].
 Check r (w 2) (w 9).
+Check (w 4) $ (w 5).
+
+Definition verify_relation (W : World) (R : Relation) : Prop := forall .
 
 
 Record Frame : Type :={
@@ -84,7 +89,7 @@ Record Frame : Type :={
 
 Record Model : Type :={
     F : Frame; (*Frame de um modelo*)
-    v : nat -> World -> bool; (*Precisa ser visto como vai ser feito*)
+    v : formulaModal -> World -> bool; (*Precisa ser visto como vai ser feito*)
 }.
 
 Fixpoint eqb (n m : nat) : bool :=
