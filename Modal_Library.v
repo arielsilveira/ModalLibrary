@@ -75,10 +75,6 @@ Inductive Relation : Prop :=
 Notation "w # X" := (w X) (at level 1, no associativity).
 Notation "x $ y" := (r x y) (at level 1, no associativity).
 
-Check [w 0; w 1; w 4].
-Check r (w 2) (w 9).
-Check (w 4) $ (w 5).
-
 (* Definition verify_relation (W : World) (R : Relation) : Prop := forall . *)
 
 Fixpoint eqb (n m : nat) : bool :=
@@ -102,19 +98,10 @@ end.
 
 
 
-Record Frame : Type :={
-    W : World; (*Recebe uma lista de mundos*)
-    R : Relation; (*Recebe uma lista de pares ordenados*)
-}.
-
-Record Model : Type :={
-    F : Frame; (*Frame de um modelo*)
-    v : formulaModal -> World -> bool; (*Precisa ser visto como vai ser feito*)
-}.
 
 
 Notation "x && y" := (andb x y).
-Notation "x =? y" := (eqb x y) (at level 70) : nat_scope.
+Notation "x =? y" := (eqb x y) (at level 70).
 
 Fixpoint eqb_World (x x' : World): bool :=
   match x with
@@ -131,10 +118,9 @@ Fixpoint In_World (x: World) (l: list World): bool :=
   end.
 
 Fixpoint teste (Worlds : list World) (Relations : list (World * World)) : list (World * World) :=
-match Relations, Worlds with
-    | nil, _ => nil 
-    | _, nil => nil
-    | h :: t, h1 :: t1 => if (In_World (fst h) Worlds) && (In_World (snd h) Worlds) 
+match Relations with
+    | nil => nil 
+    | h :: t => if (In_World (fst h) Worlds) && (In_World (snd h) Worlds) 
                           then ((fst h, snd h) :: nil) ++ teste Worlds t
                           else teste Worlds t
 end.
@@ -145,9 +131,16 @@ Fixpoint pair_to_relation (l : list (World * World)) : list Relation :=
     | h :: t => (r (fst h) (snd h)) :: pair_to_relation t
   end.
 
-Compute teste [w 1 ; w 2; w 3; w 4] [(w 3,w 6)].
-Compute pair_to_relation ( teste [w 1 ; w 2; w 3; w 4] [(w 1,w 2) ; (w 2,w 4); (w 3,w 6)] ).
 
+Record Frame : Type := frame{
+    W : list World; (*Recebe uma lista de mundos*)
+    R : list Relation; (*Recebe uma lista de pares ordenados*)
+}.
+
+Record Model : Type :={
+    F : Frame; (*Frame de um modelo*)
+    v : formulaModal -> World -> bool; (*Precisa ser visto como vai ser feito*)
+}.
 
 (* Definition W := list nat. *)
 
