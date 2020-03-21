@@ -1,4 +1,4 @@
-DIGEST 37d3dac9716b3172ed8641b8d55ee9f7
+DIGEST 623840d0006fd3f35d8575057cc1a0ac
 Fexemplos
 R15:27 Modal_Library <> <> lib
 def 106:110 <> form1
@@ -95,34 +95,22 @@ R546:547 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
 R551:551 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
 R543:543 Modal_Library <> w constr
 R548:548 Modal_Library <> w constr
-def 828:830 <> rel
-R835:851 Modal_Library <> validate_relation def
-R868:881 exemplos <> relation_world def
-R853:866 exemplos <> world_in_model def
-def 957:957 <> a
-R963:967 Modal_Library <> frame constr
-R985:1000 Modal_Library <> pair_to_relation def
-R1003:1007 Modal_Library <> teste def
-R1024:1037 exemplos <> relation_world def
-R1009:1022 exemplos <> world_in_model def
-R969:982 exemplos <> world_in_model def
-def 1053:1054 <> aa
-R1060:1064 Modal_Library <> frame constr
-R1081:1083 exemplos <> rel def
-R1066:1079 exemplos <> world_in_model def
-R1093:1093 exemplos <> a def
-R1105:1105 Modal_Library <> W proj
-R1107:1107 exemplos <> a def
-R1120:1120 Modal_Library <> R proj
-R1122:1122 exemplos <> a def
-R1133:1134 exemplos <> aa def
-R1146:1146 Modal_Library <> W proj
-R1148:1149 exemplos <> aa def
-R1162:1162 Modal_Library <> R proj
-R1164:1165 exemplos <> aa def
-def 1269:1271 <> ex1
-R1274:1281 Modal_Library <> Relation ind
-R1283:1283 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R1285:1286 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R1288:1289 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R1291:1291 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+def 649:651 <> rel
+R656:672 Modal_Library <> validate_relation def
+R689:702 exemplos <> relation_world def
+R674:687 exemplos <> world_in_model def
+def 778:795 <> construction_frame
+R800:804 Modal_Library <> frame constr
+R821:823 exemplos <> rel def
+R806:819 exemplos <> world_in_model def
+R833:850 exemplos <> construction_frame def
+R862:862 Modal_Library <> W proj
+R864:881 exemplos <> construction_frame def
+R894:894 Modal_Library <> R proj
+R896:913 exemplos <> construction_frame def
+def 1017:1019 <> ex1
+R1022:1029 Modal_Library <> Relation ind
+R1031:1031 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R1033:1034 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R1036:1037 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R1039:1039 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
