@@ -89,17 +89,6 @@ Fixpoint eqb (n m : nat) : bool :=
             end
   end.
 
-Fixpoint pertence (n : list nat) (m : nat) : bool :=
-match n with
-    | nil => false
-    | h :: t => if eqb h m then true
-                else pertence t m
-end.
-
-
-
-
-
 Notation "x && y" := (andb x y).
 Notation "x =? y" := (eqb x y) (at level 70).
 
@@ -131,10 +120,13 @@ Fixpoint pair_to_relation (l : list (World * World)) : list Relation :=
     | h :: t => (r (fst h) (snd h)) :: pair_to_relation t
   end.
 
+Definition validate_relation (Worlds : list World) (lw : list (World * World)) : list Relation := 
+pair_to_relation (teste Worlds lw).
+
 
 Record Frame : Type := frame{
     W : list World; (*Recebe uma lista de mundos*)
-    R : list Relation; (*Recebe uma lista de pares ordenados*)
+    R : (validate_relation W Relation)->list Relation; (*Recebe uma lista de pares ordenados*)
 }.
 
 Record Model : Type :={

@@ -10,16 +10,25 @@ Definition form3 := .~.~ #0 .-> #1.
 (* Definition world := [0;1;2;3;4]. Precisa ver se é necessário isso
 Definition relation_world := [(0,1);(1,1);(1,2);(2,0);(2,3);(3,1);(3,3);(3,4)]. *)
 
-Definition world_in_model := [w 0;w 1;w 2;w 3;w 4]. (*Precisa ver se é necessário isso*)
+Definition world_in_model := [w 0; w 1;w 2; w 3; w 4]. (*Precisa ver se é necessário isso*)
 Definition relation_world := [(w 1, w 9);(w 0,w 1);(w 1,w 1);(w 1,w 2);(w 2,w 0);(w 2,w 3);(w 3, w 1);(w 3,w 3);(w 3, w 4)].
-
 (* Definition prop_in_world := [(0,[0;1]); (1, [0;1;2;3;4])]. *)
+(* Compute teste world_in_model relation_world.
+Compute pair_to_relation (teste world_in_model relation_world). *)
+Definition rel := validate_relation world_in_model relation_world.
+(* Compute relacionamento world_in_model relation_world. *)
+
 
 Definition a  := frame world_in_model (pair_to_relation (teste world_in_model relation_world)).
-    
+Definition aa  := frame world_in_model rel.
+
 Check a.
 Compute (W a).
 Compute (R a).
+
+Check aa.
+Compute (W aa).
+Compute (R aa).
 (* Definition a  := frame world relation_world. *)
 
 
