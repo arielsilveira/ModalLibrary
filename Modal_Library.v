@@ -72,35 +72,35 @@ Notation "[ x ; .. ; y ]" := (cons x .. (cons y nil) ..).
 
 
 Fixpoint eqb_World (x x' : World): bool :=
-  match x with
+    match x with
     | w n => match x' with 
-              | w n' => if  n =? n' then true else false
+                | w n' => if  n =? n' then true else false
             end
-  end.
+end.
 
 Fixpoint In_World (x: World) (l: list World): bool :=
-  match l with
+    match l with
     | nil => false
     | h :: t => if eqb_World x h then true
                 else In_World x t
-  end.
+end.
 
 Fixpoint remove_invalidate (Worlds : list World) (Relations : list (World * World)) : list (World * World) :=
-match Relations with
+    match Relations with
     | nil => nil 
     | h :: t => if andb (In_World (fst h) Worlds) (In_World (snd h) Worlds) 
-                          then ((fst h, snd h) :: nil) ++ remove_invalidate Worlds t
-                          else remove_invalidate Worlds t
+                then ((fst h, snd h) :: nil) ++ remove_invalidate Worlds t
+                else remove_invalidate Worlds t
 end.
 
 Fixpoint pair_to_relation (l : list (World * World)) : list Relation :=
-  match l with
+    match l with
     | nil => nil
     | h :: t => (r (fst h) (snd h)) :: pair_to_relation t
-  end.
+end.
 
 Definition validate_relation (Worlds : list World) (lw : list (World * World)) : list Relation := 
-pair_to_relation (remove_invalidate Worlds lw).
+    pair_to_relation (remove_invalidate Worlds lw).
 
 
 Record Frame : Type := frame{
