@@ -1,5 +1,7 @@
 # TCC
 
+### Problemas atuais
+ - Retirar os mundos que não existem quando é dito que há uma formula nele
 
 Desenvolvimento futuro 
 

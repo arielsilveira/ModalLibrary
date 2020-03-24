@@ -7,21 +7,33 @@ Definition form2 := #1 .-> .~ .[] #2 .-> #0 .\/ .[](.<> #1 .\/ #2).
 Definition form3 := .~.~ #0 .-> #1.
 
 (* Definição do Mundos e Relações *)
-Definition world_in_model := [w 0; w 1;w 2; w 3; w 4]. (*Precisa ver se é necessário isso*)
-Definition relation_world := [(w 1, w 9);(w 0,w 1);(w 1,w 1);(w 1,w 2);(w 2,w 0);(w 2,w 3);(w 3, w 1);(w 3,w 3);(w 3, w 4)].
+Definition world_in_model := [w 0; w 1;w 2; w 3; w 4]. 
+Definition relation_world :=  [ (w 1, w 9); (w 0, w 1); (w 1, w 1);
+                                (w 1, w 2); (w 2, w 0); (w 2, w 3);
+                                (w 3, w 1); (w 3, w 3); (w 3, w 4)
+                              ].
 
 (* Valida as relações entre mundos *)
 Definition rel := validate_relation world_in_model relation_world.
 
 (* Declaração do Frame *)
-Definition construction_frame := frame world_in_model rel.
+Definition F := frame world_in_model rel.
 
-Check construction_frame.
-Compute (W construction_frame).
-Compute (R construction_frame).
+Check F.
+Compute (W F).
+Compute (R F).
 (* Definition a  := frame world relation_world. *)
 
+Definition M := model F (7, [w 1]).
 
+Definition V := (# 1 ./\ # 2, [w 1; w 2]).
+
+Check V.
+Compute V.
+
+
+
+(* Talvez seja útil *)
 (* Inicio dos exemplos de Relação *)
 Example ex1: Relation [1; 2; 3] 2 3.
 Proof.

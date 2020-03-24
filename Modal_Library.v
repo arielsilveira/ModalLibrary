@@ -49,7 +49,7 @@ Inductive World : Set :=
 .
 
 
-Inductive Relation : Prop :=
+Inductive Relation : Set :=
     | r : World -> World -> Relation
 .
 
@@ -63,7 +63,7 @@ Notation " .<> X "    := (Dia X)       (at level 10, right associativity).
 Notation " # X "      := (Lit X)       (at level 1, no associativity).
 
 Notation "w # X" := (w X) (at level 1, no associativity).
-Notation "x $ y" := (r x y) (at level 1, no associativity).
+Notation "x .R y" := (r x y) (at level 1, no associativity).
 
 Notation "[ ]" := nil.
 Notation "x :: l" := (cons x l)
@@ -89,7 +89,7 @@ Fixpoint remove_invalidate (Worlds : list World) (Relations : list (World * Worl
     match Relations with
     | nil => nil 
     | h :: t => if andb (In_World (fst h) Worlds) (In_World (snd h) Worlds) 
-                then ((fst h, snd h) :: nil) ++ remove_invalidate Worlds t
+                then [(fst h, snd h)] ++ remove_invalidate Worlds t
                 else remove_invalidate Worlds t
 end.
 
@@ -108,9 +108,11 @@ Record Frame : Type := frame{
     R : list Relation; (*Recebe uma lista de pares ordenados*)
 }.
 
-Record Model : Type :={
+Record Model : Type := model{
     F : Frame; (*Frame de um modelo*)
-    v : formulaModal -> World -> bool; (*Precisa ser visto como vai ser feito*)
+    v : nat -> World; (*Precisa ser visto como vai ser feito*)
 }.
 
+
+(*  *)
 (* The end *)
