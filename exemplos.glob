@@ -1,4 +1,4 @@
-DIGEST e17c5324317c4570a440eea1ad8ce164
+DIGEST 47519a1d66198d1bf473671dcc91a55a
 Fexemplos
 R48:60 Modal_Library <> <> lib
 def 106:110 <> form1
@@ -108,12 +108,3 @@ R766:766 Modal_Library <> W proj
 R768:768 exemplos <> F def
 R781:781 Modal_Library <> R proj
 R783:783 exemplos <> F def
-def 850:850 <> M
-R855:859 Modal_Library <> model constr
-R863:863 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R865:866 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R872:872 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R867:867 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R871:871 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R868:868 Modal_Library <> w constr
-R861:861 exemplos <> F def

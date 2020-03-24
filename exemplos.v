@@ -24,18 +24,9 @@ Compute (W F).
 Compute (R F).
 (* Definition a  := frame world relation_world. *)
 
-Definition M := model F (7, [w 1]).
-
-Definition V := (# 1 ./\ # 2, [w 1; w 2]).
-
-Check V.
-Compute V.
-
-
-
 (* Talvez seja útil *)
 (* Inicio dos exemplos de Relação *)
-Example ex1: Relation [1; 2; 3] 2 3.
+(* Example ex1: Relation [1; 2; 3] 2 3.
 Proof.
   apply r.
     - simpl. auto.
@@ -52,6 +43,6 @@ Example ex3: Relation [1;2;3] 2 5 -> False.
 Proof.
   intros. inversion H. inversion H1. discriminate H4. inversion H4. 
   discriminate H5. inversion H5. discriminate H6. inversion H6.
-Qed.
+Qed. *)
 
 
