@@ -22,6 +22,16 @@ Definition F := frame world_in_model rel.
 Check F.
 Compute (W F).
 Compute (R F).
+
+Definition a := validate_formula (W F) [(# 1,[w 1; w 2]); (# 2, [w 3; w 8])].
+
+Check a.
+
+
+
+Definition M := model F [(# 1,[w 1; w 2]); (# 2, [w 3; w 8])].
+
+
 (* Definition a  := frame world relation_world. *)
 
 (* Talvez seja útil *)

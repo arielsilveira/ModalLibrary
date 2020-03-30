@@ -85,6 +85,13 @@ Fixpoint In_World (x: World) (l: list World): bool :=
                 else In_World x t
 end.
 
+Fixpoint All_In_World (l : list World) (l' : list World) : bool :=
+match l with
+  | nil  => true
+  | h::t => if In_World h l' then All_In_World t l'
+            else false
+end.
+
 Fixpoint remove_invalidate (Worlds : list World) (Relations : list (World * World)) : list (World * World) :=
     match Relations with
     | nil => nil 
@@ -102,6 +109,17 @@ end.
 Definition validate_relation (Worlds : list World) (lw : list (World * World)) : list Relation := 
     pair_to_relation (remove_invalidate Worlds lw).
 
+Fixpoint validate_formula (Worlds : list World) (Formulas : list (formulaModal * list World)) : 
+         list (formulaModal * list World) :=
+  match Formulas with
+    | nil   => nil
+    | h::t  => match snd h with 
+                   | nil => validate_formula Worlds t 
+                   | h'::t' => if All_In_World (snd h) Worlds then  [h] ++ validate_formula Worlds t
+                               else validate_formula Worlds t
+                   (*^^^ formula válida em algum mundo, verifica se os mundos existem, se sim, concatena*)
+               end
+  end.
 
 Record Frame : Type := frame{
     W : list World; (*Recebe uma lista de mundos*)
@@ -112,6 +130,8 @@ Record Model : Type := model{
     F : Frame; (*Frame de um modelo*)
     v : nat -> World; (*Precisa ser visto como vai ser feito*)
 }.
+
+
 
 
 (*  *)
