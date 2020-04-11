@@ -109,6 +109,11 @@ end.
 Definition validate_relation (Worlds : list World) (lw : list (World * World)) : list Relation := 
     pair_to_relation (remove_invalidate Worlds lw).
 
+(* formula válida em algum mundo, 
+    verifica se os mundos existem, 
+    se sim, 
+    concatena
+*)
 Fixpoint validate_formula (Worlds : list World) (Formulas : list (formulaModal * list World)) : 
          list (formulaModal * list World) :=
   match Formulas with
@@ -117,22 +122,44 @@ Fixpoint validate_formula (Worlds : list World) (Formulas : list (formulaModal *
                    | nil => validate_formula Worlds t 
                    | h'::t' => if All_In_World (snd h) Worlds then  [h] ++ validate_formula Worlds t
                                else validate_formula Worlds t
-                   (*^^^ formula válida em algum mundo, verifica se os mundos existem, se sim, concatena*)
                end
   end.
 
-Record Frame : Type := frame{
+Record Frame : Type := frame_kripke{
     W : list World; (*Recebe uma lista de mundos*)
     R : list Relation; (*Recebe uma lista de pares ordenados*)
 }.
 
-Record Model : Type := model{
+Record Model : Type := model_kripke{
     F : Frame; (*Frame de um modelo*)
-    v : nat -> World; (*Precisa ser visto como vai ser feito*)
+    val: list (nat * (list World));
+    (* fun_v : Frame -> World -> nat -> Prop; Precisa ser visto como vai ser feito *)
 }.
 
 
+Definition frame (w: list World) (r: list (World * World)) : Frame :=
+    frame_kripke w (validate_relation w r).
 
+Definition model (f: Frame) (v: list (nat * (list World))) : Model :=
+    model_kripke f v.
+
+Fixpoint verification (val: list (nat * (list World))) (w : World) (p: nat) : Prop :=
+    match val with
+    | [] => False
+    | h :: t => if eqb p (fst h) /\ In_World w (snd h) then True
+                else verification t w p
+    end.
+
+Fixpoint fun_validation (M : Model) (w : World) (p : formulaModal) : Prop :=
+    match p with
+    | Lit      x     => verification (v M) w x
+    (* | Dia      p1    => literals p1 *)
+    (* | Box      p1    => literals p1 *)
+    | Neg      p1    => .~ fun_validation M w p1
+    | And      p1 p2 => fun_validation M w p1 ./\ fun_validation M w p2
+    | Or       p1 p2 => fun_validation M w p1 .\/ fun_validation M w p2
+    | Implies  p1 p2 => fun_validation M w p1 .-> fun_validation M w p2 
+    end.
 
 (*  *)
 (* The end *)

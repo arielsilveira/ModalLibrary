@@ -14,10 +14,11 @@ Definition relation_world :=  [ (w 1, w 9); (w 0, w 1); (w 1, w 1);
                               ].
 
 (* Valida as relações entre mundos *)
-Definition rel := validate_relation world_in_model relation_world.
+(* Definition rel := validate_relation world_in_model relation_world. *)
+Definition F := frame world_in_model relation_world.
 
 (* Declaração do Frame *)
-Definition F := frame world_in_model rel.
+(* Definition F := frame world_in_model rel. *)
 
 Check F.
 Compute (W F).
