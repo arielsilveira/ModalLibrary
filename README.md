@@ -32,13 +32,7 @@ será visto cada uma das restrições. Página 29
 - https://github.com/coq/coq/wiki/Ltac 
 - https://coq.inria.fr/refman/proof-engine/ltac.html#grammar-token-cpattern 
 
+### Pontos importantes
 
- ### Anotações importantes para próximo uso 
- 
-- Dar uma olhada em argumentos implícitos, passar como parâmetro e salvá-las
-- Construir um Definition que recebe esse argumento, tal como vetor vazio,
-    desta forma, concateno o retorno da lista com este argumento. Como por exemplo:
-    - [] ++ (funcao mundos relações)
-
-
-    [(prop, [worlds]);(prop, [worlds]);(prop, [worlds]);(prop, [worlds])]
+- Rever IndProp -> Diferença entre (r: list ...) (w w1 : ...) para list Rel -> world -> world -> Prop
+- Definir a relação como World -> World -> Prop
