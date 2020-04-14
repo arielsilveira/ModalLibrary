@@ -24,6 +24,8 @@ Check F.
 Compute (W F).
 Compute (R F).
 
+Compute relacao (R F) (w 0) (w 18).
+
 Definition a := validate_formula (W F) [(# 1,[w 1; w 2]); (# 2, [w 3; w 8])].
 
 Check a.

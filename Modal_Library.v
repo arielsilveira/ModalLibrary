@@ -132,7 +132,7 @@ Record Frame : Type := frame_kripke{
 
 Record Model : Type := model_kripke{
     F : Frame; (*Frame de um modelo*)
-    val: list (nat * (list World));
+    v: list (nat * (list World));
 }.
 
 
@@ -148,25 +148,37 @@ Fixpoint verification (val: list (nat * (list World))) (w : World) (p: nat) : Pr
     | h :: t => if andb (eqb p (fst h)) (In_World w (snd h)) then True
                 else verification t w p
     end.
-(* 
-Fixpoint relacao (r: list Relation) (w w': World) : Prop :=
+
+Definition fst_world (pair_w: Relation) : World :=
+    match pair_w with
+    | r x y => x
+    end.
+
+Definition snd_world (pair_w: Relation) : World :=
+    match pair_w with
+    | r x y => y
+    end.
+
+Fixpoint relacao (r: list Relation) (w w' : World) : Prop :=
     match r with
     | [] => False
-    | h :: t => 
- *)
+    | h :: t => if andb (eqb_World (fst_world h) w) (eqb_World (snd_world h) w') then True
+                else relacao t w w'
+    end.
+
 
 Fixpoint fun_validation (M : Model) (w : World) (p : formulaModal) : Prop :=
     match p with
-    | Lit      x     => verification (val M) w x
-    | Dia      p1    => .<> fun_validation M w p1
-    | Box      p1    => .[] fun_validation M w p1
+    | Lit      x     => verification (v M) w x
+    | Box      p1    => forall w': World, relacao (R F) w w' -> fun_validation M w' p1
+    | Dia      p1    => exists w' : World, relacao (R F) w w' -> fun_validation M w' p1
     | Neg      p1    => ~ fun_validation M w p1
     | And      p1 p2 => fun_validation M w p1 /\ fun_validation M w p2
     | Or       p1 p2 => fun_validation M w p1 \/ fun_validation M w p2
     | Implies  p1 p2 => fun_validation M w p1 -> fun_validation M w p2 
     end.
 
-Notation "M, w |= p" := (fun_validation Model w p) (at level 1, no associativity).
+(* Notation "M, w |= p" := (fun_validation Model w p) (at level 1, no associativity). *)
 
 
 (*  *)
