@@ -1,4 +1,4 @@
-DIGEST 49760579e853ec7a7de4850862a66fd2
+DIGEST 0f77db58aac8acbda44ab2d6b12e1717
 Fexemplos
 R48:60 Modal_Library <> <> lib
 def 106:110 <> form1
@@ -157,3 +157,11 @@ R1016:1016 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
 R1013:1013 Modal_Library <> w constr
 R1008:1008 Modal_Library <> w constr
 R1001:1001 exemplos <> F def
+R1047:1060 Modal_Library <> fun_validation def
+R1071:1074 Modal_Library <> ::'.[]'_x not
+R1075:1076 Modal_Library <> ::'#'_x not
+R1065:1065 Modal_Library <> w constr
+R1062:1062 exemplos <> M def
+R1090:1092 Modal_Library <> ::'M,'_x_'|='_x not
+R1096:1099 Modal_Library <> ::'M,'_x_'|='_x not
+R1093:1093 Modal_Library <> w constr

@@ -170,15 +170,15 @@ Fixpoint relacao (r: list Relation) (w w' : World) : Prop :=
 Fixpoint fun_validation (M : Model) (w : World) (p : formulaModal) : Prop :=
     match p with
     | Lit      x     => verification (v M) w x
-    | Box      p1    => forall w': World, relacao (R F) w w' -> fun_validation M w' p1
-    | Dia      p1    => exists w' : World, relacao (R F) w w' -> fun_validation M w' p1
+    | Box      p1    => forall w': World, relacao (R (F M)) w w' -> fun_validation M w' p1
+    | Dia      p1    => exists w' : World, relacao (R (F M)) w w' -> fun_validation M w' p1
     | Neg      p1    => ~ fun_validation M w p1
     | And      p1 p2 => fun_validation M w p1 /\ fun_validation M w p2
     | Or       p1 p2 => fun_validation M w p1 \/ fun_validation M w p2
     | Implies  p1 p2 => fun_validation M w p1 -> fun_validation M w p2 
     end.
 
-(* Notation "M, w |= p" := (fun_validation Model w p) (at level 1, no associativity). *)
+Notation "M, w |= p" := (fun_validation Model w p) (at level 1, no associativity).
 
 
 (*  *)

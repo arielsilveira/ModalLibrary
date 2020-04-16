@@ -32,8 +32,9 @@ Check a.
 
 Definition M := model F [(1,[w 1; w 2]); (2, [w 3; w 8])].
 
-Compute (val M).
-Compute (val M) w 1 |= 1.
+Compute fun_validation M (w 1) (.[] # 1).
+
+Compute M, w 1 |= 1.
 
 (* Definition a  := frame world relation_world. *)
 
