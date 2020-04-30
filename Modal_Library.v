@@ -166,19 +166,50 @@ Fixpoint relacao (r: list Relation) (w w' : World) : Prop :=
                 else relacao t w w'
     end.
 
-
+    (* World Satisfaziblity *)
 Fixpoint fun_validation (M : Model) (w : World) (p : formulaModal) : Prop :=
     match p with
     | Lit      x     => verification (v M) w x
     | Box      p1    => forall w': World, relacao (R (F M)) w w' -> fun_validation M w' p1
-    | Dia      p1    => exists w' : World, relacao (R (F M)) w w' -> fun_validation M w' p1
+    | Dia      p1    => exists w': World, relacao (R (F M)) w w' -> fun_validation M w' p1
     | Neg      p1    => ~ fun_validation M w p1
     | And      p1 p2 => fun_validation M w p1 /\ fun_validation M w p2
     | Or       p1 p2 => fun_validation M w p1 \/ fun_validation M w p2
     | Implies  p1 p2 => fun_validation M w p1 -> fun_validation M w p2 
     end.
 
-Notation "M, w |= p" := (fun_validation Model w p) (at level 1, no associativity).
+    (* Model satisfazibility *)
+Definition validate_model (M : Model) (p : formulaModal) : Prop :=
+    forall w: World, In w (W (F M)) /\ fun_validation M w p.
+
+Fixpoint eqb_list_worlds (W W' : list World) : bool :=
+    match W with
+    | [] => true
+    | h :: t => if In_World h W' then eqb_list_worlds t W'
+                else false
+    end.
+
+Fixpoint In_Relations (r : Relation ) (R' : list Relation): bool :=
+    match R' with
+    | [] => false
+    | h' :: t' =>   if andb (eqb_World (fst_world r) (fst_world h')) (eqb_World (snd_world r) (snd_world h')) then true
+                    else In_Relations r t'
+    end.
+
+
+Fixpoint eqb_list_relations (R R' : list Relation) : bool :=
+    match R with
+    | [] => true
+    | h :: t =>  if In_Relations h R' then eqb_list_relations t R'
+                 else false
+    end.
+
+    (* Validate in Frame *)
+(* Definition validate_frame (F: Frame) (M : Model) (p : formulaModal) : Prop :=
+    (eqb_list_worlds (W F) (W (F M))) /\ (eqb_list_relations (R F) (R (F M))) -> validate_model M p. *)
+
+
+Notation "M w |= phi" := (fun_validation M w phi) (at level 200, no associativity).
 
 
 (*  *)

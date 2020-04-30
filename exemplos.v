@@ -30,11 +30,13 @@ Definition a := validate_formula (W F) [(# 1,[w 1; w 2]); (# 2, [w 3; w 8])].
 
 Check a.
 
-Definition M := model F [(1,[w 1; w 2]); (2, [w 3; w 8])].
+Definition M := model F [(1,[w 1; w 2]); (2, [w 3; w 8]); (3, [w 1; w 2; w 3])].
 
 Compute fun_validation M (w 1) (.[] # 1).
 
-Compute M, w 1 |= 1.
+Compute validate_model M (# 1).
+
+Compute M w 1 |= 1.
 
 (* Definition a  := frame world relation_world. *)
 
