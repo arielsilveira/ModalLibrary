@@ -36,6 +36,9 @@ Compute fun_validation M (w 1) (.[] # 1).
 
 Compute validate_model M (# 1).
 
+Print or.
+Print and.
+
 Compute M w 1 |= 1.
 
 (* Definition a  := frame world relation_world. *)

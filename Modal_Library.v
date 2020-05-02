@@ -142,6 +142,7 @@ Definition frame (w: list World) (r: list (World * World)) : Frame :=
 Definition model (f: Frame) (v: list (nat * (list World))) : Model :=
     model_kripke f v.
 
+
 Fixpoint verification (val: list (nat * (list World))) (w : World) (p: nat) : Prop :=
     match val with
     | [] => False
@@ -178,6 +179,7 @@ Fixpoint fun_validation (M : Model) (w : World) (p : formulaModal) : Prop :=
     | Implies  p1 p2 => fun_validation M w p1 -> fun_validation M w p2 
     end.
 
+
     (* Model satisfazibility *)
 Definition validate_model (M : Model) (p : formulaModal) : Prop :=
     forall w: World, In w (W (F M)) /\ fun_validation M w p.
@@ -203,11 +205,6 @@ Fixpoint eqb_list_relations (R R' : list Relation) : bool :=
     | h :: t =>  if In_Relations h R' then eqb_list_relations t R'
                  else false
     end.
-
-    (* Validate in Frame *)
-(* Definition validate_frame (F: Frame) (M : Model) (p : formulaModal) : Prop :=
-    (eqb_list_worlds (W F) (W (F M))) /\ (eqb_list_relations (R F) (R (F M))) -> validate_model M p. *)
-
 
 Notation "M w |= phi" := (fun_validation M w phi) (at level 200, no associativity).
 
