@@ -6,6 +6,8 @@
 
     Minion: Miguel
 
+    Agradecimentos: Torrens <3
+
     <Modal Logic Library>
     Description:
 *)
@@ -192,14 +194,14 @@ Notation "M |= B" := (validate_model M B) (at level 110, right associativity).
 
 Definition theory := list formulaModal.
 
-Fixpoint theoryModal (M : Model) (w : World) (Gamma : theory) : Prop :=
+Fixpoint theoryModal (M : Model) (Gamma : theory) : Prop :=
     match Gamma with
     | nil => True
-    | h :: t => (fun_validation M w h) /\ (theoryModal M w t)
+    | h :: t => (validate_model M h) /\ (theoryModal M t)
     end.
 
 Definition entails (M : Model) (A : theory) (B : formulaModal) : Prop :=
-    forall p : formulaModal, ((In p A) /\ (validate_model M p)) -> validate_model M B.
+    forall p : formulaModal, (theoryModal M A) -> validate_model M B.
 
 Notation "M ← A |- B" := (entails M A B) (at level 110, no associativity).
 
@@ -209,20 +211,50 @@ Notation "M ← A |- B" := (entails M A B) (at level 110, no associativity).
 (* reflexivity *)
 
 Theorem  reflexive_deduction:
-   forall (M:Model) (Gamma:theory) (A:formulaModal) ,
+   forall (M: Model) (Gamma: theory) (A: formulaModal) ,
       (M ← A::Gamma |- A).
-    Proof.
-        intros.
-        unfold entails.
-        intros.
-        destruct H. destruct H. rewrite H. apply H0.
+Proof.
+    intros.
+    unfold entails.
+    intros.
+    destruct H.
+    apply H.
+Qed.
         
-        unfold validate_model.
-        intros.
-        unfold entails.
-        
-        
-        
+(* transitivity *)
+
+Lemma theoryModal_union: forall (M:Model) (Gamma Delta:theory),
+  (theoryModal M (Gamma++Delta)) -> ((theoryModal M Gamma) /\ (theoryModal M Delta)).
+Proof.
+    intros.
+    induction Gamma.
+        - simpl in *. split. tauto. apply H.
+        - simpl in *. apply and_assoc. destruct H as [left  right]. split.
+            + apply left.
+            + apply IHGamma. apply right.
+Qed.
+         
+
+(* prova bottom-up *)
+Theorem  transitive_deduction_bu:
+   forall (M:Model) (Gamma Delta:theory) (A B C:formulaModal) ,
+      (M ← A::Gamma |- B) /\ (M ← B::Delta |- C) -> (M ← A::Gamma++Delta |- C).
+Proof.
+    intros. 
+    unfold entails in *. 
+    destruct H as [H1 H2]. 
+    intros; apply H2. apply p. 
+    simpl in *; destruct H as [left right]. 
+    apply theoryModal_union in right; destruct right as [ModalG ModalD]. split.
+        - apply H1.
+            + apply p.
+            + split.
+                * apply left.
+                * apply ModalG. 
+        - apply ModalD.
+Qed.
+
+
 
 (*  *)
 (* The end *)

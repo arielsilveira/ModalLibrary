@@ -208,9 +208,9 @@ Proof.
     destruct H as [left right].
     pose right as x. apply theorySAT_union in x.
     destruct x as [x1 x2].
-    assert ( theorySAT p (A::Gamma)). simpl. split. assumption. assumption.
+    assert ( theorySAT v (A::Gamma)). simpl. split. assumption. assumption.
     pose H as y. apply H1 in y.
-    assert ( theorySAT p (B::Delta)). simpl. split. assumption. assumption. 
+    assert ( theorySAT v (B::Delta)). simpl. split. assumption. assumption. 
     pose H0 as z.
     apply H2 in z.
     assumption.

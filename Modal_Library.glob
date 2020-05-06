@@ -1,520 +1,566 @@
-DIGEST fe63a2f9caf2a201b4b36a953906037c
+DIGEST 15259a944d6015feb9312adad88daf6e
 FModal_Library
-R170:174 Coq.Arith.Arith <> <> lib
-R176:179 Coq.Lists.List <> <> lib
-R181:187 Coq.Lists.ListSet <> <> lib
-R189:197 Coq.Logic.Classical <> <> lib
-R199:203 Coq.Init.Logic <> <> lib
-R205:207 Coq.Init.Nat <> <> lib
-R209:217 Coq.Init.Notations <> <> lib
-ind 231:242 <> formulaModal
-constr 259:261 <> Lit
-constr 300:302 <> Neg
-constr 350:352 <> Box
-constr 400:402 <> Dia
-constr 450:452 <> And
-constr 516:517 <> Or
-constr 582:588 <> Implies
-R277:280 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R281:292 Modal_Library <> formulaModal ind
-R274:276 Coq.Init.Datatypes <> nat ind
-R327:330 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R331:342 Modal_Library <> formulaModal ind
-R315:326 Modal_Library <> formulaModal ind
-R377:380 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R381:392 Modal_Library <> formulaModal ind
-R365:376 Modal_Library <> formulaModal ind
-R427:430 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R431:442 Modal_Library <> formulaModal ind
-R415:426 Modal_Library <> formulaModal ind
-R477:480 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R493:496 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R202:206 Coq.Arith.Arith <> <> lib
+R208:211 Coq.Lists.List <> <> lib
+R213:219 Coq.Lists.ListSet <> <> lib
+R221:229 Coq.Logic.Classical <> <> lib
+R231:235 Coq.Init.Logic <> <> lib
+R237:239 Coq.Init.Nat <> <> lib
+R241:249 Coq.Init.Notations <> <> lib
+ind 263:274 <> formulaModal
+constr 291:293 <> Lit
+constr 332:334 <> Neg
+constr 382:384 <> Box
+constr 432:434 <> Dia
+constr 482:484 <> And
+constr 548:549 <> Or
+constr 614:620 <> Implies
+R309:312 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R313:324 Modal_Library <> formulaModal ind
+R306:308 Coq.Init.Datatypes <> nat ind
+R359:362 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R363:374 Modal_Library <> formulaModal ind
+R347:358 Modal_Library <> formulaModal ind
+R409:412 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R413:424 Modal_Library <> formulaModal ind
+R397:408 Modal_Library <> formulaModal ind
+R459:462 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R463:474 Modal_Library <> formulaModal ind
+R447:458 Modal_Library <> formulaModal ind
+R509:512 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R525:528 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R529:540 Modal_Library <> formulaModal ind
+R513:524 Modal_Library <> formulaModal ind
 R497:508 Modal_Library <> formulaModal ind
-R481:492 Modal_Library <> formulaModal ind
-R465:476 Modal_Library <> formulaModal ind
-R543:546 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R559:562 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R575:578 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R591:594 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R595:606 Modal_Library <> formulaModal ind
+R579:590 Modal_Library <> formulaModal ind
 R563:574 Modal_Library <> formulaModal ind
-R547:558 Modal_Library <> formulaModal ind
-R531:542 Modal_Library <> formulaModal ind
-R609:612 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R625:628 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R641:644 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R657:660 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R661:672 Modal_Library <> formulaModal ind
+R645:656 Modal_Library <> formulaModal ind
 R629:640 Modal_Library <> formulaModal ind
-R613:624 Modal_Library <> formulaModal ind
-R597:608 Modal_Library <> formulaModal ind
-def 721:729 <> sizeModal
-R734:745 Modal_Library <> formulaModal ind
-R750:752 Coq.Init.Datatypes <> nat ind
-R767:767 Modal_Library <> f var
-R781:783 Modal_Library <> Lit constr
-R807:809 Modal_Library <> Neg constr
-R826:829 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R842:842 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R830:838 Modal_Library <> sizeModal def
-R850:852 Modal_Library <> Box constr
-R869:872 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R885:885 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R873:881 Modal_Library <> sizeModal def
-R893:895 Modal_Library <> Dia constr
-R912:915 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R928:928 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R916:924 Modal_Library <> sizeModal def
-R936:938 Modal_Library <> And constr
-R972:975 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R988:988 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R955:958 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R971:971 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R959:967 Modal_Library <> sizeModal def
-R976:984 Modal_Library <> sizeModal def
-R996:997 Modal_Library <> Or constr
-R1032:1035 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1048:1048 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1015:1018 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1031:1031 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1019:1027 Modal_Library <> sizeModal def
-R1036:1044 Modal_Library <> sizeModal def
-R1056:1062 Modal_Library <> Implies constr
-R1092:1095 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1108:1108 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1075:1078 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1091:1091 Coq.Init.Peano <> :nat_scope:x_'+'_x not
-R1079:1087 Modal_Library <> sizeModal def
-R1096:1104 Modal_Library <> sizeModal def
-def 1125:1132 <> literals
-R1137:1148 Modal_Library <> formulaModal ind
-R1153:1155 Coq.Lists.ListSet <> set def
-R1157:1159 Coq.Init.Datatypes <> nat ind
-R1174:1174 Modal_Library <> f var
-R1188:1190 Modal_Library <> Lit constr
-R1206:1212 Coq.Lists.ListSet <> set_add def
-R1228:1236 Coq.Lists.ListSet <> empty_set def
-R1238:1240 Coq.Init.Datatypes <> nat ind
-R1214:1223 Coq.Arith.Peano_dec <> eq_nat_dec syndef
-R1249:1251 Modal_Library <> Dia constr
-R1267:1274 Modal_Library <> literals def
-R1285:1287 Modal_Library <> Box constr
-R1303:1310 Modal_Library <> literals def
-R1321:1323 Modal_Library <> Neg constr
-R1339:1346 Modal_Library <> literals def
-R1357:1359 Modal_Library <> And constr
-R1375:1383 Coq.Lists.ListSet <> set_union def
-R1411:1418 Modal_Library <> literals def
-R1397:1404 Modal_Library <> literals def
-R1385:1394 Coq.Arith.Peano_dec <> eq_nat_dec syndef
-R1430:1431 Modal_Library <> Or constr
-R1448:1456 Coq.Lists.ListSet <> set_union def
-R1484:1491 Modal_Library <> literals def
-R1470:1477 Modal_Library <> literals def
-R1458:1467 Coq.Arith.Peano_dec <> eq_nat_dec syndef
-R1503:1509 Modal_Library <> Implies constr
-R1521:1529 Coq.Lists.ListSet <> set_union def
-R1557:1564 Modal_Library <> literals def
-R1543:1550 Modal_Library <> literals def
-R1531:1540 Coq.Arith.Peano_dec <> eq_nat_dec syndef
-ind 1587:1591 <> World
-constr 1608:1608 <> w
-R1615:1618 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R1619:1623 Modal_Library <> World ind
-R1612:1614 Coq.Init.Datatypes <> nat ind
-ind 1639:1646 <> Relation
-constr 1663:1663 <> r
-R1672:1675 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R1681:1684 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R1685:1692 Modal_Library <> Relation ind
-R1676:1680 Modal_Library <> World ind
-R1667:1671 Modal_Library <> World ind
-R1748:1754 Modal_Library <> Implies constr
-not 1731:1731 <> ::x_'.->'_x
-R1823:1824 Modal_Library <> Or constr
-not 1806:1806 <> ::x_'.\/'_x
-R1897:1899 Modal_Library <> And constr
-not 1880:1880 <> ::x_'./\'_x
-R1971:1973 Modal_Library <> Neg constr
-not 1954:1954 <> ::'.~'_x
-R2046:2048 Modal_Library <> Box constr
-not 2029:2029 <> ::'.[]'_x
-R2121:2123 Modal_Library <> Dia constr
-not 2104:2104 <> ::'.<>'_x
-R2196:2198 Modal_Library <> Lit constr
-not 2179:2179 <> ::'#'_x
-not 2251:2251 <> ::x_'#'_x
-R2322:2322 Modal_Library <> r constr
-not 2309:2309 <> ::x_'.R'_x
-R2380:2382 Coq.Init.Datatypes <> nil constr
-not 2371:2371 <> ::'['_']'
-R2407:2410 Coq.Init.Datatypes <> cons constr
-not 2394:2394 <> ::x_'::'_x
-R2504:2507 Coq.Init.Datatypes <> cons constr
-R2515:2518 Coq.Init.Datatypes <> cons constr
-R2522:2524 Coq.Init.Datatypes <> nil constr
-not 2483:2483 <> ::'['_x_';'_'..'_';'_x_']'
-def 2543:2551 <> eqb_World
-R2561:2565 Modal_Library <> World ind
-R2569:2572 Coq.Init.Datatypes <> bool ind
-R2587:2587 Modal_Library <> x var
-R2600:2600 Modal_Library <> w constr
-R2613:2614 Modal_Library <> x' var
-R2640:2640 Modal_Library <> w constr
-R2653:2656 Coq.Arith.PeanoNat <> :nat_scope:x_'=?'_x not
-R2675:2679 Coq.Init.Datatypes <> false constr
-R2665:2668 Coq.Init.Datatypes <> true constr
-def 2712:2719 <> In_World
-R2725:2729 Modal_Library <> World ind
-R2736:2739 Coq.Init.Datatypes <> list ind
-R2741:2745 Modal_Library <> World ind
-R2749:2752 Coq.Init.Datatypes <> bool ind
-R2767:2767 Modal_Library <> l var
-R2780:2782 Coq.Init.Datatypes <> nil constr
-R2787:2791 Coq.Init.Datatypes <> false constr
-R2800:2803 Modal_Library <> ::x_'::'_x not
-R2812:2820 Modal_Library <> eqb_World def
-R2822:2822 Modal_Library <> x var
-R2857:2864 Modal_Library <> In_World def
-R2866:2866 Modal_Library <> x var
-R2831:2834 Coq.Init.Datatypes <> true constr
-def 2885:2896 <> All_In_World
-R2903:2906 Coq.Init.Datatypes <> list ind
-R2908:2912 Modal_Library <> World ind
-R2921:2924 Coq.Init.Datatypes <> list ind
-R2926:2930 Modal_Library <> World ind
-R2935:2938 Coq.Init.Datatypes <> bool ind
-R2953:2953 Modal_Library <> l var
-R2964:2966 Coq.Init.Datatypes <> nil constr
-R2972:2975 Coq.Init.Datatypes <> true constr
-R2982:2983 Modal_Library <> ::x_'::'_x not
-R2992:2999 Modal_Library <> In_World def
-R3003:3004 Modal_Library <> l' var
-R3046:3050 Coq.Init.Datatypes <> false constr
-R3011:3022 Modal_Library <> All_In_World def
-R3026:3027 Modal_Library <> l' var
-def 3067:3083 <> remove_invalidate
-R3095:3098 Coq.Init.Datatypes <> list ind
-R3100:3104 Modal_Library <> World ind
-R3120:3123 Coq.Init.Datatypes <> list ind
-R3131:3133 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
-R3126:3130 Modal_Library <> World ind
-R3134:3138 Modal_Library <> World ind
-R3144:3147 Coq.Init.Datatypes <> list ind
-R3155:3157 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
-R3150:3154 Modal_Library <> World ind
+def 753:761 <> sizeModal
+R766:777 Modal_Library <> formulaModal ind
+R782:784 Coq.Init.Datatypes <> nat ind
+R799:799 Modal_Library <> f var
+R813:815 Modal_Library <> Lit constr
+R839:841 Modal_Library <> Neg constr
+R858:861 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R874:874 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R862:870 Modal_Library <> sizeModal def
+R882:884 Modal_Library <> Box constr
+R901:904 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R917:917 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R905:913 Modal_Library <> sizeModal def
+R925:927 Modal_Library <> Dia constr
+R944:947 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R960:960 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R948:956 Modal_Library <> sizeModal def
+R968:970 Modal_Library <> And constr
+R1004:1007 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1020:1020 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R987:990 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1003:1003 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R991:999 Modal_Library <> sizeModal def
+R1008:1016 Modal_Library <> sizeModal def
+R1028:1029 Modal_Library <> Or constr
+R1064:1067 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1080:1080 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1047:1050 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1063:1063 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1051:1059 Modal_Library <> sizeModal def
+R1068:1076 Modal_Library <> sizeModal def
+R1088:1094 Modal_Library <> Implies constr
+R1124:1127 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1140:1140 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1107:1110 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1123:1123 Coq.Init.Peano <> :nat_scope:x_'+'_x not
+R1111:1119 Modal_Library <> sizeModal def
+R1128:1136 Modal_Library <> sizeModal def
+def 1157:1164 <> literals
+R1169:1180 Modal_Library <> formulaModal ind
+R1185:1187 Coq.Lists.ListSet <> set def
+R1189:1191 Coq.Init.Datatypes <> nat ind
+R1206:1206 Modal_Library <> f var
+R1220:1222 Modal_Library <> Lit constr
+R1238:1244 Coq.Lists.ListSet <> set_add def
+R1260:1268 Coq.Lists.ListSet <> empty_set def
+R1270:1272 Coq.Init.Datatypes <> nat ind
+R1246:1255 Coq.Arith.Peano_dec <> eq_nat_dec syndef
+R1281:1283 Modal_Library <> Dia constr
+R1299:1306 Modal_Library <> literals def
+R1317:1319 Modal_Library <> Box constr
+R1335:1342 Modal_Library <> literals def
+R1353:1355 Modal_Library <> Neg constr
+R1371:1378 Modal_Library <> literals def
+R1389:1391 Modal_Library <> And constr
+R1407:1415 Coq.Lists.ListSet <> set_union def
+R1443:1450 Modal_Library <> literals def
+R1429:1436 Modal_Library <> literals def
+R1417:1426 Coq.Arith.Peano_dec <> eq_nat_dec syndef
+R1462:1463 Modal_Library <> Or constr
+R1480:1488 Coq.Lists.ListSet <> set_union def
+R1516:1523 Modal_Library <> literals def
+R1502:1509 Modal_Library <> literals def
+R1490:1499 Coq.Arith.Peano_dec <> eq_nat_dec syndef
+R1535:1541 Modal_Library <> Implies constr
+R1553:1561 Coq.Lists.ListSet <> set_union def
+R1589:1596 Modal_Library <> literals def
+R1575:1582 Modal_Library <> literals def
+R1563:1572 Coq.Arith.Peano_dec <> eq_nat_dec syndef
+ind 1619:1623 <> World
+constr 1640:1640 <> w
+R1647:1650 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R1651:1655 Modal_Library <> World ind
+R1644:1646 Coq.Init.Datatypes <> nat ind
+ind 1671:1678 <> Relation
+constr 1695:1695 <> r
+R1704:1707 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R1713:1716 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R1717:1724 Modal_Library <> Relation ind
+R1708:1712 Modal_Library <> World ind
+R1699:1703 Modal_Library <> World ind
+R1780:1786 Modal_Library <> Implies constr
+not 1763:1763 <> ::x_'.->'_x
+R1855:1856 Modal_Library <> Or constr
+not 1838:1838 <> ::x_'.\/'_x
+R1929:1931 Modal_Library <> And constr
+not 1912:1912 <> ::x_'./\'_x
+R2003:2005 Modal_Library <> Neg constr
+not 1986:1986 <> ::'.~'_x
+R2078:2080 Modal_Library <> Box constr
+not 2061:2061 <> ::'.[]'_x
+R2153:2155 Modal_Library <> Dia constr
+not 2136:2136 <> ::'.<>'_x
+R2228:2230 Modal_Library <> Lit constr
+not 2211:2211 <> ::'#'_x
+not 2283:2283 <> ::x_'#'_x
+R2354:2354 Modal_Library <> r constr
+not 2341:2341 <> ::x_'.R'_x
+R2412:2414 Coq.Init.Datatypes <> nil constr
+not 2403:2403 <> ::'['_']'
+R2439:2442 Coq.Init.Datatypes <> cons constr
+not 2426:2426 <> ::x_'::'_x
+R2536:2539 Coq.Init.Datatypes <> cons constr
+R2547:2550 Coq.Init.Datatypes <> cons constr
+R2554:2556 Coq.Init.Datatypes <> nil constr
+not 2515:2515 <> ::'['_x_';'_'..'_';'_x_']'
+def 2575:2583 <> eqb_World
+R2593:2597 Modal_Library <> World ind
+R2601:2604 Coq.Init.Datatypes <> bool ind
+R2619:2619 Modal_Library <> x var
+R2632:2632 Modal_Library <> w constr
+R2645:2646 Modal_Library <> x' var
+R2672:2672 Modal_Library <> w constr
+R2685:2688 Coq.Arith.PeanoNat <> :nat_scope:x_'=?'_x not
+R2707:2711 Coq.Init.Datatypes <> false constr
+R2697:2700 Coq.Init.Datatypes <> true constr
+def 2744:2751 <> In_World
+R2757:2761 Modal_Library <> World ind
+R2768:2771 Coq.Init.Datatypes <> list ind
+R2773:2777 Modal_Library <> World ind
+R2781:2784 Coq.Init.Datatypes <> bool ind
+R2799:2799 Modal_Library <> l var
+R2812:2814 Coq.Init.Datatypes <> nil constr
+R2819:2823 Coq.Init.Datatypes <> false constr
+R2832:2835 Modal_Library <> ::x_'::'_x not
+R2844:2852 Modal_Library <> eqb_World def
+R2854:2854 Modal_Library <> x var
+R2889:2896 Modal_Library <> In_World def
+R2898:2898 Modal_Library <> x var
+R2863:2866 Coq.Init.Datatypes <> true constr
+def 2917:2928 <> All_In_World
+R2935:2938 Coq.Init.Datatypes <> list ind
+R2940:2944 Modal_Library <> World ind
+R2953:2956 Coq.Init.Datatypes <> list ind
+R2958:2962 Modal_Library <> World ind
+R2967:2970 Coq.Init.Datatypes <> bool ind
+R2985:2985 Modal_Library <> l var
+R2996:2998 Coq.Init.Datatypes <> nil constr
+R3004:3007 Coq.Init.Datatypes <> true constr
+R3014:3015 Modal_Library <> ::x_'::'_x not
+R3024:3031 Modal_Library <> In_World def
+R3035:3036 Modal_Library <> l' var
+R3078:3082 Coq.Init.Datatypes <> false constr
+R3043:3054 Modal_Library <> All_In_World def
+R3058:3059 Modal_Library <> l' var
+def 3099:3115 <> remove_invalidate
+R3127:3130 Coq.Init.Datatypes <> list ind
+R3132:3136 Modal_Library <> World ind
+R3152:3155 Coq.Init.Datatypes <> list ind
+R3163:3165 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
 R3158:3162 Modal_Library <> World ind
-R3178:3186 Modal_Library <> Relations var
-R3199:3201 Coq.Init.Datatypes <> nil constr
-R3206:3208 Coq.Init.Datatypes <> nil constr
-R3218:3221 Modal_Library <> ::x_'::'_x not
-R3230:3233 Coq.Init.Datatypes <> andb def
-R3262:3269 Modal_Library <> In_World def
-R3279:3284 Modal_Library <> Worlds var
-R3272:3274 Coq.Init.Datatypes <> snd def
-R3236:3243 Modal_Library <> In_World def
-R3253:3258 Modal_Library <> Worlds var
-R3246:3248 Coq.Init.Datatypes <> fst def
-R3377:3393 Modal_Library <> remove_invalidate def
-R3395:3400 Modal_Library <> Worlds var
-R3325:3328 Coq.Init.Datatypes <> :list_scope:x_'++'_x not
-R3309:3309 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R3324:3324 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R3310:3310 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R3316:3317 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R3323:3323 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R3311:3313 Coq.Init.Datatypes <> fst def
-R3318:3320 Coq.Init.Datatypes <> snd def
-R3329:3345 Modal_Library <> remove_invalidate def
-R3347:3352 Modal_Library <> Worlds var
-def 3419:3434 <> pair_to_relation
-R3441:3444 Coq.Init.Datatypes <> list ind
-R3452:3454 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
-R3447:3451 Modal_Library <> World ind
-R3455:3459 Modal_Library <> World ind
-R3465:3468 Coq.Init.Datatypes <> list ind
-R3470:3477 Modal_Library <> Relation ind
-R3492:3492 Modal_Library <> l var
-R3505:3507 Coq.Init.Datatypes <> nil constr
-R3512:3514 Coq.Init.Datatypes <> nil constr
-R3523:3526 Modal_Library <> ::x_'::'_x not
-R3532:3532 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
-R3550:3554 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
-R3533:3533 Modal_Library <> r constr
-R3544:3546 Coq.Init.Datatypes <> snd def
-R3536:3538 Coq.Init.Datatypes <> fst def
-R3555:3570 Modal_Library <> pair_to_relation def
-def 3591:3607 <> validate_relation
-R3619:3622 Coq.Init.Datatypes <> list ind
-R3624:3628 Modal_Library <> World ind
-R3637:3640 Coq.Init.Datatypes <> list ind
-R3648:3650 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
-R3643:3647 Modal_Library <> World ind
-R3651:3655 Modal_Library <> World ind
-R3661:3664 Coq.Init.Datatypes <> list ind
-R3666:3673 Modal_Library <> Relation ind
-R3683:3698 Modal_Library <> pair_to_relation def
-R3701:3717 Modal_Library <> remove_invalidate def
-R3726:3727 Modal_Library <> lw var
-R3719:3724 Modal_Library <> Worlds var
-def 3843:3858 <> validate_formula
-R3870:3873 Coq.Init.Datatypes <> list ind
-R3875:3879 Modal_Library <> World ind
-R3894:3897 Coq.Init.Datatypes <> list ind
-R3912:3914 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
-R3900:3911 Modal_Library <> formulaModal ind
-R3915:3918 Coq.Init.Datatypes <> list ind
-R3920:3924 Modal_Library <> World ind
-R3940:3943 Coq.Init.Datatypes <> list ind
-R3958:3960 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
-R3946:3957 Modal_Library <> formulaModal ind
-R3961:3964 Coq.Init.Datatypes <> list ind
-R3966:3970 Modal_Library <> World ind
-R3984:3991 Modal_Library <> Formulas var
-R4004:4006 Coq.Init.Datatypes <> nil constr
-R4013:4015 Coq.Init.Datatypes <> nil constr
-R4024:4025 Modal_Library <> ::x_'::'_x not
-R4038:4040 Coq.Init.Datatypes <> snd def
-R4071:4073 Coq.Init.Datatypes <> nil constr
-R4078:4093 Modal_Library <> validate_formula def
-R4095:4100 Modal_Library <> Worlds var
-R4128:4129 Modal_Library <> ::x_'::'_x not
-R4139:4150 Modal_Library <> All_In_World def
-R4160:4165 Modal_Library <> Worlds var
-R4153:4155 Coq.Init.Datatypes <> snd def
-R4242:4257 Modal_Library <> validate_formula def
-R4259:4264 Modal_Library <> Worlds var
-R4176:4179 Coq.Init.Datatypes <> :list_scope:x_'++'_x not
-R4173:4173 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R4175:4175 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
-R4180:4195 Modal_Library <> validate_formula def
-R4197:4202 Modal_Library <> Worlds var
-constr 4318:4329 <> frame_kripke
-rec 4302:4306 <> Frame
-proj 4336:4336 <> W
-proj 4387:4387 <> R
-R4340:4343 Coq.Init.Datatypes <> list ind
-R4345:4349 Modal_Library <> World ind
-R4391:4394 Coq.Init.Datatypes <> list ind
-R4396:4403 Modal_Library <> Relation ind
-constr 4473:4484 <> model_kripke
-rec 4457:4461 <> Model
-proj 4491:4491 <> F
-proj 4529:4529 <> v
-R4495:4499 Modal_Library <> Frame rec
-R4532:4535 Coq.Init.Datatypes <> list ind
-R4541:4544 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
-R4555:4555 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
-R4538:4540 Coq.Init.Datatypes <> nat ind
-R4545:4548 Coq.Init.Datatypes <> list ind
-R4550:4554 Modal_Library <> World ind
-def 4575:4579 <> frame
-R4585:4588 Coq.Init.Datatypes <> list ind
-R4590:4594 Modal_Library <> World ind
-R4601:4604 Coq.Init.Datatypes <> list ind
-R4612:4614 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
-R4607:4611 Modal_Library <> World ind
-R4615:4619 Modal_Library <> World ind
-R4625:4629 Modal_Library <> Frame rec
-R4638:4649 Modal_Library <> frame_kripke constr
-R4654:4670 Modal_Library <> validate_relation def
-R4674:4674 Modal_Library <> r var
-R4672:4672 Modal_Library <> w var
-R4651:4651 Modal_Library <> w var
-def 4690:4694 <> model
-R4700:4704 Modal_Library <> Frame rec
-R4711:4714 Coq.Init.Datatypes <> list ind
-R4720:4723 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
-R4734:4734 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
-R4717:4719 Coq.Init.Datatypes <> nat ind
-R4724:4727 Coq.Init.Datatypes <> list ind
-R4729:4733 Modal_Library <> World ind
-R4740:4744 Modal_Library <> Model rec
-R4753:4764 Modal_Library <> model_kripke constr
-R4768:4768 Modal_Library <> v var
-R4766:4766 Modal_Library <> f var
-def 4782:4793 <> verification
-R4801:4804 Coq.Init.Datatypes <> list ind
-R4810:4813 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
-R4824:4824 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
-R4807:4809 Coq.Init.Datatypes <> nat ind
-R4814:4817 Coq.Init.Datatypes <> list ind
-R4819:4823 Modal_Library <> World ind
-R4833:4837 Modal_Library <> World ind
-R4844:4846 Coq.Init.Datatypes <> nat ind
-R4869:4871 Modal_Library <> val var
-R4884:4885 Modal_Library <> ::'['_']' not
-R4890:4894 Coq.Init.Logic <> False ind
-R4903:4906 Modal_Library <> ::x_'::'_x not
-R4915:4918 Coq.Init.Datatypes <> andb def
-R4937:4944 Modal_Library <> In_World def
-R4949:4951 Coq.Init.Datatypes <> snd def
-R4946:4946 Modal_Library <> w var
-R4921:4923 Coq.Init.Nat <> eqb def
-R4928:4930 Coq.Init.Datatypes <> fst def
-R4925:4925 Modal_Library <> p var
-R4988:4999 Modal_Library <> verification def
-R5005:5005 Modal_Library <> p var
-R5003:5003 Modal_Library <> w var
-R4962:4965 Coq.Init.Logic <> True ind
-def 5028:5036 <> fst_world
-R5047:5054 Modal_Library <> Relation ind
-R5059:5063 Modal_Library <> World ind
-R5078:5083 Modal_Library <> pair_w var
-R5096:5096 Modal_Library <> r constr
-def 5128:5136 <> snd_world
-R5147:5154 Modal_Library <> Relation ind
-R5159:5163 Modal_Library <> World ind
-R5178:5183 Modal_Library <> pair_w var
-R5196:5196 Modal_Library <> r constr
-def 5226:5232 <> relacao
-R5238:5241 Coq.Init.Datatypes <> list ind
-R5243:5250 Modal_Library <> Relation ind
-R5261:5265 Modal_Library <> World ind
-R5288:5288 Modal_Library <> r var
-R5301:5302 Modal_Library <> ::'['_']' not
-R5307:5311 Coq.Init.Logic <> False ind
-R5320:5323 Modal_Library <> ::x_'::'_x not
-R5332:5335 Coq.Init.Datatypes <> andb def
-R5366:5374 Modal_Library <> eqb_World def
-R5390:5391 Modal_Library <> w' var
-R5377:5385 Modal_Library <> snd_world def
-R5338:5346 Modal_Library <> eqb_World def
-R5362:5362 Modal_Library <> w var
-R5349:5357 Modal_Library <> fst_world def
-R5425:5431 Modal_Library <> relacao def
-R5437:5438 Modal_Library <> w' var
-R5435:5435 Modal_Library <> w var
-R5399:5402 Coq.Init.Logic <> True ind
-def 5490:5503 <> fun_validation
-R5510:5514 Modal_Library <> Model rec
-R5522:5526 Modal_Library <> World ind
-R5534:5545 Modal_Library <> formulaModal ind
-R5568:5568 Modal_Library <> p var
-R5581:5583 Modal_Library <> Lit constr
-R5599:5610 Modal_Library <> verification def
-R5618:5618 Modal_Library <> w var
-R5613:5613 Modal_Library <> v proj
-R5615:5615 Modal_Library <> M var
-R5628:5630 Modal_Library <> Box constr
-R5657:5661 Modal_Library <> World ind
-R5686:5689 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R5690:5703 Modal_Library <> fun_validation def
-R5707:5708 Modal_Library <> w' var
-R5705:5705 Modal_Library <> M var
-R5664:5670 Modal_Library <> relacao def
-R5684:5685 Modal_Library <> w' var
-R5682:5682 Modal_Library <> w var
-R5673:5673 Modal_Library <> R proj
-R5676:5676 Modal_Library <> F proj
-R5678:5678 Modal_Library <> M var
-R5719:5721 Modal_Library <> Dia constr
-R5737:5743 Coq.Init.Logic <> :type_scope:'exists'_x_'..'_x_','_x not
-R5753:5754 Coq.Init.Logic <> :type_scope:'exists'_x_'..'_x_','_x not
-R5748:5752 Modal_Library <> World ind
-R5777:5780 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R5781:5794 Modal_Library <> fun_validation def
-R5798:5799 Modal_Library <> w' var
-R5796:5796 Modal_Library <> M var
-R5755:5761 Modal_Library <> relacao def
-R5775:5776 Modal_Library <> w' var
-R5773:5773 Modal_Library <> w var
-R5764:5764 Modal_Library <> R proj
-R5767:5767 Modal_Library <> F proj
-R5769:5769 Modal_Library <> M var
-R5810:5812 Modal_Library <> Neg constr
-R5828:5829 Coq.Init.Logic <> :type_scope:'~'_x not
-R5830:5843 Modal_Library <> fun_validation def
-R5847:5847 Modal_Library <> w var
-R5845:5845 Modal_Library <> M var
-R5858:5860 Modal_Library <> And constr
-R5897:5900 Coq.Init.Logic <> :type_scope:x_'/\'_x not
-R5876:5889 Modal_Library <> fun_validation def
-R5893:5893 Modal_Library <> w var
-R5891:5891 Modal_Library <> M var
-R5901:5914 Modal_Library <> fun_validation def
-R5918:5918 Modal_Library <> w var
-R5916:5916 Modal_Library <> M var
-R5929:5930 Modal_Library <> Or constr
-R5968:5971 Coq.Init.Logic <> :type_scope:x_'\/'_x not
-R5947:5960 Modal_Library <> fun_validation def
-R5964:5964 Modal_Library <> w var
-R5962:5962 Modal_Library <> M var
-R5972:5985 Modal_Library <> fun_validation def
-R5989:5989 Modal_Library <> w var
-R5987:5987 Modal_Library <> M var
-R6000:6006 Modal_Library <> Implies constr
-R6039:6042 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R6043:6056 Modal_Library <> fun_validation def
-R6060:6060 Modal_Library <> w var
-R6058:6058 Modal_Library <> M var
-R6018:6031 Modal_Library <> fun_validation def
-R6035:6035 Modal_Library <> w var
-R6033:6033 Modal_Library <> M var
-R6105:6118 Modal_Library <> fun_validation def
-not 6085:6085 <> ::x_'→'_x_'||-'_x
-def 6208:6221 <> validate_model
-R6228:6232 Modal_Library <> Model rec
-R6240:6251 Modal_Library <> formulaModal ind
-R6278:6282 Modal_Library <> World ind
-R6299:6302 Coq.Init.Logic <> :type_scope:x_'/\'_x not
-R6285:6286 Coq.Lists.List <> In def
-R6291:6291 Modal_Library <> W proj
-R6294:6294 Modal_Library <> F proj
-R6296:6296 Modal_Library <> M var
-R6288:6288 Modal_Library <> w var
-R6303:6316 Modal_Library <> fun_validation def
-R6322:6322 Modal_Library <> p var
+R3166:3170 Modal_Library <> World ind
+R3176:3179 Coq.Init.Datatypes <> list ind
+R3187:3189 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
+R3182:3186 Modal_Library <> World ind
+R3190:3194 Modal_Library <> World ind
+R3210:3218 Modal_Library <> Relations var
+R3231:3233 Coq.Init.Datatypes <> nil constr
+R3238:3240 Coq.Init.Datatypes <> nil constr
+R3250:3253 Modal_Library <> ::x_'::'_x not
+R3262:3265 Coq.Init.Datatypes <> andb def
+R3294:3301 Modal_Library <> In_World def
+R3311:3316 Modal_Library <> Worlds var
+R3304:3306 Coq.Init.Datatypes <> snd def
+R3268:3275 Modal_Library <> In_World def
+R3285:3290 Modal_Library <> Worlds var
+R3278:3280 Coq.Init.Datatypes <> fst def
+R3409:3425 Modal_Library <> remove_invalidate def
+R3427:3432 Modal_Library <> Worlds var
+R3357:3360 Coq.Init.Datatypes <> :list_scope:x_'++'_x not
+R3341:3341 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R3356:3356 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R3342:3342 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3348:3349 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3355:3355 Coq.Init.Datatypes <> :core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3343:3345 Coq.Init.Datatypes <> fst def
+R3350:3352 Coq.Init.Datatypes <> snd def
+R3361:3377 Modal_Library <> remove_invalidate def
+R3379:3384 Modal_Library <> Worlds var
+def 3451:3466 <> pair_to_relation
+R3473:3476 Coq.Init.Datatypes <> list ind
+R3484:3486 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
+R3479:3483 Modal_Library <> World ind
+R3487:3491 Modal_Library <> World ind
+R3497:3500 Coq.Init.Datatypes <> list ind
+R3502:3509 Modal_Library <> Relation ind
+R3524:3524 Modal_Library <> l var
+R3537:3539 Coq.Init.Datatypes <> nil constr
+R3544:3546 Coq.Init.Datatypes <> nil constr
+R3555:3558 Modal_Library <> ::x_'::'_x not
+R3564:3564 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R3582:3586 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R3565:3565 Modal_Library <> r constr
+R3576:3578 Coq.Init.Datatypes <> snd def
+R3568:3570 Coq.Init.Datatypes <> fst def
+R3587:3602 Modal_Library <> pair_to_relation def
+def 3623:3639 <> validate_relation
+R3651:3654 Coq.Init.Datatypes <> list ind
+R3656:3660 Modal_Library <> World ind
+R3669:3672 Coq.Init.Datatypes <> list ind
+R3680:3682 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
+R3675:3679 Modal_Library <> World ind
+R3683:3687 Modal_Library <> World ind
+R3693:3696 Coq.Init.Datatypes <> list ind
+R3698:3705 Modal_Library <> Relation ind
+R3715:3730 Modal_Library <> pair_to_relation def
+R3733:3749 Modal_Library <> remove_invalidate def
+R3758:3759 Modal_Library <> lw var
+R3751:3756 Modal_Library <> Worlds var
+def 3875:3890 <> validate_formula
+R3902:3905 Coq.Init.Datatypes <> list ind
+R3907:3911 Modal_Library <> World ind
+R3926:3929 Coq.Init.Datatypes <> list ind
+R3944:3946 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
+R3932:3943 Modal_Library <> formulaModal ind
+R3947:3950 Coq.Init.Datatypes <> list ind
+R3952:3956 Modal_Library <> World ind
+R3972:3975 Coq.Init.Datatypes <> list ind
+R3990:3992 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
+R3978:3989 Modal_Library <> formulaModal ind
+R3993:3996 Coq.Init.Datatypes <> list ind
+R3998:4002 Modal_Library <> World ind
+R4016:4023 Modal_Library <> Formulas var
+R4036:4038 Coq.Init.Datatypes <> nil constr
+R4045:4047 Coq.Init.Datatypes <> nil constr
+R4056:4057 Modal_Library <> ::x_'::'_x not
+R4070:4072 Coq.Init.Datatypes <> snd def
+R4103:4105 Coq.Init.Datatypes <> nil constr
+R4110:4125 Modal_Library <> validate_formula def
+R4127:4132 Modal_Library <> Worlds var
+R4160:4161 Modal_Library <> ::x_'::'_x not
+R4171:4182 Modal_Library <> All_In_World def
+R4192:4197 Modal_Library <> Worlds var
+R4185:4187 Coq.Init.Datatypes <> snd def
+R4274:4289 Modal_Library <> validate_formula def
+R4291:4296 Modal_Library <> Worlds var
+R4208:4211 Coq.Init.Datatypes <> :list_scope:x_'++'_x not
+R4205:4205 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R4207:4207 Modal_Library <> ::'['_x_';'_'..'_';'_x_']' not
+R4212:4227 Modal_Library <> validate_formula def
+R4229:4234 Modal_Library <> Worlds var
+constr 4350:4361 <> frame_kripke
+rec 4334:4338 <> Frame
+proj 4368:4368 <> W
+proj 4419:4419 <> R
+R4372:4375 Coq.Init.Datatypes <> list ind
+R4377:4381 Modal_Library <> World ind
+R4423:4426 Coq.Init.Datatypes <> list ind
+R4428:4435 Modal_Library <> Relation ind
+constr 4505:4516 <> model_kripke
+rec 4489:4493 <> Model
+proj 4523:4523 <> F
+proj 4561:4561 <> v
+R4527:4531 Modal_Library <> Frame rec
+R4564:4567 Coq.Init.Datatypes <> list ind
+R4573:4576 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
+R4587:4587 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
+R4570:4572 Coq.Init.Datatypes <> nat ind
+R4577:4580 Coq.Init.Datatypes <> list ind
+R4582:4586 Modal_Library <> World ind
+def 4607:4611 <> frame
+R4617:4620 Coq.Init.Datatypes <> list ind
+R4622:4626 Modal_Library <> World ind
+R4633:4636 Coq.Init.Datatypes <> list ind
+R4644:4646 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
+R4639:4643 Modal_Library <> World ind
+R4647:4651 Modal_Library <> World ind
+R4657:4661 Modal_Library <> Frame rec
+R4670:4681 Modal_Library <> frame_kripke constr
+R4686:4702 Modal_Library <> validate_relation def
+R4706:4706 Modal_Library <> r var
+R4704:4704 Modal_Library <> w var
+R4683:4683 Modal_Library <> w var
+def 4722:4726 <> model
+R4732:4736 Modal_Library <> Frame rec
+R4743:4746 Coq.Init.Datatypes <> list ind
+R4752:4755 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
+R4766:4766 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
+R4749:4751 Coq.Init.Datatypes <> nat ind
+R4756:4759 Coq.Init.Datatypes <> list ind
+R4761:4765 Modal_Library <> World ind
+R4772:4776 Modal_Library <> Model rec
+R4785:4796 Modal_Library <> model_kripke constr
+R4800:4800 Modal_Library <> v var
+R4798:4798 Modal_Library <> f var
+def 4814:4825 <> verification
+R4833:4836 Coq.Init.Datatypes <> list ind
+R4842:4845 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
+R4856:4856 Coq.Init.Datatypes <> :type_scope:x_'*'_x not
+R4839:4841 Coq.Init.Datatypes <> nat ind
+R4846:4849 Coq.Init.Datatypes <> list ind
+R4851:4855 Modal_Library <> World ind
+R4865:4869 Modal_Library <> World ind
+R4876:4878 Coq.Init.Datatypes <> nat ind
+R4901:4903 Modal_Library <> val var
+R4916:4917 Modal_Library <> ::'['_']' not
+R4922:4926 Coq.Init.Logic <> False ind
+R4935:4938 Modal_Library <> ::x_'::'_x not
+R4947:4950 Coq.Init.Datatypes <> andb def
+R4969:4976 Modal_Library <> In_World def
+R4981:4983 Coq.Init.Datatypes <> snd def
+R4978:4978 Modal_Library <> w var
+R4953:4955 Coq.Init.Nat <> eqb def
+R4960:4962 Coq.Init.Datatypes <> fst def
+R4957:4957 Modal_Library <> p var
+R5020:5031 Modal_Library <> verification def
+R5037:5037 Modal_Library <> p var
+R5035:5035 Modal_Library <> w var
+R4994:4997 Coq.Init.Logic <> True ind
+def 5060:5068 <> fst_world
+R5079:5086 Modal_Library <> Relation ind
+R5091:5095 Modal_Library <> World ind
+R5110:5115 Modal_Library <> pair_w var
+R5128:5128 Modal_Library <> r constr
+def 5160:5168 <> snd_world
+R5179:5186 Modal_Library <> Relation ind
+R5191:5195 Modal_Library <> World ind
+R5210:5215 Modal_Library <> pair_w var
+R5228:5228 Modal_Library <> r constr
+def 5258:5264 <> relacao
+R5270:5273 Coq.Init.Datatypes <> list ind
+R5275:5282 Modal_Library <> Relation ind
+R5293:5297 Modal_Library <> World ind
+R5320:5320 Modal_Library <> r var
+R5333:5334 Modal_Library <> ::'['_']' not
+R5339:5343 Coq.Init.Logic <> False ind
+R5352:5355 Modal_Library <> ::x_'::'_x not
+R5364:5367 Coq.Init.Datatypes <> andb def
+R5398:5406 Modal_Library <> eqb_World def
+R5422:5423 Modal_Library <> w' var
+R5409:5417 Modal_Library <> snd_world def
+R5370:5378 Modal_Library <> eqb_World def
+R5394:5394 Modal_Library <> w var
+R5381:5389 Modal_Library <> fst_world def
+R5457:5463 Modal_Library <> relacao def
+R5469:5470 Modal_Library <> w' var
+R5467:5467 Modal_Library <> w var
+R5431:5434 Coq.Init.Logic <> True ind
+def 5522:5535 <> fun_validation
+R5542:5546 Modal_Library <> Model rec
+R5554:5558 Modal_Library <> World ind
+R5566:5577 Modal_Library <> formulaModal ind
+R5600:5600 Modal_Library <> p var
+R5613:5615 Modal_Library <> Lit constr
+R5631:5642 Modal_Library <> verification def
+R5650:5650 Modal_Library <> w var
+R5645:5645 Modal_Library <> v proj
+R5647:5647 Modal_Library <> M var
+R5660:5662 Modal_Library <> Box constr
+R5689:5693 Modal_Library <> World ind
+R5718:5721 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R5722:5735 Modal_Library <> fun_validation def
+R5739:5740 Modal_Library <> w' var
+R5737:5737 Modal_Library <> M var
+R5696:5702 Modal_Library <> relacao def
+R5716:5717 Modal_Library <> w' var
+R5714:5714 Modal_Library <> w var
+R5705:5705 Modal_Library <> R proj
+R5708:5708 Modal_Library <> F proj
+R5710:5710 Modal_Library <> M var
+R5751:5753 Modal_Library <> Dia constr
+R5769:5775 Coq.Init.Logic <> :type_scope:'exists'_x_'..'_x_','_x not
+R5785:5786 Coq.Init.Logic <> :type_scope:'exists'_x_'..'_x_','_x not
+R5780:5784 Modal_Library <> World ind
+R5809:5812 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R5813:5826 Modal_Library <> fun_validation def
+R5830:5831 Modal_Library <> w' var
+R5828:5828 Modal_Library <> M var
+R5787:5793 Modal_Library <> relacao def
+R5807:5808 Modal_Library <> w' var
+R5805:5805 Modal_Library <> w var
+R5796:5796 Modal_Library <> R proj
+R5799:5799 Modal_Library <> F proj
+R5801:5801 Modal_Library <> M var
+R5842:5844 Modal_Library <> Neg constr
+R5860:5861 Coq.Init.Logic <> :type_scope:'~'_x not
+R5862:5875 Modal_Library <> fun_validation def
+R5879:5879 Modal_Library <> w var
+R5877:5877 Modal_Library <> M var
+R5890:5892 Modal_Library <> And constr
+R5929:5932 Coq.Init.Logic <> :type_scope:x_'/\'_x not
+R5908:5921 Modal_Library <> fun_validation def
+R5925:5925 Modal_Library <> w var
+R5923:5923 Modal_Library <> M var
+R5933:5946 Modal_Library <> fun_validation def
+R5950:5950 Modal_Library <> w var
+R5948:5948 Modal_Library <> M var
+R5961:5962 Modal_Library <> Or constr
+R6000:6003 Coq.Init.Logic <> :type_scope:x_'\/'_x not
+R5979:5992 Modal_Library <> fun_validation def
+R5996:5996 Modal_Library <> w var
+R5994:5994 Modal_Library <> M var
+R6004:6017 Modal_Library <> fun_validation def
+R6021:6021 Modal_Library <> w var
+R6019:6019 Modal_Library <> M var
+R6032:6038 Modal_Library <> Implies constr
+R6071:6074 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R6075:6088 Modal_Library <> fun_validation def
+R6092:6092 Modal_Library <> w var
+R6090:6090 Modal_Library <> M var
+R6050:6063 Modal_Library <> fun_validation def
+R6067:6067 Modal_Library <> w var
+R6065:6065 Modal_Library <> M var
+R6137:6150 Modal_Library <> fun_validation def
+not 6117:6117 <> ::x_'→'_x_'||-'_x
+def 6240:6253 <> validate_model
+R6260:6264 Modal_Library <> Model rec
+R6272:6283 Modal_Library <> formulaModal ind
+R6310:6314 Modal_Library <> World ind
+R6331:6334 Coq.Init.Logic <> :type_scope:x_'/\'_x not
+R6317:6318 Coq.Lists.List <> In def
+R6323:6323 Modal_Library <> W proj
+R6326:6326 Modal_Library <> F proj
+R6328:6328 Modal_Library <> M var
 R6320:6320 Modal_Library <> w var
-R6318:6318 Modal_Library <> M var
-R6348:6361 Modal_Library <> validate_model def
-not 6335:6335 <> ::x_'|='_x
-def 6466:6471 <> theory
-R6476:6479 Coq.Init.Datatypes <> list ind
-R6481:6492 Modal_Library <> formulaModal ind
-def 6505:6515 <> theoryModal
-R6522:6526 Modal_Library <> Model rec
-R6534:6538 Modal_Library <> World ind
-R6550:6555 Modal_Library <> theory def
-R6578:6582 Modal_Library <> Gamma var
-R6595:6597 Coq.Init.Datatypes <> nil constr
-R6602:6605 Coq.Init.Logic <> True ind
-R6614:6617 Modal_Library <> ::x_'::'_x not
-R6623:6623 Coq.Init.Logic <> :type_scope:x_'/\'_x not
-R6644:6649 Coq.Init.Logic <> :type_scope:x_'/\'_x not
-R6667:6667 Coq.Init.Logic <> :type_scope:x_'/\'_x not
-R6624:6637 Modal_Library <> fun_validation def
-R6641:6641 Modal_Library <> w var
-R6639:6639 Modal_Library <> M var
-R6650:6660 Modal_Library <> theoryModal def
-R6664:6664 Modal_Library <> w var
-R6662:6662 Modal_Library <> M var
-def 6690:6696 <> entails
-R6703:6707 Modal_Library <> Model rec
-R6715:6720 Modal_Library <> theory def
-R6728:6739 Modal_Library <> formulaModal ind
-R6767:6778 Modal_Library <> formulaModal ind
-R6781:6781 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R6814:6818 Coq.Init.Logic <> :type_scope:x_'->'_x not
-R6819:6832 Modal_Library <> validate_model def
-R6836:6836 Modal_Library <> B var
-R6834:6834 Modal_Library <> M var
-R6782:6782 Coq.Init.Logic <> :type_scope:x_'/\'_x not
-R6789:6794 Coq.Init.Logic <> :type_scope:x_'/\'_x not
-R6813:6813 Coq.Init.Logic <> :type_scope:x_'/\'_x not
-R6783:6784 Coq.Lists.List <> In def
-R6788:6788 Modal_Library <> A var
-R6786:6786 Modal_Library <> p var
-R6795:6808 Modal_Library <> validate_model def
-R6812:6812 Modal_Library <> p var
+R6335:6348 Modal_Library <> fun_validation def
+R6354:6354 Modal_Library <> p var
+R6352:6352 Modal_Library <> w var
+R6350:6350 Modal_Library <> M var
+R6380:6393 Modal_Library <> validate_model def
+not 6367:6367 <> ::x_'|='_x
+def 6498:6503 <> theory
+R6508:6511 Coq.Init.Datatypes <> list ind
+R6513:6524 Modal_Library <> formulaModal ind
+def 6537:6547 <> theoryModal
+R6554:6558 Modal_Library <> Model rec
+R6570:6575 Modal_Library <> theory def
+R6598:6602 Modal_Library <> Gamma var
+R6615:6617 Coq.Init.Datatypes <> nil constr
+R6622:6625 Coq.Init.Logic <> True ind
+R6634:6637 Modal_Library <> ::x_'::'_x not
+R6643:6643 Coq.Init.Logic <> :type_scope:x_'/\'_x not
+R6662:6667 Coq.Init.Logic <> :type_scope:x_'/\'_x not
+R6683:6683 Coq.Init.Logic <> :type_scope:x_'/\'_x not
+R6644:6657 Modal_Library <> validate_model def
+R6659:6659 Modal_Library <> M var
+R6668:6678 Modal_Library <> theoryModal def
+R6680:6680 Modal_Library <> M var
+def 6706:6712 <> entails
+R6719:6723 Modal_Library <> Model rec
+R6731:6736 Modal_Library <> theory def
+R6744:6755 Modal_Library <> formulaModal ind
+R6783:6794 Modal_Library <> formulaModal ind
+R6797:6797 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R6813:6817 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R6818:6831 Modal_Library <> validate_model def
+R6835:6835 Modal_Library <> B var
+R6833:6833 Modal_Library <> M var
+R6798:6808 Modal_Library <> theoryModal def
+R6812:6812 Modal_Library <> A var
 R6810:6810 Modal_Library <> M var
-R6868:6874 Modal_Library <> entails def
-not 6849:6849 <> ::x_'←'_x_'|-'_x
-prf 6996:7014 <> reflexive_deduction
+R6867:6873 Modal_Library <> entails def
+not 6848:6848 <> ::x_'←'_x_'|-'_x
+prf 6995:7013 <> reflexive_deduction
 R7030:7034 Modal_Library <> Model rec
-R7044:7049 Modal_Library <> theory def
-R7055:7066 Modal_Library <> formulaModal ind
-R7079:7083 Modal_Library <> ::x_'←'_x_'|-'_x not
-R7092:7095 Modal_Library <> ::x_'←'_x_'|-'_x not
-R7078:7078 Modal_Library <> M var
-R7085:7086 Modal_Library <> ::x_'::'_x not
-R7084:7084 Modal_Library <> A var
-R7087:7091 Modal_Library <> Gamma var
-R7096:7096 Modal_Library <> A var
-R7142:7148 Modal_Library <> entails def
-R7244:7257 Modal_Library <> validate_model def
-R7291:7297 Modal_Library <> entails def
+R7045:7050 Modal_Library <> theory def
+R7057:7068 Modal_Library <> formulaModal ind
+R7081:7085 Modal_Library <> ::x_'←'_x_'|-'_x not
+R7094:7097 Modal_Library <> ::x_'←'_x_'|-'_x not
+R7080:7080 Modal_Library <> M var
+R7087:7088 Modal_Library <> ::x_'::'_x not
+R7086:7086 Modal_Library <> A var
+R7089:7093 Modal_Library <> Gamma var
+R7098:7098 Modal_Library <> A var
+R7132:7138 Modal_Library <> entails def
+prf 7222:7238 <> theoryModal_union
+R7251:7255 Modal_Library <> Model rec
+R7271:7276 Modal_Library <> theory def
+R7282:7282 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R7311:7316 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R7363:7363 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R7317:7317 Coq.Init.Logic <> :type_scope:x_'/\'_x not
+R7337:7342 Coq.Init.Logic <> :type_scope:x_'/\'_x not
+R7362:7362 Coq.Init.Logic <> :type_scope:x_'/\'_x not
+R7318:7328 Modal_Library <> theoryModal def
+R7332:7336 Modal_Library <> Gamma var
+R7330:7330 Modal_Library <> M var
+R7343:7353 Modal_Library <> theoryModal def
+R7357:7361 Modal_Library <> Delta var
+R7355:7355 Modal_Library <> M var
+R7283:7293 Modal_Library <> theoryModal def
+R7303:7304 Coq.Init.Datatypes <> :list_scope:x_'++'_x not
+R7298:7302 Modal_Library <> Gamma var
+R7305:7309 Modal_Library <> Delta var
+R7295:7295 Modal_Library <> M var
+R7479:7487 Coq.Init.Logic <> and_assoc thm
+R7479:7487 Coq.Init.Logic <> and_assoc thm
+prf 7641:7663 <> transitive_deduction_bu
+R7679:7683 Modal_Library <> Model rec
+R7699:7704 Modal_Library <> theory def
+R7714:7725 Modal_Library <> formulaModal ind
+R7782:7786 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R7813:7813 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R7788:7792 Modal_Library <> ::x_'←'_x_'|-'_x not
+R7808:7811 Modal_Library <> ::x_'←'_x_'|-'_x not
+R7787:7787 Modal_Library <> M var
+R7794:7795 Modal_Library <> ::x_'::'_x not
+R7793:7793 Modal_Library <> A var
+R7801:7802 Coq.Init.Datatypes <> :list_scope:x_'++'_x not
+R7796:7800 Modal_Library <> Gamma var
+R7803:7807 Modal_Library <> Delta var
+R7812:7812 Modal_Library <> C var
+R7736:7736 Coq.Init.Logic <> :type_scope:x_'/\'_x not
+R7756:7761 Coq.Init.Logic <> :type_scope:x_'/\'_x not
+R7781:7781 Coq.Init.Logic <> :type_scope:x_'/\'_x not
+R7738:7742 Modal_Library <> ::x_'←'_x_'|-'_x not
+R7751:7754 Modal_Library <> ::x_'←'_x_'|-'_x not
+R7737:7737 Modal_Library <> M var
+R7744:7745 Modal_Library <> ::x_'::'_x not
+R7743:7743 Modal_Library <> A var
+R7746:7750 Modal_Library <> Gamma var
+R7755:7755 Modal_Library <> B var
+R7763:7767 Modal_Library <> ::x_'←'_x_'|-'_x not
+R7776:7779 Modal_Library <> ::x_'←'_x_'|-'_x not
+R7762:7762 Modal_Library <> M var
+R7769:7770 Modal_Library <> ::x_'::'_x not
+R7768:7768 Modal_Library <> B var
+R7771:7775 Modal_Library <> Delta var
+R7780:7780 Modal_Library <> C var
+R7847:7853 Modal_Library <> entails def
+R7977:7993 Modal_Library <> theoryModal_union thm
+R7977:7993 Modal_Library <> theoryModal_union thm
