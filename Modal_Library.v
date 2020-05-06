@@ -1,4 +1,5 @@
-(*  
+(*  Introduction
+
     Name: Ariel Agne da Silveira
 
     Advisor: Karina Girardi Roggia
@@ -86,7 +87,7 @@ Fixpoint In_World (x: World) (l: list World): bool :=
 end.
 
 Fixpoint All_In_World (l : list World) (l' : list World) : bool :=
-match l with
+    match l with
   | nil  => true
   | h::t => if In_World h l' then All_In_World t l'
             else false
@@ -179,35 +180,49 @@ Fixpoint fun_validation (M : Model) (w : World) (p : formulaModal) : Prop :=
     | Implies  p1 p2 => fun_validation M w p1 -> fun_validation M w p2 
     end.
 
+Notation "M → w ||- B" := (fun_validation M w B) (at level 110, right associativity).
 
     (* Model satisfazibility *)
 Definition validate_model (M : Model) (p : formulaModal) : Prop :=
     forall w: World, In w (W (F M)) /\ fun_validation M w p.
 
-Fixpoint eqb_list_worlds (W W' : list World) : bool :=
-    match W with
-    | [] => true
-    | h :: t => if In_World h W' then eqb_list_worlds t W'
-                else false
+Notation "M |= B" := (validate_model M B) (at level 110, right associativity).
+
+(******  Finite theories and entailment ******)
+
+Definition theory := list formulaModal.
+
+Fixpoint theoryModal (M : Model) (w : World) (Gamma : theory) : Prop :=
+    match Gamma with
+    | nil => True
+    | h :: t => (fun_validation M w h) /\ (theoryModal M w t)
     end.
 
-Fixpoint In_Relations (r : Relation ) (R' : list Relation): bool :=
-    match R' with
-    | [] => false
-    | h' :: t' =>   if andb (eqb_World (fst_world r) (fst_world h')) (eqb_World (snd_world r) (snd_world h')) then true
-                    else In_Relations r t'
-    end.
+Definition entails (M : Model) (A : theory) (B : formulaModal) : Prop :=
+    forall p : formulaModal, ((In p A) /\ (validate_model M p)) -> validate_model M B.
+
+Notation "M ← A |- B" := (entails M A B) (at level 110, no associativity).
+
+(***** structural properties of deduction ****)
 
 
-Fixpoint eqb_list_relations (R R' : list Relation) : bool :=
-    match R with
-    | [] => true
-    | h :: t =>  if In_Relations h R' then eqb_list_relations t R'
-                 else false
-    end.
+(* reflexivity *)
 
-Notation "M w |= phi" := (fun_validation M w phi) (at level 200, no associativity).
-
+Theorem  reflexive_deduction:
+   forall (M:Model) (Gamma:theory) (A:formulaModal) ,
+      (M ← A::Gamma |- A).
+    Proof.
+        intros.
+        unfold entails.
+        intros.
+        destruct H. destruct H. rewrite H. apply H0.
+        
+        unfold validate_model.
+        intros.
+        unfold entails.
+        
+        
+        
 
 (*  *)
 (* The end *)

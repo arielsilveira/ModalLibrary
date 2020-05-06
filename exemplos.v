@@ -7,7 +7,7 @@ Definition form2 := #1 .-> .~ .[] #2 .-> #0 .\/ .[](.<> #1 .\/ #2).
 Definition form3 := .~.~ #0 .-> #1.
 
 (* Definição do Mundos e Relações *)
-Definition world_in_model := [w 0; w 1;w 2; w 3; w 4]. 
+Definition world_in_model := [w # 0; w # 1;w # 2; w # 3; w # 4]. 
 Definition relation_world :=  [ (w 1, w 9); (w 0, w 1); (w 1, w 1);
                                 (w 1, w 2); (w 2, w 0); (w 2, w 3);
                                 (w 3, w 1); (w 3, w 3); (w 3, w 4)
@@ -20,15 +20,15 @@ Definition F := frame world_in_model relation_world.
 (* Declaração do Frame *)
 (* Definition F := frame world_in_model rel. *)
 
-Check F.
-Compute (W F).
-Compute (R F).
+(* Check F. *)
+(* Compute (W F). *)
+(* Compute (R F). *)
 
-Compute relacao (R F) (w 0) (w 18).
+(* Compute relacao (R F) (w 0) (w 18). *)
 
 Definition a := validate_formula (W F) [(# 1,[w 1; w 2]); (# 2, [w 3; w 8])].
 
-Check a.
+(* Check a. *)
 
 Definition M := model F [(1,[w 1; w 2]); (2, [w 3; w 8]); (3, [w 1; w 2; w 3])].
 
@@ -36,10 +36,18 @@ Compute fun_validation M (w 1) (.[] # 1).
 
 Compute validate_model M (# 1).
 
-Print or.
-Print and.
+(* 
 
-Compute M w 1 |= 1.
+Print or.
+Print and. 
+*)
+
+(* Definition world_w := (w 1). *)
+
+(* Compute True /\ True. *)
+Compute M |= (# 0 ./\ # 1).
+Compute M → (w 1) ||- (# 0 ./\ # 1).
+Compute M ← [# 0; # 1; # 2] |- # 1.
 
 (* Definition a  := frame world relation_world. *)
 
