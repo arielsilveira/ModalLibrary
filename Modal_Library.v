@@ -254,7 +254,39 @@ Proof.
         - apply ModalD.
 Qed.
 
+(* Representação de diferentes Frames *)
 
+(* Reflexividade *)
+Definition reflexivity_frame (F: Frame) : Prop :=
+    forall w: World, (In w (W F)) /\ relacao (R F) w w.
+
+(* Transitividade *)
+Definition transitivity_frame (F: Frame) : Prop :=
+    forall (w w' w'' : World), (In w (W F) /\ In w' (W F) /\ In w'' (W F) /\ relacao (R F) w w' /\ relacao (R F) w' w'') -> relacao (R F) w w''.
+    
+(* Simetria *)
+Definition simmetry_frame (F: Frame) : Prop :=
+    forall w w': World, (In w (W F) /\ In w' (W F)) /\ relacao (R F) w w' -> relacao (R F) w' w.
+
+(* Euclidiana *)
+Definition euclidian_frame (F: Frame) : Prop :=
+    forall w w' w'', (In w (W F) /\ In w' (W F) /\ In w'' (W F) /\ relacao (R F) w w' /\ relacao (R F) w w'') -> relacao (R F) w' w''.
+
+(* Serial *)
+Definition serial_frame (F: Frame) : Prop :=
+    forall w: World, exists w': World, (In w (W F) /\ In w' (W F) /\ relacao (R F) w w').
+
+(* Funcional *)
+Definition functional_frame (F: Frame) : Prop :=
+    forall w w' w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F) /\ relacao (R F) w w' /\ relacao (R F) w w'') -> w' = w''.
+
+(* Densa *)
+Definition dense_frame (F: Frame) : Prop :=
+    forall w w' w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F) /\ relacao (R F) w w') -> (relacao (R F) w w'' /\ relacao (R F) w' w'').
+
+(* Convergente *)
+Definition convergente_frame (F: Frame) : Prop :=
+    forall w x y: World, exists z: World,  (In w (W F) /\ In x (W F) /\ In y (W F) /\ relacao (R F) w x /\ relacao (R F) w y) -> (relacao (R F) x z /\ relacao (R F) y z /\ In z (W F)).
 
 (*  *)
 (* The end *)
