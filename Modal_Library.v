@@ -260,6 +260,11 @@ Qed.
 Definition reflexivity_frame (F: Frame) : Prop :=
     forall w: World, (In w (W F)) /\ relacao (R F) w w.
 
+
+Theorem system_T:
+    forall (F: Frame) (r: reflexivity_frame F) (p: formulaModal),
+    (r F -> []p -> p).
+
 (* Transitividade *)
 Definition transitivity_frame (F: Frame) : Prop :=
     forall (w w' w'' : World), (In w (W F) /\ In w' (W F) /\ In w'' (W F) /\ relacao (R F) w w' /\ relacao (R F) w' w'') -> relacao (R F) w w''.
