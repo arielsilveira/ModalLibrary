@@ -65,6 +65,15 @@ Notation " .[] X "    := (Box X)       (at level 10, right associativity).
 Notation " .<> X "    := (Dia X)       (at level 10, right associativity).
 Notation " # X "      := (Lit X)       (at level 1, no associativity).
 
+Notation " ☐ A" := (.[] A)
+    (at level 1, A at level 200, right associativity): type_scope.
+
+Notation " ◇ A" := (.<> A)
+    (at level 1, A at level 200, right associativity): type_scope.
+
+Notation " A → B" := (A .-> B)
+    (at level 99, B at level 200, right associativity) : type_scope.
+
 Notation "w # X" := (w X) (at level 1, no associativity).
 Notation "x .R y" := (r x y) (at level 1, no associativity).
 
@@ -182,7 +191,7 @@ Fixpoint fun_validation (M : Model) (w : World) (p : formulaModal) : Prop :=
     | Implies  p1 p2 => fun_validation M w p1 -> fun_validation M w p2 
     end.
 
-Notation "M → w ||- B" := (fun_validation M w B) (at level 110, right associativity).
+Notation "M ' w ||- B" := (fun_validation M w B) (at level 110, right associativity).
 
     (* Model satisfazibility *)
 Definition validate_model (M : Model) (p : formulaModal) : Prop :=
@@ -203,7 +212,7 @@ Fixpoint theoryModal (M : Model) (Gamma : theory) : Prop :=
 Definition entails (M : Model) (A : theory) (B : formulaModal) : Prop :=
     forall p : formulaModal, (theoryModal M A) -> validate_model M B.
 
-Notation "M ← A |- B" := (entails M A B) (at level 110, no associativity).
+Notation "M '' A |- B" := (entails M A B) (at level 110, no associativity).
 
 (***** structural properties of deduction ****)
 
@@ -212,7 +221,7 @@ Notation "M ← A |- B" := (entails M A B) (at level 110, no associativity).
 
 Theorem  reflexive_deduction:
    forall (M: Model) (Gamma: theory) (A: formulaModal) ,
-      (M ← A::Gamma |- A).
+      (M '' A::Gamma |- A).
 Proof.
     intros.
     unfold entails.
@@ -238,7 +247,7 @@ Qed.
 (* prova bottom-up *)
 Theorem  transitive_deduction_bu:
    forall (M:Model) (Gamma Delta:theory) (A B C:formulaModal) ,
-      (M ← A::Gamma |- B) /\ (M ← B::Delta |- C) -> (M ← A::Gamma++Delta |- C).
+      (M '' A::Gamma |- B) /\ (M '' B::Delta |- C) -> (M '' A::Gamma++Delta |- C).
 Proof.
     intros. 
     unfold entails in *. 
@@ -255,7 +264,7 @@ Proof.
 Qed.
 
 Theorem exchange: forall (M: Model) (Gamma:theory) (A B C:formulaModal),
-  (M ← A::B::Gamma |- C) -> (M ← B::A::Gamma |- C).
+  (M '' A::B::Gamma |- C) -> (M '' B::A::Gamma |- C).
 Proof.
     intros. 
     unfold entails in *; 
@@ -273,7 +282,7 @@ Qed.
                 
 Theorem idempotence:
     forall (M: Model) (Gamma:theory) (A B:formulaModal),
-        (M ← A::A::Gamma |- B) -> (M ← A::Gamma |- B).
+        (M '' A::A::Gamma |- B) -> (M '' A::Gamma |- B).
 Proof.
     intros.
     unfold entails in *.
@@ -285,7 +294,7 @@ Proof.
 Qed.
 
 Theorem monotonicity: forall (M:Model) (Gamma Delta: theory) (A: formulaModal),
-    (M ← Gamma |- A) -> (M ← Gamma++Delta |- A).
+    (M '' Gamma |- A) -> (M '' Gamma++Delta |- A).
 Proof.
     intros.
     unfold entails in *.
@@ -297,13 +306,19 @@ Qed.
 
 (* Representação de diferentes Frames *)
 
+
+
 (* Reflexividade *)
 Definition reflexivity_frame (F: Frame) : Prop :=
     forall w: World, (In w (W F)) /\ relacao (R F) w w.
 
-Theorem system_T:
+    (* Inductive Caixa  (A: Prop) : Prop :=
+        conj : A -> .[] A
+    where ".[] A" := (Caixa A) : type_scope. *)
+
+Theorem validacao_frame_reflexivo:
     forall (M: Model) (p: formulaModal),
-    ((reflexivity_frame (F M)) -> (M |= .[] p .-> p)).
+    ((reflexivity_frame (F M)) -> (M |= .[] p .-> p)). 
 Proof.
     intros;
     unfold validate_model;
@@ -317,8 +332,18 @@ Qed.
 
 (* Transitividade *)
 Definition transitivity_frame (F: Frame) : Prop :=
-    forall (w w' w'' : World), (In w (W F) /\ In w' (W F) /\ In w'' (W F) /\ relacao (R F) w w' /\ relacao (R F) w' w'') -> relacao (R F) w w''.
+    forall (w w' w'' : World), ((In w (W F)) /\ (In w' (W F)) /\ (In w'' (W F)) /\ relacao (R F) w w' /\ relacao (R F) w' w'') -> relacao (R F) w w''.
     
+
+Theorem validacao_frame_transitivo: 
+    forall (M: Model) (p: formulaModal),
+    ((transitivity_frame (F M)) -> (M |= .[]p .-> .[] .[] p)).
+Proof.
+    intros.
+    unfold validate_model.
+Admitted.
+
+
 (* Simetria *)
 Definition simmetry_frame (F: Frame) : Prop :=
     forall w w': World, (In w (W F) /\ In w' (W F)) /\ relacao (R F) w w' -> relacao (R F) w' w.

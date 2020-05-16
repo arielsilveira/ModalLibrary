@@ -26,6 +26,4 @@ Desenvolvimento futuro
 
 
 ### A fazer
-exchange
-idempotente
-monotonicidade
+Rever o  forall p: formulaModal do entails.
