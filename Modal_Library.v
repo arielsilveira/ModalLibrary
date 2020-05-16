@@ -12,7 +12,7 @@
     Description:
 *)
 
-Require Import Arith List ListSet Classical Logic Nat Notations.
+Require Import Arith List ListSet Classical Logic Nat Notations Utf8 Tactics.
 
 Inductive formulaModal : Set :=
     | Lit          : nat -> formulaModal
@@ -254,16 +254,66 @@ Proof.
         - apply ModalD.
 Qed.
 
+Theorem exchange: forall (M: Model) (Gamma:theory) (A B C:formulaModal),
+  (M ← A::B::Gamma |- C) -> (M ← B::A::Gamma |- C).
+Proof.
+    intros. 
+    unfold entails in *; 
+    intros;
+    apply H.
+    apply p; apply theoryModal_union with (Delta:=Gamma). 
+    simpl in *;
+    split.
+        - destruct H0 as [H0 [H1 H2]]; apply H1.
+        - split;
+            destruct H0. apply H0;
+            destruct H0 as [H0 H1].
+            destruct H1. apply H2.
+Qed.
+                
+Theorem idempotence:
+    forall (M: Model) (Gamma:theory) (A B:formulaModal),
+        (M ← A::A::Gamma |- B) -> (M ← A::Gamma |- B).
+Proof.
+    intros.
+    unfold entails in *.
+    intros.
+    apply H.
+    apply p. simpl in *.
+    split; destruct H0. apply H0.
+    split. apply H0. apply H1.
+Qed.
+
+Theorem monotonicity: forall (M:Model) (Gamma Delta: theory) (A: formulaModal),
+    (M ← Gamma |- A) -> (M ← Gamma++Delta |- A).
+Proof.
+    intros.
+    unfold entails in *.
+    intros. apply H.
+    apply p.
+    apply theoryModal_union with (Delta:=Delta).
+    apply H0.
+Qed.
+
 (* Representação de diferentes Frames *)
 
 (* Reflexividade *)
 Definition reflexivity_frame (F: Frame) : Prop :=
     forall w: World, (In w (W F)) /\ relacao (R F) w w.
 
-
 Theorem system_T:
-    forall (F: Frame) (r: reflexivity_frame F) (p: formulaModal),
-    (r F -> []p -> p).
+    forall (M: Model) (p: formulaModal),
+    ((reflexivity_frame (F M)) -> (M |= .[] p .-> p)).
+Proof.
+    intros;
+    unfold validate_model;
+    intros;
+    induction M.
+    split.
+        - simpl in *. apply H.
+        - simpl in *. intros. apply H0. apply H.
+Qed.
+
 
 (* Transitividade *)
 Definition transitivity_frame (F: Frame) : Prop :=
