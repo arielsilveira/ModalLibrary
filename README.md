@@ -26,4 +26,5 @@ Desenvolvimento futuro
 
 
 ### A fazer
-Rever o  forall p: formulaModal do entails.
+- Realizar as provas de validação do frame.
+- Iniciar o desenvolvimento do sistema dedutivo.

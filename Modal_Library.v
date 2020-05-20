@@ -184,7 +184,7 @@ Fixpoint fun_validation (M : Model) (w : World) (p : formulaModal) : Prop :=
     match p with
     | Lit      x     => verification (v M) w x
     | Box      p1    => forall w': World, relacao (R (F M)) w w' -> fun_validation M w' p1
-    | Dia      p1    => exists w': World, relacao (R (F M)) w w' -> fun_validation M w' p1
+    | Dia      p1    => exists w': World, relacao (R (F M)) w w' /\ fun_validation M w' p1
     | Neg      p1    => ~ fun_validation M w p1
     | And      p1 p2 => fun_validation M w p1 /\ fun_validation M w p2
     | Or       p1 p2 => fun_validation M w p1 \/ fun_validation M w p2
@@ -306,25 +306,25 @@ Qed.
 
 (* Reflexividade *)
 Definition reflexivity_frame (F: Frame) : Prop :=
-    forall w: World, (In w (W F)) /\ relacao (R F) w w.
+    forall w: World, In w (W F) -> relacao (R F) w w.
 
 Theorem validacao_frame_reflexivo:
     forall (M: Model) (p: formulaModal),
     ((reflexivity_frame (F M)) -> (M |= .[] p .-> p)). 
 Proof.
-    intros;
+    intros M p Hip.
     unfold validate_model;
     intros;
-    induction M.
+    induction M;
     split.
-        - simpl in *. apply H.
-        - simpl in *. intros. apply H0. apply H.
-Qed.
+        - simpl in *. 
+
+Admitted.
 
 
 (* Transitividade *)
 Definition transitivity_frame (F: Frame) : Prop :=
-    forall w w' w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F)) /\ (((relacao (R F) w w') /\ (relacao (R F) w' w'')) -> relacao (R F) w w'').
+    forall w w' w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F)) -> ((relacao (R F) w w' /\ relacao (R F) w' w'') -> relacao (R F) w w'').
     
 
 Theorem validacao_frame_transitivo: 
@@ -332,38 +332,33 @@ Theorem validacao_frame_transitivo:
     ((transitivity_frame (F M)) -> (M |= .[]p .-> .[] .[] p)).
 Proof.
     intros.
-    unfold validate_model;
-    intros;
+    unfold validate_model.
+    intros.
     induction M.
     split.
-        - simpl in *. apply H. apply w0. apply w0.
-        - simpl in *. intros. apply H0. apply H with (w:=w0) (w':=w') (w'':=w'0).
-            split.
-                + apply H1.
-                + apply H2.
-Qed.
+        - simpl in *. 
+    Admitted.
              
     
 (* Simetria *)
 Definition simmetry_frame (F: Frame) : Prop :=
-    forall w w': World, (In w (W F) /\ In w' (W F)) /\ (relacao (R F) w w' -> relacao (R F) w' w).
+    forall w w': World, (In w (W F) /\ In w' (W F)) -> (relacao (R F) w w' -> relacao (R F) w' w).
 
 Theorem validacao_frame_simetria: 
     forall (M: Model) (p:formulaModal),
     (simmetry_frame (F M)) -> (M |= p .-> .[] .<> p).
 Proof.
     intros.
-    unfold validate_model;
-    intros;
+    unfold validate_model.
+    intros.
     induction M.
     split.
-        - simpl in *. apply H. apply w0.
-        - simpl in *. intros. exists w0. intros. apply H0.
-Qed.
+        - simpl in *. 
+Admitted.
 
 (* Euclidiana *)
 Definition euclidian_frame (F: Frame) : Prop :=
-    forall w w' w'', (In w (W F) /\ In w' (W F) /\ In w'' (W F)) /\ ((relacao (R F) w w' /\ relacao (R F) w w'') -> relacao (R F) w' w'').
+    forall w w' w'', (In w (W F) /\ In w' (W F) /\ In w'' (W F)) -> ((relacao (R F) w w' /\ relacao (R F) w w'') -> relacao (R F) w' w'').
 
 Theorem validacao_frame_eucliadiana: 
     forall (M: Model) (p: formulaModal),
@@ -371,25 +366,17 @@ Theorem validacao_frame_eucliadiana:
 Proof.
     intros.
     unfold validate_model.
-    induction M.
     intros.
+    induction M;
     split.
-        - simpl in *. apply H; auto.
         - simpl in *. 
-            intros;
-            destruct H0 as [w'' Hip];
-            exists w''; 
-            intros; apply Hip.
-            apply H with (w:=w') (w':=w0) (w'':=w'');
-            split. 
 
 Admitted.
 
 
-
 (* Serial *)
 Definition serial_frame (F: Frame) : Prop :=
-    forall w: World, exists w': World, (In w (W F) /\ In w' (W F)) /\ relacao (R F) w w'.
+    forall w: World, exists w': World, (In w (W F) /\ In w' (W F)) -> relacao (R F) w w'.
 
 Theorem validaacao_frame_serial: 
     forall (M: Model) (p: formulaModal),
@@ -404,42 +391,56 @@ Proof.
 Admitted.
 
 
-
 (* Funcional *)
 Definition functional_frame (F: Frame) : Prop :=
-    forall w w' w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F)) /\ ((relacao (R F) w w' /\ relacao (R F) w w'') -> w' = w'').
+    forall w w' w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F)) -> ((relacao (R F) w w' /\ relacao (R F) w w'') -> w' = w'').
 
 Theorem validacao_frame_funcional:
     forall (M:Model) (p:formulaModal),
     (functional_frame (F M)) -> (M |= .<> p .-> .[] p).
 Proof.
+    intros.
+    unfold validate_model.
+    induction M.
+    intros; split.
+        - simpl in *.
     
 Admitted.
 
 
 (* Densa *)
 Definition dense_frame (F: Frame) : Prop :=
-    forall w w' w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F) /\ relacao (R F) w w') -> (relacao (R F) w w'' /\ relacao (R F) w' w'').
+    forall w w' w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F) -> relacao (R F) w w') -> (relacao (R F) w w'' /\ relacao (R F) w' w'').
 
 
 Theorem validacao_frame_densa:
     forall (M: Model) (p: formulaModal),
     (dense_frame (F M)) -> (M |= .[] .[] p .-> .[] p).
 Proof.
+    intros.
+    unfold validate_model.
+    intros.
+    destruct M.
+    split.
+        - simpl in *.
 
 Admitted.
 
 (* Convergente *)
 Definition convergente_frame (F: Frame) : Prop :=
-    forall w x y: World, exists z: World,  (In w (W F) /\ In x (W F) /\ In y (W F) /\ relacao (R F) w x /\ relacao (R F) w y) -> (relacao (R F) x z /\ relacao (R F) y z /\ In z (W F)).
+    forall w x y: World, exists z: World,  (In w (W F) /\ In x (W F) /\ In y (W F) -> relacao (R F) w x /\ relacao (R F) w y) -> (relacao (R F) x z /\ relacao (R F) y z /\ In z (W F)).
 
 
 Theorem validacao_frame_convergente:
     forall (M: Model) (p: formulaModal),
     (convergente_frame (F M)) -> (M |= .<> .[] p .-> .[] .<> p).
 Proof.
+    intros.
+    unfold validate_model.
+    intros. induction M.
+    split.
+        - simpl in *.
 
 Admitted.
 
-(*  *)
-(* The end *)
+(* ;-; *)
