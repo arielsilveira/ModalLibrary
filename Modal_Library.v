@@ -303,6 +303,15 @@ Qed.
 (* Representação de diferentes Frames *)
 
 
+Lemma relacao_pertinencia_mundos: 
+    forall (M: Model) (w w': World) , 
+        relacao (R (F M)) w w' -> (In w (W (F M)) /\ In w' (W (F M))).
+Proof.
+    intros.
+    split.
+Admitted.
+
+
 (* Reflexividade *)
 Definition reflexivity_frame (F: Frame) : Prop :=
     forall w: World, (In w (W F)) -> relacao (R F) w w.
@@ -328,14 +337,6 @@ Definition transitivity_frame (F: Frame) : Prop :=
     forall w w' w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F)) -> ((relacao (R F) w w' /\ relacao (R F) w' w'') -> relacao (R F) w w'').
     
 
-Lemma sndkaj: 
-    forall (M: Model) (w w': World) , 
-        relacao (R (F M)) w w' -> (In w (W (F M)) /\ In w' (W (F M))).
-Proof.
-    intros.
-    split.
-    
-Admitted.
 
 
 
@@ -351,7 +352,7 @@ Proof.
     apply H1.
     apply H  with (w:=w) (w':=w') (w'':=w'').
     split. apply H0. 
-    apply sndkaj in H3 as J.
+    apply relacao_pertinencia_mundos in H3 as J.
     apply J.
     split.
     apply H2. apply H3.  
@@ -369,9 +370,15 @@ Proof.
     intros.
     unfold validate_model.
     intros.
-
-
-Admitted.
+    simpl.
+    intros.
+    exists w0.
+    split.
+    unfold simmetry_frame in *.
+    apply H with (w:=w0) (w':=w').
+    apply relacao_pertinencia_mundos. apply H2. apply H2.
+    apply H1.
+Qed.
 
 (* Euclidiana *)
 Definition euclidian_frame (F: Frame) : Prop :=
@@ -383,13 +390,20 @@ Theorem validacao_frame_eucliadiana:
 Proof.
     intros.
     unfold validate_model.
-    intros.
-    induction M;
+    simpl.
+    intros w H0 H1 w' H2.
+    (* split. *)
+    unfold euclidian_frame in *.
+    destruct H1 as [w'' [H1 H3]].
+    exists w''.
     split.
-        - simpl in *. 
-
-Admitted.
-
+    apply H with (w:=w) (w':=w') (w'':=w'').
+    split. apply H0.
+    apply relacao_pertinencia_mundos in H2. apply relacao_pertinencia_mundos in H1.
+    split; destruct H2; auto.
+    destruct H1; auto.
+    split; eauto. apply H3.
+Qed.
 
 (* Serial *)
 Definition serial_frame (F: Frame) : Prop :=
@@ -401,10 +415,16 @@ Theorem validaacao_frame_serial:
 Proof.
     intros.
     unfold validate_model.
-    intros.
-    induction M.
+    simpl;
+    intros w H0 H1.
+    exists w;
     split.
-        - simpl in *.
+    unfold serial_frame in *.
+    
+
+
+
+
 Admitted.
 
 
@@ -418,16 +438,16 @@ Theorem validacao_frame_funcional:
 Proof.
     intros.
     unfold validate_model.
-    induction M.
-    intros; split.
-        - simpl in *.
-    
-Admitted.
+    simpl.
+    intros.
+    unfold functional_frame in *.
+    destruct H1 as [w [H1 H3]].
+Admitted.    
 
 
-(* Densa *)
+(* Densa DEFINIÇÃO ERRADA*)
 Definition dense_frame (F: Frame) : Prop :=
-    forall w w' w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F) -> relacao (R F) w w') -> (relacao (R F) w w'' /\ relacao (R F) w' w'').
+    forall w w' w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F)) -> (relacao (R F) w w' -> (relacao (R F) w w'' /\ relacao (R F) w' w'')).
 
 
 Theorem validacao_frame_densa:
@@ -436,10 +456,15 @@ Theorem validacao_frame_densa:
 Proof.
     intros.
     unfold validate_model.
+    simpl in *.
+    unfold dense_frame in *.
     intros.
-    destruct M.
-    split.
-        - simpl in *.
+    apply H1 with (w':=w0) (w'0:=w').
+    apply H with (w:=) (w:=) (w:=)
+    apply relacao_pertinencia_mundos with (w:=w0) in H0 as Hip .
+    apply relacao_pertinencia_mundos with (w:w0)  as Hip .
+    apply relacao_pertinencia_mundos with (w:w0)  as Hip .
+    apply relacao_pertinencia_mundos with (w:w0)  as Hip .
 
 Admitted.
 
@@ -460,7 +485,13 @@ Proof.
 
 Admitted.
 
+
+
 (* Equivalencia lógica *)
+
+
+
+
 Definition equivalence (M: Model) (f g:formulaModal) : Prop := 
     ( M '' f::nil |- g ) <-> (M '' g::nil |- f).
 
