@@ -351,7 +351,7 @@ Proof.
 intros p t a b.
 unfold entails.
 intros.
-assert ((formulaSAT p0 a) \/ ~(formulaSAT p0 a)). apply classic.
+assert ((formulaSAT p a) \/ ~(formulaSAT p a)). apply classic.
 destruct H1.
   simpl. right. apply H. simpl. auto.
   simpl. left. auto.
@@ -367,7 +367,7 @@ intros p t a b.
 unfold entails.
 intros. 
 simpl in H0. destruct H0.
-assert (formulaSAT p0 (a .-> b)). apply H. auto. simpl in H2.
+assert (formulaSAT p (a .-> b)). apply H. auto. simpl in H2.
 destruct H2. contradiction. auto.
 Qed.
 

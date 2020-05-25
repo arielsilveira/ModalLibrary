@@ -195,7 +195,7 @@ Notation "M ' w ||- B" := (fun_validation M w B) (at level 110, right associativ
 
     (* Model satisfazibility *)
 Definition validate_model (M : Model) (p : formulaModal) : Prop :=
-    forall w: World, In w (W (F M)) /\ fun_validation M w p.
+    forall w: World,  In w (W (F M)) -> fun_validation M w p.
 
 Notation "M |= B" := (validate_model M B) (at level 110, right associativity).
 
@@ -303,23 +303,24 @@ Qed.
 (* Representação de diferentes Frames *)
 
 
-
 (* Reflexividade *)
 Definition reflexivity_frame (F: Frame) : Prop :=
-    forall w: World, In w (W F) -> relacao (R F) w w.
+    forall w: World, (In w (W F)) -> relacao (R F) w w.
+
 
 Theorem validacao_frame_reflexivo:
     forall (M: Model) (p: formulaModal),
     ((reflexivity_frame (F M)) -> (M |= .[] p .-> p)). 
 Proof.
-    intros M p Hip.
-    unfold validate_model;
-    intros;
-    induction M;
-    split.
-        - simpl in *. 
-
-Admitted.
+    intros.
+    unfold validate_model.
+    intros.
+    unfold reflexivity_frame in *. simpl in *.
+    intros. 
+    apply H1 with (w':=w0).
+    apply H with (w:=w0).
+    apply H0.
+Qed.
 
 
 (* Transitividade *)
@@ -327,17 +328,34 @@ Definition transitivity_frame (F: Frame) : Prop :=
     forall w w' w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F)) -> ((relacao (R F) w w' /\ relacao (R F) w' w'') -> relacao (R F) w w'').
     
 
+Lemma sndkaj: 
+    forall (M: Model) (w w': World) , 
+        relacao (R (F M)) w w' -> (In w (W (F M)) /\ In w' (W (F M))).
+Proof.
+    intros.
+    split.
+    
+Admitted.
+
+
+
 Theorem validacao_frame_transitivo: 
     forall (M: Model) (p: formulaModal),
-    ((transitivity_frame (F M)) -> (M |= .[]p .-> .[] .[] p)).
+    ((transitivity_frame (F M)) -> (M |= .[]p .-> .[].[]p)).
 Proof.
     intros.
     unfold validate_model.
-    intros.
-    induction M.
+    simpl.
+    intros w H0 H1 w' H2 w'' H3.
+    unfold transitivity_frame in *.
+    apply H1.
+    apply H  with (w:=w) (w':=w') (w'':=w'').
+    split. apply H0. 
+    apply sndkaj in H3 as J.
+    apply J.
     split.
-        - simpl in *. 
-    Admitted.
+    apply H2. apply H3.  
+Qed.
              
     
 (* Simetria *)
@@ -351,9 +369,8 @@ Proof.
     intros.
     unfold validate_model.
     intros.
-    induction M.
-    split.
-        - simpl in *. 
+
+
 Admitted.
 
 (* Euclidiana *)
@@ -442,5 +459,37 @@ Proof.
         - simpl in *.
 
 Admitted.
+
+(* Equivalencia lógica *)
+Definition equivalence (M: Model) (f g:formulaModal) : Prop := 
+    ( M '' f::nil |- g ) <-> (M '' g::nil |- f).
+
+Notation "M |= A =|= B" := (equivalence M A B) (at level 110, no associativity).
+
+Notation "M |= A ≡ B " := (M |= A =|= B) (at level 110, no associativity).
+
+Theorem implies_to_or_modal : 
+    forall (M: Model) (w: World) (a b: formulaModal),
+        (M |= (a .-> b)  =|=  (.~ a) .\/ b) .
+Proof.
+    intros.
+    unfold equivalence;
+    induction M;
+    split.
+        - intros. unfold entails in *. intros; simpl in *.
+            unfold validate_model in *. inversion H0. 
+            intros. split. apply H1. simpl in *. intros.
+            destruct H1. 
+        
+        simpl in *. 
+            apply H0 in H.
+            
+    intros.
+    simpl in *. destruct H0. 
+    unfold validate_model.
+Admitted.
+
+
+
 
 (* ;-; *)

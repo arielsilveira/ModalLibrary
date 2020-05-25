@@ -1,4 +1,4 @@
-DIGEST 2584fe254d891111718302aadb2bd5fd
+DIGEST abbe01a78bfa86f2b5ecc9fda630d56e
 FPropositional_Library_
 R15:19 Coq.Arith.Arith <> <> lib
 R21:24 Coq.Lists.List <> <> lib
@@ -614,11 +614,16 @@ R8570:8570 Propositional_Library_ <> t var
 R8575:8575 Propositional_Library_ <> b var
 R8627:8633 Propositional_Library_ <> entails def
 R8652:8652 Coq.Init.Logic <> :type_scope:x_'\/'_x not
-R8668:8672 Coq.Init.Logic <> :type_scope:x_'\/'_x not
+R8667:8671 Coq.Init.Logic <> :type_scope:x_'\/'_x not
 R8653:8662 Propositional_Library_ <> formulaSAT def
-R8673:8674 Coq.Init.Logic <> :type_scope:'~'_x not
-R8690:8690 Coq.Init.Logic <> :type_scope:'~'_x not
-R8675:8684 Propositional_Library_ <> formulaSAT def
+R8672:8673 Coq.Init.Logic <> :type_scope:'~'_x not
+R8688:8688 Coq.Init.Logic <> :type_scope:'~'_x not
+R8674:8683 Propositional_Library_ <> formulaSAT def
 R8652:8652 Coq.Init.Logic <> :type_scope:x_'\/'_x not
-R8668:8672 Coq.Init.Logic <> :type_scope:x_'\/'_x not
+R8667:8671 Coq.Init.Logic <> :type_scope:x_'\/'_x not
 R8653:8662 Propositional_Library_ <> formulaSAT def
+R8672:8673 Coq.Init.Logic <> :type_scope:'~'_x not
+R8688:8688 Coq.Init.Logic <> :type_scope:'~'_x not
+R8674:8683 Propositional_Library_ <> formulaSAT def
+R8698:8704 Coq.Logic.Classical_Prop <> classic prfax
+R8698:8704 Coq.Logic.Classical_Prop <> classic prfax
