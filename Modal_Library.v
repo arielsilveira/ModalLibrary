@@ -338,8 +338,6 @@ Definition transitivity_frame (F: Frame) : Prop :=
     
 
 
-
-
 Theorem validacao_frame_transitivo: 
     forall (M: Model) (p: formulaModal),
     ((transitivity_frame (F M)) -> (M |= .[]p .-> .[].[]p)).
@@ -407,23 +405,24 @@ Qed.
 
 (* Serial *)
 Definition serial_frame (F: Frame) : Prop :=
-    forall w: World, exists w': World, (In w (W F) /\ In w' (W F)) -> relacao (R F) w w'.
+    forall w: World, exists w': World, 
+        (In w (W F) /\ In w' (W F)) -> (relacao (R F) w w').
 
-Theorem validaacao_frame_serial: 
+Theorem validacao_frame_serial: 
     forall (M: Model) (p: formulaModal),
     (serial_frame (F M)) -> (M |= .[] p .-> .<> p).
 Proof.
     intros.
     unfold validate_model.
+    unfold serial_frame in *.
     simpl;
     intros w H0 H1.
-    exists w;
+    (* assert (w':World). apply w. *)
+    destruct H with (w:=w).
+    exists x.
     split.
-    unfold serial_frame in *.
-    
-
-
-
+    apply H2;
+    split. apply H0.
 
 Admitted.
 
@@ -440,9 +439,17 @@ Proof.
     unfold validate_model.
     simpl.
     intros.
-    unfold functional_frame in *.
     destruct H1 as [w [H1 H3]].
-Admitted.    
+    unfold functional_frame in *.
+    destruct H with (w:=w0) (w':=w) (w'':=w').
+    split. apply H0.
+    (* apply relacao_pertinencia_mundos. *)
+    apply relacao_pertinencia_mundos in H1 as Hip1.
+    apply relacao_pertinencia_mundos in H2 as Hip2.
+    destruct Hip1. destruct Hip2.
+    split. apply H5. apply H7.
+    split. apply H1. apply H2. apply H3.
+Qed.
 
 
 (* Densa DEFINIÇÃO ERRADA*)
@@ -460,17 +467,12 @@ Proof.
     unfold dense_frame in *.
     intros.
     apply H1 with (w':=w0) (w'0:=w').
-    apply H with (w:=) (w:=) (w:=)
-    apply relacao_pertinencia_mundos with (w:=w0) in H0 as Hip .
-    apply relacao_pertinencia_mundos with (w:w0)  as Hip .
-    apply relacao_pertinencia_mundos with (w:w0)  as Hip .
-    apply relacao_pertinencia_mundos with (w:w0)  as Hip .
 
 Admitted.
 
 (* Convergente *)
 Definition convergente_frame (F: Frame) : Prop :=
-    forall w x y: World, exists z: World,  (In w (W F) /\ In x (W F) /\ In y (W F) -> relacao (R F) w x /\ relacao (R F) w y) -> (relacao (R F) x z /\ relacao (R F) y z /\ In z (W F)).
+    forall w x y: World, exists z: World,  (In w (W F) /\ In x (W F) /\ In y (W F) -> (relacao (R F) w x /\ relacao (R F) w y) -> (relacao (R F) x z /\ relacao (R F) y z /\ In z (W F))).
 
 
 Theorem validacao_frame_convergente:
