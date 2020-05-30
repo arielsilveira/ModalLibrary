@@ -26,5 +26,5 @@ Desenvolvimento futuro
 
 
 ### A fazer
-- Realizar as provas de validação do frame.
-- Iniciar o desenvolvimento do sistema dedutivo.
+- Desenvolvimento da prova de Densa e Serial
+- Fazer o sistema dedutivo

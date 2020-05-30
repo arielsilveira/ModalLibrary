@@ -416,13 +416,14 @@ Proof.
     unfold validate_model.
     unfold serial_frame in *.
     simpl;
-    intros w H0 H1.
-    (* assert (w':World). apply w. *)
+    intros w H0 H1;
     destruct H with (w:=w).
-    exists x.
+    exists x;
     split.
     apply H2;
     split. apply H0.
+    
+    
 
 Admitted.
 
@@ -443,7 +444,6 @@ Proof.
     unfold functional_frame in *.
     destruct H with (w:=w0) (w':=w) (w'':=w').
     split. apply H0.
-    (* apply relacao_pertinencia_mundos. *)
     apply relacao_pertinencia_mundos in H1 as Hip1.
     apply relacao_pertinencia_mundos in H2 as Hip2.
     destruct Hip1. destruct Hip2.
@@ -452,9 +452,9 @@ Proof.
 Qed.
 
 
-(* Densa DEFINIÇÃO ERRADA*)
+(* Densa*)
 Definition dense_frame (F: Frame) : Prop :=
-    forall w w' w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F)) -> (relacao (R F) w w' -> (relacao (R F) w w'' /\ relacao (R F) w' w'')).
+    forall w w': World, exists w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F)) -> (relacao (R F) w w' -> (relacao (R F) w w'' /\ relacao (R F) w'' w')).
 
 
 Theorem validacao_frame_densa:
@@ -463,11 +463,22 @@ Theorem validacao_frame_densa:
 Proof.
     intros.
     unfold validate_model.
-    simpl in *.
     unfold dense_frame in *.
+    simpl in *.
     intros.
-    apply H1 with (w':=w0) (w'0:=w').
-
+    apply H1 with (w':=w') (w'0:=w').
+    apply H2.
+    destruct H with (w:=w0) (w':=w') as [w Hip].
+    apply Hip in H2.
+    destruct Hip.
+    split; auto.
+    destruct H2.
+    apply relacao_pertinencia_mundos in H3 as Hip. destruct Hip.
+    split; auto.
+    destruct H2.
+    apply relacao_pertinencia_mundos in H3. destruct H3.
+    
+    apply H1. destruct H1 with (w':=w') (w'0:=w').
 Admitted.
 
 (* Convergente *)
@@ -481,11 +492,22 @@ Theorem validacao_frame_convergente:
 Proof.
     intros.
     unfold validate_model.
-    intros. induction M.
-    split.
-        - simpl in *.
-
-Admitted.
+    unfold convergente_frame in *.
+    simpl in *.
+    intros.
+    destruct H1.
+    destruct H1 as [Hip1 Hip2].
+    destruct H with (w:=w0) (x:=x) (y:=w').
+    destruct H1.
+    split. apply H0.
+    apply relacao_pertinencia_mundos in H2 as Hip3. destruct Hip3.
+    apply relacao_pertinencia_mundos in Hip1 as Hip4. destruct Hip4.
+    split; auto.
+    split; auto.
+    exists x0.
+    split. destruct H3; auto.
+    apply Hip2 with (w':=x0). apply H1.
+Qed.
 
 
 
