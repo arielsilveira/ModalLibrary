@@ -6,7 +6,6 @@ Desenvolvimento futuro
 
 - Theorem test : 1 <> 2. 
 - Rever as anotações criadas pela Kaqui 
-- Uma proposição vai ter uma lista de mundos 
 - Ver como funciona a construção do Ltac 
 - Modelar os diferentes sistemas (K, B, D, T, 4, 5...) 
 - Diferentes propriedades de cada um modelo, dessa forma será visto cada uma das restrições. Página 29 
