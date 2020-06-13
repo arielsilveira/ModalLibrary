@@ -7,6 +7,87 @@ Definition form2 := #1 .-> .~ .[] #2 .-> #0 .\/ .[](.<> #1 .\/ #2).
 Definition form3 := .~.~ #0 .-> #1.
 
 (* Definição do Mundos e Relações *)
+
+Inductive W': Set :=
+    | w1: W'
+    | w2 : W' 
+    | w3 : W'
+    | w4 : W'.
+
+Definition R' := [(w3, w2); (w2, w3)].
+Definition F' := (Build_Frame W' R').
+
+Definition v' := [(1, [w1; w2; w3])].
+Definition M' := (Build_Model F' v').
+
+Check (W F').
+
+Check fun_validation M' w1 form1.
+
+(* Compute relacao (R F) (w 0) (w 18). *)
+
+Definition a := validate_formula (W F) [(# 1,[w 1; w 2]); (# 2, [w 3; w 8])].
+
+(* Check a. *)
+
+Definition M := model F [(1,[w 1; w 2]); (2, [w 3; w 8]); (3, [w 1; w 2; w 3])].
+
+Compute fun_validation M (w 1) (.[] # 1).
+
+Compute validate_model M (# 1).
+
+(* 
+
+Print or.
+Print and. 
+*)
+
+(* Definition world_w := (w 1). *)
+
+(* Compute True /\ True. *)
+Compute M |= (# 0 ./\ # 1).
+Compute M → (w 1) ||- (# 0 ./\ # 1).
+Compute M ← [# 0; # 1; # 2] |- # 1.
+
+(* Definition a  := frame world relation_world. *)
+
+(* Talvez seja útil *)
+(* Inicio dos exemplos de Relação *)
+(* Example ex1: Relation [1; 2; 3] 2 3.
+Proof.
+  apply r.
+    - simpl. auto.
+    - simpl. auto.
+Qed.
+
+Example ex2: ~Relation [1; 2; 3] 1 5.
+Proof.
+  unfold not. intros. inversion H. inversion H1. discriminate H4. inversion H4. 
+  discriminate H5. inversion H5. discriminate H6. inversion H6.
+Qed.
+
+Example ex3: Relation [1;2;3] 2 5 -> False.
+Proof.
+  intros. inversion H. inversion H1. discriminate H4. inversion H4. 
+  discriminate H5. inversion H5. discriminate H6. inversion H6.
+Qed. *)
+
+
+
+
+
+
+
+
+(* Arquivo para criar testes.
+Require Import Modal_Library.
+
+(* Construçao de fórmulas *)
+Definition form1 := .[] #0 .\/ #1.
+Definition form2 := #1 .-> .~ .[] #2 .-> #0 .\/ .[](.<> #1 .\/ #2).
+Definition form3 := .~.~ #0 .-> #1.
+
+(* Definição do Mundos e Relações *)
 Definition world_in_model := [w # 0; w # 1;w # 2; w # 3; w # 4]. 
 Definition relation_world :=  [ (w 1, w 9); (w 0, w 1); (w 1, w 1);
                                 (w 1, w 2); (w 2, w 0); (w 2, w 3);
@@ -72,4 +153,4 @@ Proof.
   discriminate H5. inversion H5. discriminate H6. inversion H6.
 Qed. *)
 
-
+ *)

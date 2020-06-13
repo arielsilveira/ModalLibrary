@@ -12,7 +12,7 @@
     Description:
 *)
 
-Require Import Arith List ListSet Classical Logic Nat Notations Utf8 Tactics.
+Require Import Arith List ListSet Classical Logic Nat Notations Utf8 Tactics Relation_Definitions.
 
 Inductive formulaModal : Set :=
     | Lit          : nat -> formulaModal
@@ -47,22 +47,13 @@ Fixpoint literals (f:formulaModal) : set nat :=
     | Implies  p1 p2 => set_union eq_nat_dec (literals p1) (literals p2) 
 end.
 
-Inductive World : Set :=
-    | w : nat -> World
-.
-
-
-Inductive Relation : Set :=
-    | r : World -> World -> Relation
-.
-
 (* -- New notation -- *)
 Notation " X .-> Y "  := (Implies X Y) (at level 13, right associativity).
 Notation " X .\/ Y "  := (Or X Y)      (at level 12, left associativity).
 Notation " X ./\ Y"   := (And X Y)     (at level 11, left associativity).
-Notation " .~ X "     := (Neg X)       (at level 10, right associativity).
-Notation " .[] X "    := (Box X)       (at level 10, right associativity).
-Notation " .<> X "    := (Dia X)       (at level 10, right associativity).
+Notation " .~ X "     := (Neg X)       (at level 9, right associativity).
+Notation " .[] X "    := (Box X)       (at level 9, right associativity).
+Notation " .<> X "    := (Dia X)       (at level 9, right associativity).
 Notation " # X "      := (Lit X)       (at level 1, no associativity).
 
 Notation " ☐ A" := (.[] A)
@@ -74,8 +65,8 @@ Notation " ◇ A" := (.<> A)
 Notation " A → B" := (A .-> B)
     (at level 99, B at level 200, right associativity) : type_scope.
 
-Notation "w # X" := (w X) (at level 1, no associativity).
-Notation "x .R y" := (r x y) (at level 1, no associativity).
+Notation " X ∈ Y " := (In X Y)
+    (at level 250, no associativity) : type_scope.
 
 Notation "[ ]" := nil.
 Notation "x :: l" := (cons x l)
@@ -83,121 +74,46 @@ Notation "x :: l" := (cons x l)
 Notation "[ x ; .. ; y ]" := (cons x .. (cons y nil) ..).
 
 
-Fixpoint eqb_World (x x' : World): bool :=
-    match x with
-    | w n => match x' with 
-                | w n' => if  n =? n' then true else false
-            end
-end.
-
-Fixpoint In_World (x: World) (l: list World): bool :=
-    match l with
-    | nil => false
-    | h :: t => if eqb_World x h then true
-                else In_World x t
-end.
-
-Fixpoint All_In_World (l : list World) (l' : list World) : bool :=
-    match l with
-  | nil  => true
-  | h::t => if In_World h l' then All_In_World t l'
-            else false
-end.
-
-Fixpoint remove_invalidate (Worlds : list World) (Relations : list (World * World)) : list (World * World) :=
-    match Relations with
-    | nil => nil 
-    | h :: t => if andb (In_World (fst h) Worlds) (In_World (snd h) Worlds) 
-                then [(fst h, snd h)] ++ remove_invalidate Worlds t
-                else remove_invalidate Worlds t
-end.
-
-Fixpoint pair_to_relation (l : list (World * World)) : list Relation :=
-    match l with
-    | nil => nil
-    | h :: t => (r (fst h) (snd h)) :: pair_to_relation t
-end.
-
-Definition validate_relation (Worlds : list World) (lw : list (World * World)) : list Relation := 
-    pair_to_relation (remove_invalidate Worlds lw).
-
-(* formula válida em algum mundo, 
-    verifica se os mundos existem, 
-    se sim, 
-    concatena
-*)
-Fixpoint validate_formula (Worlds : list World) (Formulas : list (formulaModal * list World)) : 
-         list (formulaModal * list World) :=
-  match Formulas with
-    | nil   => nil
-    | h::t  => match snd h with 
-                   | nil => validate_formula Worlds t 
-                   | h'::t' => if All_In_World (snd h) Worlds then  [h] ++ validate_formula Worlds t
-                               else validate_formula Worlds t
-               end
-  end.
-
-Record Frame : Type := frame_kripke{
-    W : list World; (*Recebe uma lista de mundos*)
-    R : list Relation; (*Recebe uma lista de pares ordenados*)
+Record Frame : Type :={
+    W : Set;
+    R : list (W * W);
 }.
 
-Record Model : Type := model_kripke{
+Record Model : Type := {
     F : Frame; (*Frame de um modelo*)
-    v: list (nat * (list World));
+    v : list (nat * list (W F));
 }.
 
+Check Build_Model.
 
-Definition frame (w: list World) (r: list (World * World)) : Frame :=
-    frame_kripke w (validate_relation w r).
-
-Definition model (f: Frame) (v: list (nat * (list World))) : Model :=
-    model_kripke f v.
-
-
-Fixpoint verification (val: list (nat * (list World))) (w : World) (p: nat) : Prop :=
-    match val with
+Fixpoint verification {M : Model} (v: list (nat * list (W (F M)))) (w: (W (F M))) (p : nat) : Prop :=
+    match v with
     | [] => False
-    | h :: t => if andb (eqb p (fst h)) (In_World w (snd h)) then True
-                else verification t w p
+    | h :: t => ((verification t w p) \/ (In p [(fst h)] /\ In w (snd h))) -> True
     end.
 
-Definition fst_world (pair_w: Relation) : World :=
-    match pair_w with
-    | r x y => x
-    end.
-
-Definition snd_world (pair_w: Relation) : World :=
-    match pair_w with
-    | r x y => y
-    end.
-
-Fixpoint relacao (r: list Relation) (w w' : World) : Prop :=
-    match r with
-    | [] => False
-    | h :: t => if andb (eqb_World (fst_world h) w) (eqb_World (snd_world h) w') then True
-                else relacao t w w'
-    end.
-
-    (* World Satisfaziblity *)
-Fixpoint fun_validation (M : Model) (w : World) (p : formulaModal) : Prop :=
+Fixpoint fun_validation (M : Model) (w : (W (F M))) (p : formulaModal) : Prop :=
     match p with
-    | Lit      x     => verification (v M) w x
-    | Box      p1    => forall w': World, relacao (R (F M)) w w' -> fun_validation M w' p1
-    | Dia      p1    => exists w': World, relacao (R (F M)) w w' /\ fun_validation M w' p1
+    | Lit       x    => verification (v M) w x 
+    | Box      p1    => forall w': (W (F M)), In (w, w') (R (F M)) -> fun_validation M w' p1
+    | Dia      p1    => exists w': (W (F M)), In (w, w') (R (F M)) /\ fun_validation M w' p1
     | Neg      p1    => ~ fun_validation M w p1
     | And      p1 p2 => fun_validation M w p1 /\ fun_validation M w p2
     | Or       p1 p2 => fun_validation M w p1 \/ fun_validation M w p2
     | Implies  p1 p2 => fun_validation M w p1 -> fun_validation M w p2 
     end.
 
+    (* World Satisfaziblity *)
 Notation "M ' w ||- B" := (fun_validation M w B) (at level 110, right associativity).
+Notation " M ☯ w ╟ B" := (fun_validation M w B) (at level 110, right associativity).
 
-    (* Model satisfazibility *)
+(* Ver esse ponto para baixo *)
+(* Model satisfazibility *)
 Definition validate_model (M : Model) (p : formulaModal) : Prop :=
-    forall w: World,  In w (W (F M)) -> fun_validation M w p.
+    forall w: (W (F M)), fun_validation M w p.
 
 Notation "M |= B" := (validate_model M B) (at level 110, right associativity).
+Notation "M ╞ B" := (validate_model M B) (at level 110, right associativity).
 
 (******  Finite theories and entailment ******)
 
@@ -213,12 +129,15 @@ Definition entails (M : Model) (A : theory) (B : formulaModal) : Prop :=
     (theoryModal M A) -> validate_model M B.
 
 Notation "M '' A |- B" := (entails M A B) (at level 110, no associativity).
+Notation "M ☯ A ├ B" := (entails M A B) (at level 110, no associativity).
+
+Notation "⊤" := True.
+Notation "⊥" := False.
+
 
 (***** structural properties of deduction ****)
-
-
+(* Γ *)
 (* reflexivity *)
-
 Theorem  reflexive_deduction:
    forall (M: Model) (Gamma: theory) (A: formulaModal) ,
       (M '' A::Gamma |- A).
@@ -290,6 +209,7 @@ Proof.
     split. apply H0. apply H1.
 Qed.
 
+
 Theorem monotonicity: forall (M:Model) (Gamma Delta: theory) (A: formulaModal),
     (M '' Gamma |- A) -> (M '' Gamma++Delta |- A).
 Proof.
@@ -300,63 +220,81 @@ Proof.
     apply H0.
 Qed.
 
-(* Representação de diferentes Frames *)
-
-
-Lemma relacao_pertinencia_mundos: 
-    forall (M: Model) (w w': World) , 
-        relacao (R (F M)) w w' -> (In w (W (F M)) /\ In w' (W (F M))).
-Proof.
-    intros.
-    split.
-Admitted.
-
-
 (* Reflexividade *)
 Definition reflexivity_frame (F: Frame) : Prop :=
-    forall w: World, (In w (W F)) -> relacao (R F) w w.
+    forall w: (W F), (In (w, w) (R F)).
+    
 
-
-Theorem validacao_frame_reflexivo:
+Theorem validacao_frame_reflexivo_ida:
     forall (M: Model) (p: formulaModal),
     ((reflexivity_frame (F M)) -> (M |= .[] p .-> p)). 
 Proof.
-    intros.
     unfold validate_model.
-    intros.
-    unfold reflexivity_frame in *. simpl in *.
-    intros. 
-    apply H1 with (w':=w0).
-    apply H with (w:=w0).
-    apply H0.
+    unfold reflexivity_frame in *. 
+    simpl in *.
+    intros; auto.
 Qed.
 
 
+Theorem validacao_frame_reflexivo_volta:
+    forall (M: Model) (p: formulaModal),
+    ((M |= .[] p .-> p) -> (reflexivity_frame (F M))). 
+Proof.
+    unfold reflexivity_frame;
+    unfold validate_model in *.
+    intros;
+    simpl in *.
+    Admitted.
+
+Theorem validacao_frame_reflexivo_ida_volta:
+    forall (M: Model) (p: formulaModal),
+    ((reflexivity_frame (F M)) <-> (M |= .[] p .-> p)). 
+Proof.
+    intros.
+    split.
+    apply validacao_frame_reflexivo_ida.
+    apply validacao_frame_reflexivo_volta.
+Qed.
+
 (* Transitividade *)
 Definition transitivity_frame (F: Frame) : Prop :=
-    forall w w' w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F)) -> ((relacao (R F) w w' /\ relacao (R F) w' w'') -> relacao (R F) w w'').
+    forall w w' w'' : (W F), (In (w, w') (R F) /\ In (w', w'') (R F)) -> In (w, w'') (R F).
     
 
-
-Theorem validacao_frame_transitivo: 
+(* Prova da relação transitiva de ida*)
+Theorem validacao_frame_transitivo_ida: 
     forall (M: Model) (p: formulaModal),
     ((transitivity_frame (F M)) -> (M |= .[]p .-> .[].[]p)).
 Proof.
     intros.
     unfold validate_model.
     simpl.
-    intros w H0 H1 w' H2 w'' H3.
+    intros.
     unfold transitivity_frame in *.
-    apply H1.
-    apply H  with (w:=w) (w':=w') (w'':=w'').
-    split. apply H0. 
-    apply relacao_pertinencia_mundos in H3 as J.
-    apply J.
-    split.
-    apply H2. apply H3.  
+    apply H0.
+    apply H  with (w:=w) (w':=w') (w'':=w'0).
+    split. apply H1. apply H2. 
 Qed.
+
+(* Prova da relação transitiva de volta*)
+Theorem validacao_frame_transitivo_volta: 
+    forall (M: Model) (p: formulaModal),
+    ((M |= .[]p .-> .[].[]p) -> (transitivity_frame (F M))).
+Proof.
+    unfold validate_model.
+    unfold transitivity_frame.
+    intros.
+    simpl in *.
+    destruct H0 as [H0 H1].
+    simpl in *.
+    Admitted.
              
-    
+
+(* 
+    FIM DA ATUALIZAÇÃO DO CODIGO
+
+*)
+
 (* Simetria *)
 Definition simmetry_frame (F: Frame) : Prop :=
     forall w w': World, (In w (W F) /\ In w' (W F)) -> (relacao (R F) w w' -> relacao (R F) w' w).
