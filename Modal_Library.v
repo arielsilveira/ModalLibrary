@@ -105,7 +105,7 @@ Fixpoint fun_validation (M : Model) (w : (W (F M))) (p : formulaModal) : Prop :=
 
     (* World Satisfaziblity *)
 Notation "M ' w ||- B" := (fun_validation M w B) (at level 110, right associativity).
-Notation " M ☯ w ╟ B" := (fun_validation M w B) (at level 110, right associativity).
+Notation "M ☯ w ╟ B" := (fun_validation M w B) (at level 110, right associativity).
 
 (* Ver esse ponto para baixo *)
 (* Model satisfazibility *)
@@ -222,7 +222,7 @@ Qed.
 
 (* Reflexividade *)
 Definition reflexivity_frame (F: Frame) : Prop :=
-    forall w: (W F), (In (w, w) (R F)).
+    forall w, In (w, w) (R F).
     
 
 Theorem validacao_frame_reflexivo_ida:
@@ -232,9 +232,8 @@ Proof.
     unfold validate_model.
     unfold reflexivity_frame in *. 
     simpl in *.
-    intros; auto.
+    intuition.
 Qed.
-
 
 Theorem validacao_frame_reflexivo_volta:
     forall (M: Model) (p: formulaModal),
@@ -242,8 +241,8 @@ Theorem validacao_frame_reflexivo_volta:
 Proof.
     unfold reflexivity_frame;
     unfold validate_model in *.
-    intros;
     simpl in *.
+    intros.
     Admitted.
 
 Theorem validacao_frame_reflexivo_ida_volta:
