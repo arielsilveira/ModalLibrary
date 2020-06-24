@@ -22,7 +22,7 @@ Check (Implies (Neg (Neg (Lit 0))) (Lit 1)).
 Notation " X .-> Y "  := (Implies X Y) (at level 13, right associativity).
 Notation " X .\/ Y "  := (Or X Y)      (at level 12, left associativity).
 Notation " X ./\ Y"   := (And X Y)     (at level 11, left associativity).
-Notation " .~ X "     := (Neg X)       (at level 10, right associativity).
+Notation " .~ X "     := (Neg X)       (at level 9, right associativity).
 Notation " # X "      := (Lit X)       (at level 1, no associativity).
 
 

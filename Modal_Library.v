@@ -12,7 +12,7 @@
     Description:
 *)
 
-Require Import Arith List ListSet Classical Logic Nat Notations Utf8 Tactics Relation_Definitions.
+Require Import Arith List ListSet Classical Logic Nat Notations Utf8 Tactics Relation_Definitions Classical_Prop.
 
 Inductive formulaModal : Set :=
     | Lit          : nat -> formulaModal
@@ -129,14 +129,14 @@ Definition entails (M : Model) (A : theory) (B : formulaModal) : Prop :=
     (theoryModal M A) -> validate_model M B.
 
 Notation "M '' A |- B" := (entails M A B) (at level 110, no associativity).
-Notation "M ☯ A ├ B" := (entails M A B) (at level 110, no associativity).
+Notation "M ♥ A ├ B" := (entails M A B) (at level 110, no associativity).
 
 Notation "⊤" := True.
 Notation "⊥" := False.
 
 
 (***** structural properties of deduction ****)
-(* Γ *)
+(* Γ ٭*)
 (* reflexivity *)
 Theorem  reflexive_deduction:
    forall (M: Model) (Gamma: theory) (A: formulaModal) ,
@@ -224,36 +224,62 @@ Qed.
 Definition reflexivity_frame (F: Frame) : Prop :=
     forall w, In (w, w) (R F).
     
-
 Theorem validacao_frame_reflexivo_ida:
-    forall (M: Model) (p: formulaModal),
-    ((reflexivity_frame (F M)) -> (M |= .[] p .-> p)). 
+    forall (M: Model) (Ψ: formulaModal),
+    (~(M |= .[] Ψ .-> Ψ) -> ~(reflexivity_frame (F M))). 
+Proof.
+    intros.
+    unfold not in *.
+    unfold reflexivity_frame.
+    unfold validate_model in *. 
+    simpl in *. auto.
+Qed.
+
+
+Theorem validacao_frame_reflexivo_volta:
+    forall (M: Model) (Ψ: formulaModal),
+    (~ (reflexivity_frame (F M)) -> ~ (M |= .[] Ψ .-> Ψ)).
+Proof. 
+    unfold not.
+    unfold reflexivity_frame in *.
+    unfold validate_model in *.
+    intros.
+    apply H.
+    intros.
+    simpl in *.
+    assert (forall w:W (F M), (In (w, w) (R (F M))) \/ ~(In (w, w) (R (F M)))).
+    intros. apply classic.
+    destruct H1 with (w:=w).
+        apply H2.
+    
+    Admitted.
+
+(* Theorem validacao_frame_reflexivo_ida:
+    forall (M: Model) (Ψ: formulaModal),
+    ((reflexivity_frame (F M)) -> (M |= .[] Ψ .-> Ψ)). 
 Proof.
     unfold validate_model.
     unfold reflexivity_frame in *. 
     simpl in *.
     intuition.
-Qed.
+Qed. *)
 
-Theorem validacao_frame_reflexivo_volta:
-    forall (M: Model) (p: formulaModal),
-    ((M |= .[] p .-> p) -> (reflexivity_frame (F M))). 
+Theorem validacao_frame_reflexivo_volta_2: 
+    forall (M: Model) (Ψ: formulaModal),
+    ~((M |= .[] Ψ .-> Ψ) -> (reflexivity_frame (F M))). 
 Proof.
-    unfold reflexivity_frame;
+    intros.
+    unfold not.
     unfold validate_model in *.
+    unfold reflexivity_frame.
     simpl in *.
     intros.
-    Admitted.
+    assert (forall w:W (F M), (In (w, w) (R (F M))) \/ ~(In (w, w) (R (F M)))).
+    intros. apply classic.
+    (* destruct H0. with (W:=w'). *)
+    
 
-Theorem validacao_frame_reflexivo_ida_volta:
-    forall (M: Model) (p: formulaModal),
-    ((reflexivity_frame (F M)) <-> (M |= .[] p .-> p)). 
-Proof.
-    intros.
-    split.
-    apply validacao_frame_reflexivo_ida.
-    apply validacao_frame_reflexivo_volta.
-Qed.
+Admitted.
 
 (* Transitividade *)
 Definition transitivity_frame (F: Frame) : Prop :=
@@ -275,158 +301,169 @@ Proof.
     split. apply H1. apply H2. 
 Qed.
 
-(* Prova da relação transitiva de volta*)
+(* Prova da relação transitiva de volta *)
 Theorem validacao_frame_transitivo_volta: 
     forall (M: Model) (p: formulaModal),
     ((M |= .[]p .-> .[].[]p) -> (transitivity_frame (F M))).
 Proof.
-    unfold validate_model.
-    unfold transitivity_frame.
-    intros.
-    simpl in *.
-    destruct H0 as [H0 H1].
-    simpl in *.
-    Admitted.
-             
-
-(* 
-    FIM DA ATUALIZAÇÃO DO CODIGO
-
-*)
+Admitted.
 
 (* Simetria *)
 Definition simmetry_frame (F: Frame) : Prop :=
-    forall w w': World, (In w (W F) /\ In w' (W F)) -> (relacao (R F) w w' -> relacao (R F) w' w).
+    forall w w', In (w, w') (R F) -> In (w', w) (R F).
 
-Theorem validacao_frame_simetria: 
+    Theorem validacao_frame_simetria_ida: 
     forall (M: Model) (p:formulaModal),
     (simmetry_frame (F M)) -> (M |= p .-> .[] .<> p).
 Proof.
     intros.
     unfold validate_model.
+    simpl in *.
     intros.
-    simpl.
-    intros.
-    exists w0.
+    exists w.
+    apply and_comm.
     split.
+    apply H0.
     unfold simmetry_frame in *.
-    apply H with (w:=w0) (w':=w').
-    apply relacao_pertinencia_mundos. apply H2. apply H2.
-    apply H1.
+    apply H. apply H1.
 Qed.
+
+Theorem validacao_frame_simetria_volta: 
+    forall (M: Model) (p:formulaModal),
+    ((M |= p .-> .[] .<> p) -> (simmetry_frame (F M))).
+Proof.
+Admitted.
 
 (* Euclidiana *)
 Definition euclidian_frame (F: Frame) : Prop :=
-    forall w w' w'', (In w (W F) /\ In w' (W F) /\ In w'' (W F)) -> ((relacao (R F) w w' /\ relacao (R F) w w'') -> relacao (R F) w' w'').
+    forall w w' w'', In (w, w') (R F) /\ In (w, w'') (R F) -> In (w', w'') (R F).
 
-Theorem validacao_frame_eucliadiana: 
+Theorem validacao_frame_eucliadiana_ida: 
     forall (M: Model) (p: formulaModal),
     (euclidian_frame (F M)) -> (M |= .<> p .-> .[] .<> p).
 Proof.
     intros.
-    unfold validate_model.
-    simpl.
-    intros w H0 H1 w' H2.
-    (* split. *)
     unfold euclidian_frame in *.
-    destruct H1 as [w'' [H1 H3]].
-    exists w''.
+    unfold validate_model.
+    simpl in *.
+    intros.
+    destruct H0 as [x [Hip1 Hip2]].
+    exists x.
     split.
-    apply H with (w:=w) (w':=w') (w'':=w'').
-    split. apply H0.
-    apply relacao_pertinencia_mundos in H2. apply relacao_pertinencia_mundos in H1.
-    split; destruct H2; auto.
-    destruct H1; auto.
-    split; eauto. apply H3.
+    apply H with (w:=w) (w':=w') (w'':=x).
+    split. auto. auto. auto.
 Qed.
+
+
+Theorem validacao_frame_eucliadiana_volta: 
+    forall (M: Model) (p: formulaModal),
+    (((M |= .<> p .-> .[] .<> p) -> (euclidian_frame (F M)) )).
+Proof.
+Admitted.
+
 
 (* Serial *)
 Definition serial_frame (F: Frame) : Prop :=
-    forall w: World, exists w': World, 
-        (In w (W F) /\ In w' (W F)) -> (relacao (R F) w w').
+    forall w, exists w', In (w, w') (R F).
 
-Theorem validacao_frame_serial: 
+Theorem validacao_frame_serial_ida: 
     forall (M: Model) (p: formulaModal),
     (serial_frame (F M)) -> (M |= .[] p .-> .<> p).
 Proof.
-    intros.
     unfold validate_model.
-    unfold serial_frame in *.
-    simpl;
-    intros w H0 H1;
+    unfold serial_frame in *.   
+    simpl in *.
+    intros.
     destruct H with (w:=w).
-    exists x;
-    split.
-    apply H2;
-    split. apply H0.
-    
-    
+    exists x. split. auto.
+    apply H0 in H1. apply H1.
+Qed.
 
+Theorem validacao_frame_serial_volta: 
+    forall (M: Model) (p: formulaModal),
+    ((M |= .[] p .-> .<> p) -> (serial_frame (F M))).
+Proof.   
 Admitted.
 
 
 (* Funcional *)
 Definition functional_frame (F: Frame) : Prop :=
-    forall w w' w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F)) -> ((relacao (R F) w w' /\ relacao (R F) w w'') -> w' = w'').
+    forall w w' w'', (In (w, w') (R F) /\ In (w, w'') (R F)) -> w' = w''.
 
-Theorem validacao_frame_funcional:
+Theorem validacao_frame_funcional_ida:
     forall (M:Model) (p:formulaModal),
     (functional_frame (F M)) -> (M |= .<> p .-> .[] p).
 Proof.
-    intros.
-    unfold validate_model.
-    simpl.
-    intros.
-    destruct H1 as [w [H1 H3]].
+    intros; 
+    unfold validate_model; 
     unfold functional_frame in *.
-    destruct H with (w:=w0) (w':=w) (w'':=w').
-    split. apply H0.
-    apply relacao_pertinencia_mundos in H1 as Hip1.
-    apply relacao_pertinencia_mundos in H2 as Hip2.
-    destruct Hip1. destruct Hip2.
-    split. apply H5. apply H7.
-    split. apply H1. apply H2. apply H3.
+    simpl in *.
+    intros w H0 w1 H1.
+    destruct H0 as [w' [H0 H2]].
+    destruct H with (w:=w) (w':=w1) (w'':=w').
+    split. apply H1. apply H0. apply H2.
 Qed.
 
+Theorem validacao_frame_funcional_volta:
+    forall (M:Model) (p:formulaModal),
+     (M |= .<> p .-> .[] p) -> (functional_frame (F M)).
+Proof.
+Admitted.
 
 (* Densa*)
 Definition dense_frame (F: Frame) : Prop :=
-    forall w w': World, exists w'' : World, (In w (W F) /\ In w' (W F) /\ In w'' (W F)) -> (relacao (R F) w w' -> (relacao (R F) w w'' /\ relacao (R F) w'' w')).
+    forall w w', exists w'', In (w, w') (R F) -> (In (w, w'') (R F) /\ In (w', w'') (R F)).
 
 
-Theorem validacao_frame_densa:
+Theorem validacao_frame_densa_ida:
     forall (M: Model) (p: formulaModal),
     (dense_frame (F M)) -> (M |= .[] .[] p .-> .[] p).
 Proof.
-    intros.
-    unfold validate_model.
-    unfold dense_frame in *.
+    unfold validate_model;
+    unfold dense_frame;
     simpl in *.
     intros.
-    apply H1 with (w':=w') (w'0:=w').
-    apply H2.
-    destruct H with (w:=w0) (w':=w') as [w Hip].
-    apply Hip in H2.
-    destruct Hip.
-    split; auto.
-    destruct H2.
-    apply relacao_pertinencia_mundos in H3 as Hip. destruct Hip.
-    split; auto.
-    destruct H2.
-    apply relacao_pertinencia_mundos in H3. destruct H3.
-    
-    apply H1. destruct H1 with (w':=w') (w'0:=w').
+    apply H0 with (w'0:=w') (w':=w').
+    auto.
+    apply H0 with (w':=w) (w'0:=w') in H1;
+    simpl in *.
+    apply H1.
+    induction H with (w':=w') (w:=w) as [w'' Hip].
+    destruct Hip; auto.
+    apply H0 with (w':=w) (w'0:=w'') in H2.
+    apply H0 with (w':=w') (w'0:=w'') in H3.
+        
+
+
+
+Admitted.
+
+
+Theorem validacao_frame_densa_volta:
+    forall (M: Model) (p: formulaModal),
+    (dense_frame (F M)) -> (M |= .[] .[] p .-> .[] p).
+Proof.
 Admitted.
 
 (* Convergente *)
 Definition convergente_frame (F: Frame) : Prop :=
-    forall w x y: World, exists z: World,  (In w (W F) /\ In x (W F) /\ In y (W F) -> (relacao (R F) w x /\ relacao (R F) w y) -> (relacao (R F) x z /\ relacao (R F) y z /\ In z (W F))).
+    forall w x y, exists z,  In (w, x) (R F) /\ In (w, y) (R F) -> (In (x, z) (R F) /\ In (y, z) (R F)).
 
-
-Theorem validacao_frame_convergente:
+    Theorem validacao_frame_convergente_ida:
     forall (M: Model) (p: formulaModal),
     (convergente_frame (F M)) -> (M |= .<> .[] p .-> .[] .<> p).
 Proof.
+Admitted.
+
+
+Theorem validacao_frame_convergente_volta:
+    forall (M: Model) (p: formulaModal),
+    (M |= .<> .[] p .-> .[] .<> p) -> (convergente_frame (F M)).
+Proof.
+Admitted.
+
+
+(* 
     intros.
     unfold validate_model.
     unfold convergente_frame in *.
@@ -443,16 +480,13 @@ Proof.
     split; auto.
     exists x0.
     split. destruct H3; auto.
-    apply Hip2 with (w':=x0). apply H1.
-Qed.
-
-
+    apply Hip2 with (w':=x0). apply H1. *)
 
 (* Equivalencia lógica *)
 
 
 
-
+(* Criar outra definição sem o modelo *)
 Definition equivalence (M: Model) (f g:formulaModal) : Prop := 
     ( M '' f::nil |- g ) <-> (M '' g::nil |- f).
 
