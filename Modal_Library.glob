@@ -1,4 +1,4 @@
-DIGEST 4f4467381eeae6dd03e1a2109771b220
+DIGEST feff764063e507c780be710a48ad5ef9
 FModal_Library
 R202:206 Coq.Arith.Arith <> <> lib
 R208:211 Coq.Lists.List <> <> lib
@@ -973,3 +973,125 @@ R12217:12217 Modal_Library <> F proj
 R12219:12219 Modal_Library <> M var
 R12272:12285 Modal_Library <> validate_model def
 R12299:12309 Modal_Library <> dense_frame def
+prf 12450:12476 <> validacao_frame_densa_volta
+R12494:12498 Modal_Library <> Model rec
+R12505:12516 Modal_Library <> formulaModal ind
+R12524:12524 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12542:12547 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12572:12572 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12549:12552 Modal_Library <> :::x_'|='_x not
+R12548:12548 Modal_Library <> M var
+R12562:12566 Modal_Library <> :::x_'.->'_x not
+R12553:12556 Modal_Library <> :::'.[]'_x not
+R12557:12560 Modal_Library <> :::'.[]'_x not
+R12561:12561 Modal_Library <> p var
+R12567:12570 Modal_Library <> :::'.[]'_x not
+R12571:12571 Modal_Library <> p var
+R12525:12535 Modal_Library <> dense_frame def
+R12538:12538 Modal_Library <> F proj
+R12540:12540 Modal_Library <> M var
+def 12622:12638 <> convergente_frame
+R12644:12648 Modal_Library <> Frame rec
+R12679:12685 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R12687:12689 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R12724:12728 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12763:12763 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12744:12747 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R12729:12730 Coq.Lists.List <> In def
+R12740:12740 Modal_Library <> R proj
+R12742:12742 Modal_Library <> F var
+R12732:12732 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12734:12735 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12737:12737 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12733:12733 Modal_Library <> x var
+R12736:12736 Modal_Library <> z var
+R12748:12749 Coq.Lists.List <> In def
+R12759:12759 Modal_Library <> R proj
+R12761:12761 Modal_Library <> F var
+R12751:12751 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12753:12754 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12756:12756 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12752:12752 Modal_Library <> y var
+R12755:12755 Modal_Library <> z var
+R12705:12708 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R12690:12691 Coq.Lists.List <> In def
+R12701:12701 Modal_Library <> R proj
+R12703:12703 Modal_Library <> F var
+R12693:12693 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12695:12696 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12698:12698 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12694:12694 Modal_Library <> w var
+R12697:12697 Modal_Library <> x var
+R12709:12710 Coq.Lists.List <> In def
+R12720:12720 Modal_Library <> R proj
+R12722:12722 Modal_Library <> F var
+R12712:12712 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12714:12715 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12717:12717 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12713:12713 Modal_Library <> w var
+R12716:12716 Modal_Library <> y var
+prf 12779:12809 <> validacao_frame_convergente_ida
+R12827:12831 Modal_Library <> Model rec
+R12838:12849 Modal_Library <> formulaModal ind
+R12857:12857 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12881:12886 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12915:12915 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12888:12891 Modal_Library <> :::x_'|='_x not
+R12887:12887 Modal_Library <> M var
+R12901:12905 Modal_Library <> :::x_'.->'_x not
+R12892:12895 Modal_Library <> :::'.<>'_x not
+R12896:12899 Modal_Library <> :::'.[]'_x not
+R12900:12900 Modal_Library <> p var
+R12906:12909 Modal_Library <> :::'.[]'_x not
+R12910:12913 Modal_Library <> :::'.<>'_x not
+R12914:12914 Modal_Library <> p var
+R12858:12874 Modal_Library <> convergente_frame def
+R12877:12877 Modal_Library <> F proj
+R12879:12879 Modal_Library <> M var
+R12936:12952 Modal_Library <> convergente_frame def
+R12966:12979 Modal_Library <> validate_model def
+prf 13158:13190 <> validacao_frame_convergente_volta
+R13208:13212 Modal_Library <> Model rec
+R13219:13230 Modal_Library <> formulaModal ind
+R13238:13238 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13267:13272 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13296:13296 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13273:13289 Modal_Library <> convergente_frame def
+R13292:13292 Modal_Library <> F proj
+R13294:13294 Modal_Library <> M var
+R13240:13243 Modal_Library <> :::x_'|='_x not
+R13239:13239 Modal_Library <> M var
+R13253:13257 Modal_Library <> :::x_'.->'_x not
+R13244:13247 Modal_Library <> :::'.<>'_x not
+R13248:13251 Modal_Library <> :::'.[]'_x not
+R13252:13252 Modal_Library <> p var
+R13258:13261 Modal_Library <> :::'.[]'_x not
+R13262:13265 Modal_Library <> :::'.<>'_x not
+R13266:13266 Modal_Library <> p var
+def 13401:13411 <> equivalence
+R13417:13421 Modal_Library <> Model rec
+R13429:13440 Modal_Library <> formulaModal ind
+R13458:13459 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R13476:13483 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R13500:13500 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R13461:13464 Modal_Library <> :::x_''''''_x_'|-'_x not
+R13471:13474 Modal_Library <> :::x_''''''_x_'|-'_x not
+R13460:13460 Modal_Library <> M var
+R13466:13467 Modal_Library <> :::x_'::'_x not
+R13465:13465 Modal_Library <> f var
+R13468:13470 Coq.Init.Datatypes <> nil constr
+R13475:13475 Modal_Library <> g var
+R13485:13488 Modal_Library <> :::x_''''''_x_'|-'_x not
+R13495:13498 Modal_Library <> :::x_''''''_x_'|-'_x not
+R13484:13484 Modal_Library <> M var
+R13490:13491 Modal_Library <> :::x_'::'_x not
+R13489:13489 Modal_Library <> g var
+R13492:13494 Coq.Init.Datatypes <> nil constr
+R13499:13499 Modal_Library <> f var
+R13532:13542 Modal_Library <> equivalence def
+not 13513:13513 <> :::x_'|='_x_'=|='_x
+R13616:13619 Modal_Library <> :::x_'|='_x_'=|='_x not
+R13621:13625 Modal_Library <> :::x_'|='_x_'=|='_x not
+not 13595:13595 <> :::x_'|='_x_'≡'_x
+prf 13672:13690 <> implies_to_or_modal
+R13710:13714 Modal_Library <> Model rec

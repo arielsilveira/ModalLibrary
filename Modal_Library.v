@@ -422,16 +422,10 @@ Proof.
     unfold validate_model;
     unfold dense_frame;
     simpl in *.
-    intros.
-    apply H0 with (w'0:=w') (w':=w').
+    intros. 
+    apply H0 with (w':=w').
     auto.
-    apply H0 with (w':=w) (w'0:=w') in H1;
-    simpl in *.
-    apply H1.
-    induction H with (w':=w') (w:=w) as [w'' Hip].
-    destruct Hip; auto.
-    apply H0 with (w':=w) (w'0:=w'') in H2.
-    apply H0 with (w':=w') (w'0:=w'') in H3.
+    induction H with (w:=w') (w':=w').
         
 
 
@@ -453,34 +447,22 @@ Definition convergente_frame (F: Frame) : Prop :=
     forall (M: Model) (p: formulaModal),
     (convergente_frame (F M)) -> (M |= .<> .[] p .-> .[] .<> p).
 Proof.
-Admitted.
-
+    unfold convergente_frame.
+    unfold validate_model.
+    simpl in *.
+    intros.
+    destruct H0 as [x [Hip1 Hip2]].
+    destruct H with (w:=w) (x:=x) (y:=w').
+    destruct H0. auto.
+    exists x0.
+    split; auto.
+Qed.
 
 Theorem validacao_frame_convergente_volta:
     forall (M: Model) (p: formulaModal),
     (M |= .<> .[] p .-> .[] .<> p) -> (convergente_frame (F M)).
 Proof.
 Admitted.
-
-
-(* 
-    intros.
-    unfold validate_model.
-    unfold convergente_frame in *.
-    simpl in *.
-    intros.
-    destruct H1.
-    destruct H1 as [Hip1 Hip2].
-    destruct H with (w:=w0) (x:=x) (y:=w').
-    destruct H1.
-    split. apply H0.
-    apply relacao_pertinencia_mundos in H2 as Hip3. destruct Hip3.
-    apply relacao_pertinencia_mundos in Hip1 as Hip4. destruct Hip4.
-    split; auto.
-    split; auto.
-    exists x0.
-    split. destruct H3; auto.
-    apply Hip2 with (w':=x0). apply H1. *)
 
 (* Equivalencia lógica *)
 
