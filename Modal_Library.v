@@ -467,37 +467,85 @@ Admitted.
 (* Equivalencia lógica *)
 
 
+Definition entails_teste (A : theory) (B : formulaModal) : Prop :=
+    forall M: Model, (theoryModal M A) -> validate_model M B.
+
+Notation "A ||= B" := (entails_teste A B) (at level 110, no associativity).
 
 (* Criar outra definição sem o modelo *)
-Definition equivalence (M: Model) (f g:formulaModal) : Prop := 
-    ( M '' f::nil |- g ) <-> (M '' g::nil |- f).
+Definition equivalence (f g:formulaModal) : Prop := 
+    ( f::nil ||= g ) <-> (g::nil ||= f).
 
-Notation "M |= A =|= B" := (equivalence M A B) (at level 110, no associativity).
+Notation "A =|= B" := (equivalence A B) (at level 110, no associativity).
 
-Notation "M |= A ≡ B " := (M |= A =|= B) (at level 110, no associativity).
+Notation "A ≡ B " := (A =|= B) (at level 110, no associativity).
 
 Theorem implies_to_or_modal : 
-    forall (M: Model) (w: World) (a b: formulaModal),
-        (M |= (a .-> b)  =|=  (.~ a) .\/ b) .
+    forall (a b: formulaModal),
+        (a .-> b)  =|=  (.~ a) .\/ b .
 Proof.
     intros.
-    unfold equivalence;
-    induction M;
     split.
-        - intros. unfold entails in *. intros; simpl in *.
-            unfold validate_model in *. inversion H0. 
-            intros. split. apply H1. simpl in *. intros.
-            destruct H1. 
-        
-        simpl in *. 
-            apply H0 in H.
-            
+        - intros. 
+            unfold entails_teste in *. 
+            intros. 
+            simpl in *.
+            destruct H0. 
+            unfold validate_model in *. 
+            simpl in *.
+            intro w.
+            apply or_to_imply. apply H0.
+        - intros.
+            unfold entails_teste in *. 
+            intros. 
+            simpl in *.
+            destruct H0. 
+            unfold validate_model in *.
+            intros.
+            simpl in *.
+            apply imply_to_or. auto. 
+Qed.
+
+Theorem double_neg_modal :
+    forall (a : formulaModal),
+    (.~ .~ a) =|= a.
+Proof.
     intros.
-    simpl in *. destruct H0. 
-    unfold validate_model.
+    split.
+        - unfold entails_teste.
+            simpl in *.
+            unfold validate_model.    
+            intros.
+            destruct H0.
+            simpl in *.
+            intro.
+            
+
+
+        unfold validate_model in *.
+            destruct H0. 
+            intro.
+            apply exfalso. contradiction. 
+        
 Admitted.
 
+Theorem and_to_or_modal: 
+    forall (a b: formulaModal),
+    ((a ./\ b) =|= .~ (.~ a .\/ .~ b)).
+Proof.
+Admitted.
 
+Theorem iff_to_or_modal:
+    forall (a b: formulaModal),
+    (a .<-> b) =|= ((a .-> b) ./\ (b .-> a)).
+Proof.
+Admitted.
+
+Theorem diamond_to_box_modal:
+    forall (a : formulaModal),
+    (.<> a) =|= .~ .[] .~ a.
+Proof.
+Admitted.
 
 
 (* ;-; *)

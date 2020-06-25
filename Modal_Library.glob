@@ -1,4 +1,4 @@
-DIGEST feff764063e507c780be710a48ad5ef9
+DIGEST 2348be356f45090a7cc64ed3a5165501
 FModal_Library
 R202:206 Coq.Arith.Arith <> <> lib
 R208:211 Coq.Lists.List <> <> lib
@@ -1068,30 +1068,67 @@ R13252:13252 Modal_Library <> p var
 R13258:13261 Modal_Library <> :::'.[]'_x not
 R13262:13265 Modal_Library <> :::'.<>'_x not
 R13266:13266 Modal_Library <> p var
-def 13401:13411 <> equivalence
-R13417:13421 Modal_Library <> Model rec
-R13429:13440 Modal_Library <> formulaModal ind
-R13458:13459 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R13476:13483 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R13500:13500 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R13461:13464 Modal_Library <> :::x_''''''_x_'|-'_x not
-R13471:13474 Modal_Library <> :::x_''''''_x_'|-'_x not
-R13460:13460 Modal_Library <> M var
-R13466:13467 Modal_Library <> :::x_'::'_x not
-R13465:13465 Modal_Library <> f var
-R13468:13470 Coq.Init.Datatypes <> nil constr
-R13475:13475 Modal_Library <> g var
-R13485:13488 Modal_Library <> :::x_''''''_x_'|-'_x not
-R13495:13498 Modal_Library <> :::x_''''''_x_'|-'_x not
-R13484:13484 Modal_Library <> M var
-R13490:13491 Modal_Library <> :::x_'::'_x not
-R13489:13489 Modal_Library <> g var
-R13492:13494 Coq.Init.Datatypes <> nil constr
-R13499:13499 Modal_Library <> f var
-R13532:13542 Modal_Library <> equivalence def
-not 13513:13513 <> :::x_'|='_x_'=|='_x
-R13616:13619 Modal_Library <> :::x_'|='_x_'=|='_x not
-R13621:13625 Modal_Library <> :::x_'|='_x_'=|='_x not
-not 13595:13595 <> :::x_'|='_x_'≡'_x
-prf 13672:13690 <> implies_to_or_modal
-R13710:13714 Modal_Library <> Model rec
+def 13357:13369 <> entails_teste
+R13376:13381 Modal_Library <> theory def
+R13389:13400 Modal_Library <> formulaModal ind
+R13427:13431 Modal_Library <> Model rec
+R13434:13434 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13450:13454 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13455:13468 Modal_Library <> validate_model def
+R13472:13472 Modal_Library <> B var
+R13470:13470 Modal_Library <> M var
+R13435:13445 Modal_Library <> theoryModal def
+R13449:13449 Modal_Library <> A var
+R13447:13447 Modal_Library <> M var
+R13499:13511 Modal_Library <> entails_teste def
+not 13485:13485 <> :::x_'||='_x
+def 13607:13617 <> equivalence
+R13624:13635 Modal_Library <> formulaModal ind
+R13653:13654 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R13667:13674 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R13687:13687 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R13661:13665 Modal_Library <> :::x_'||='_x not
+R13656:13657 Modal_Library <> :::x_'::'_x not
+R13655:13655 Modal_Library <> f var
+R13658:13660 Coq.Init.Datatypes <> nil constr
+R13666:13666 Modal_Library <> g var
+R13681:13685 Modal_Library <> :::x_'||='_x not
+R13676:13677 Modal_Library <> :::x_'::'_x not
+R13675:13675 Modal_Library <> g var
+R13678:13680 Coq.Init.Datatypes <> nil constr
+R13686:13686 Modal_Library <> f var
+R13714:13724 Modal_Library <> equivalence def
+not 13700:13700 <> :::x_'=|='_x
+R13791:13795 Modal_Library <> :::x_'=|='_x not
+not 13775:13775 <> :::x_'≡'_x
+prf 13842:13860 <> implies_to_or_modal
+R13882:13893 Modal_Library <> formulaModal ind
+R13905:13905 Modal_Library <> :::x_'=|='_x not
+R13913:13920 Modal_Library <> :::x_'=|='_x not
+R13907:13911 Modal_Library <> :::x_'.->'_x not
+R13906:13906 Modal_Library <> a var
+R13912:13912 Modal_Library <> b var
+R13921:13921 Modal_Library <> :::x_'.\/'_x not
+R13926:13931 Modal_Library <> :::x_'.\/'_x not
+R13922:13924 Modal_Library <> :::'.~'_x not
+R13925:13925 Modal_Library <> a var
+R13932:13932 Modal_Library <> b var
+R14004:14016 Modal_Library <> entails_teste def
+R14115:14128 Modal_Library <> validate_model def
+R14200:14210 Coq.Logic.Classical_Prop <> or_to_imply thm
+R14200:14210 Coq.Logic.Classical_Prop <> or_to_imply thm
+R14260:14272 Modal_Library <> entails_teste def
+R14371:14384 Modal_Library <> validate_model def
+R14454:14464 Coq.Logic.Classical_Prop <> imply_to_or thm
+R14454:14464 Coq.Logic.Classical_Prop <> imply_to_or thm
+prf 14488:14503 <> double_neg_modal
+R14523:14534 Modal_Library <> formulaModal ind
+R14542:14542 Modal_Library <> :::x_'=|='_x not
+R14550:14555 Modal_Library <> :::x_'=|='_x not
+R14543:14545 Modal_Library <> :::'.~'_x not
+R14546:14548 Modal_Library <> :::'.~'_x not
+R14549:14549 Modal_Library <> a var
+R14556:14556 Modal_Library <> a var
+R14606:14618 Modal_Library <> entails_teste def
+R14664:14677 Modal_Library <> validate_model def
+R14802:14815 Modal_Library <> validate_model def
