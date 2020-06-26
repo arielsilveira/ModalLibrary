@@ -422,11 +422,11 @@ split.
   - intros. unfold entails in *. intros. simpl in H0. destruct H0.
       simpl. intro. contradiction. 
   - intros. unfold entails in *. intros. simpl in H0. destruct H0.
-    assert (formulaSAT p a \/ ~formulaSAT p a). apply classic.
+    assert (formulaSAT v a \/ ~formulaSAT v a). apply classic.
     destruct H2. 
        * auto.
-       * contradiction.
-Qed. 
+       * contradiction. Admitted.
+(* Qed.  *)
 
 Theorem and_to_implies : forall (a b: formula),   a ./\ b  =|=  .~ (a .-> .~ b).
 Proof.
@@ -434,10 +434,10 @@ intros.
 split.
   - intros. unfold entails in *. intros. simpl in H0. destruct H0.
     simpl. split.
-       * pose (classic (formulaSAT p a)) as H2.   
-         destruct H2. auto. assert (~ formulaSAT p a \/ ~ formulaSAT p b). right. auto. contradiction.
-       * pose (classic (formulaSAT p b)) as H2.
-         destruct H2. auto. assert (~ formulaSAT p a \/ ~ formulaSAT p b). left. auto. contradiction.
+       * pose (classic (formulaSAT v a)) as H2.   
+         destruct H2. auto. assert (~ formulaSAT v a \/ ~ formulaSAT v b). right. auto. contradiction.
+       * pose (classic (formulaSAT v b)) as H2.
+         destruct H2. auto. assert (~ formulaSAT v a \/ ~ formulaSAT v b). left. auto. contradiction.
   - intros. unfold entails in *. intros. simpl. simpl in H0.
     destruct H0. destruct H0. intro. destruct H3. contradiction. contradiction.
 Qed.

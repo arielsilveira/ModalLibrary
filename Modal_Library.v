@@ -251,6 +251,9 @@ Proof.
     intros. apply classic.
     destruct H1 with (w:=w).
         apply H2.
+    pose (classic (In (w, w) (R (F M)))) as Hip.
+    destruct Hip. auto.
+    destruct H1 with (w:=w). auto.
     
     Admitted.
 
@@ -519,32 +522,84 @@ Proof.
             destruct H0.
             simpl in *.
             intro.
-            
-
-
-        unfold validate_model in *.
-            destruct H0. 
-            intro.
-            apply exfalso. contradiction. 
-        
-Admitted.
+            pose (classic (M ' w ||-.~.~ a)) as Hip.
+            destruct Hip. simpl in *. auto. auto.
+        - unfold entails_teste.
+            simpl in *.
+            unfold validate_model.    
+            intros.
+            simpl in *.
+            destruct H0.
+            apply NNPP. apply H0.
+Qed.
 
 Theorem and_to_or_modal: 
     forall (a b: formulaModal),
     ((a ./\ b) =|= .~ (.~ a .\/ .~ b)).
 Proof.
-Admitted.
+    intros.
+    split.
+        - unfold entails_teste.
+            simpl in *.
+            intros.
+            unfold validate_model in *.
+            intros. 
+            simpl in *.
+            split.
+            destruct H0.
+            * pose (classic (M ' w ||- a)) as Hip. 
+                destruct Hip; 
+                auto. 
+                assert ((M ' w ||- .~ a) \/ (M ' w ||-.~  b)).
+                left. 
+                auto. 
+                simpl in *.
+                destruct H0 with (w:=w). 
+                left. 
+                auto.
+            * pose (classic (M ' w ||- b)) as Hip. 
+                destruct Hip; 
+                auto. 
+                assert ((M ' w ||- .~ a) \/ (M ' w ||-.~  b)).
+                right. 
+                auto. 
+                simpl in *.
+                destruct H0.
+                destruct H0 with (w:=w). 
+                right. 
+                auto.
+        - unfold entails_teste.
+            simpl in *.
+            intros.
+            unfold validate_model in *.
+            intros. 
+            simpl in *.
+            destruct H0.
+            destruct H0 with (w:=w).
+            intro.
+            destruct H4. auto. auto.
+Qed.
 
-Theorem iff_to_or_modal:
+(* Theorem iff_to_or_modal:
     forall (a b: formulaModal),
-    (a .<-> b) =|= ((a .-> b) ./\ (b .-> a)).
+    (a <-> b) =|= ((a .-> b) ./\ (b .-> a)).
 Proof.
-Admitted.
+Admitted. *)
 
 Theorem diamond_to_box_modal:
     forall (a : formulaModal),
-    (.<> a) =|= .~ .[] .~ a.
+    .<> a =|= .~ .[] .~ a.
 Proof.
+    intros.
+    split.
+        - unfold entails_teste.
+            simpl in *.
+            unfold validate_model.
+            intros.    
+            simpl in *. 
+            intros.
+            destruct H0.
+            exists w. 
 Admitted.
 
 
