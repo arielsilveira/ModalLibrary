@@ -425,8 +425,8 @@ split.
     assert (formulaSAT v a \/ ~formulaSAT v a). apply classic.
     destruct H2. 
        * auto.
-       * contradiction. Admitted.
-(* Qed.  *)
+       * contradiction.
+Qed. 
 
 Theorem and_to_implies : forall (a b: formula),   a ./\ b  =|=  .~ (a .-> .~ b).
 Proof.

@@ -247,42 +247,13 @@ Proof.
     apply H.
     intros.
     simpl in *.
-    assert (forall w:W (F M), (In (w, w) (R (F M))) \/ ~(In (w, w) (R (F M)))).
-    intros. apply classic.
-    destruct H1 with (w:=w).
-        apply H2.
-    pose (classic (In (w, w) (R (F M)))) as Hip.
-    destruct Hip. auto.
-    destruct H1 with (w:=w). auto.
-    
-    Admitted.
-
-(* Theorem validacao_frame_reflexivo_ida:
-    forall (M: Model) (Ψ: formulaModal),
-    ((reflexivity_frame (F M)) -> (M |= .[] Ψ .-> Ψ)). 
-Proof.
-    unfold validate_model.
-    unfold reflexivity_frame in *. 
-    simpl in *.
-    intuition.
-Qed. *)
-
-Theorem validacao_frame_reflexivo_volta_2: 
-    forall (M: Model) (Ψ: formulaModal),
-    ~((M |= .[] Ψ .-> Ψ) -> (reflexivity_frame (F M))). 
-Proof.
-    intros.
-    unfold not.
-    unfold validate_model in *.
-    unfold reflexivity_frame.
-    simpl in *.
-    intros.
-    assert (forall w:W (F M), (In (w, w) (R (F M))) \/ ~(In (w, w) (R (F M)))).
-    intros. apply classic.
-    (* destruct H0. with (W:=w'). *)
-    
+    apply absurd with (A:=(In (w,w) (R(F M)))).
+    pose (classic (In (w,w) (R (F M)))) as Hip.
+    destruct Hip; auto.
 
 Admitted.
+
+
 
 (* Transitividade *)
 Definition transitivity_frame (F: Frame) : Prop :=
@@ -293,7 +264,7 @@ Definition transitivity_frame (F: Frame) : Prop :=
 Theorem validacao_frame_transitivo_ida: 
     forall (M: Model) (p: formulaModal),
     ((transitivity_frame (F M)) -> (M |= .[]p .-> .[].[]p)).
-Proof.
+Proof. 
     intros.
     unfold validate_model.
     simpl.
@@ -307,8 +278,22 @@ Qed.
 (* Prova da relação transitiva de volta *)
 Theorem validacao_frame_transitivo_volta: 
     forall (M: Model) (p: formulaModal),
-    ((M |= .[]p .-> .[].[]p) -> (transitivity_frame (F M))).
+    (~ (transitivity_frame (F M)) -> ~ (M |= .[]p .-> .[].[]p)).
 Proof.
+    unfold transitivity_frame.
+    unfold validate_model.
+    simpl in *.
+    intros.
+    intro.
+    pose H as Hip. 
+    destruct Hip.
+    intros.
+    induction H1.
+    unfold not in *.
+    (* intros. *)
+    apply H0 with (w:=w) (w':=w') (w'0:=w'') in H1.
+    apply H0 with (w:=w') (w':=w'') (w'0:=w) in H2.
+    
 Admitted.
 
 (* Simetria *)
@@ -467,8 +452,9 @@ Theorem validacao_frame_convergente_volta:
 Proof.
 Admitted.
 
-(* Equivalencia lógica *)
 
+
+(* Equivalencia lógica *)
 
 Definition entails_teste (A : theory) (B : formulaModal) : Prop :=
     forall M: Model, (theoryModal M A) -> validate_model M B.
@@ -533,31 +519,29 @@ Proof.
             apply NNPP. apply H0.
 Qed.
 
-Theorem and_to_or_modal: 
+Theorem and_to_implies_modal: 
     forall (a b: formulaModal),
-    ((a ./\ b) =|= .~ (.~ a .\/ .~ b)).
+    ((a ./\ b) =|= .~ (a .-> .~ b)).
 Proof.
     intros.
     split.
         - unfold entails_teste.
+            unfold validate_model in *.
             simpl in *.
             intros.
             unfold validate_model in *.
-            intros. 
             simpl in *.
             split.
             destruct H0.
-            * pose (classic (M ' w ||- a)) as Hip. 
-                destruct Hip; 
-                auto. 
-                assert ((M ' w ||- .~ a) \/ (M ' w ||-.~  b)).
-                left. 
-                auto. 
-                simpl in *.
-                destruct H0 with (w:=w). 
-                left. 
-                auto.
-            * pose (classic (M ' w ||- b)) as Hip. 
+                *  pose (classic (M ' w ||- a)) as Hip. 
+                    destruct Hip; 
+                    auto.
+                    assert ((M ' w ||- .~ a) \/ (M ' w ||- .~ b)).
+                    left. auto.
+                    simpl in *.
+                    destruct H0 with (w:=w).
+                    intro. contradiction.
+                * pose (classic (M ' w ||- b)) as Hip. 
                 destruct Hip; 
                 auto. 
                 assert ((M ' w ||- .~ a) \/ (M ' w ||-.~  b)).
@@ -565,9 +549,8 @@ Proof.
                 auto. 
                 simpl in *.
                 destruct H0.
-                destruct H0 with (w:=w). 
-                right. 
-                auto.
+                destruct H0 with (w:=w).
+                intro. auto. 
         - unfold entails_teste.
             simpl in *.
             intros.
@@ -580,12 +563,6 @@ Proof.
             destruct H4. auto. auto.
 Qed.
 
-(* Theorem iff_to_or_modal:
-    forall (a b: formulaModal),
-    (a <-> b) =|= ((a .-> b) ./\ (b .-> a)).
-Proof.
-Admitted. *)
-
 Theorem diamond_to_box_modal:
     forall (a : formulaModal),
     .<> a =|= .~ .[] .~ a.
@@ -595,12 +572,97 @@ Proof.
         - unfold entails_teste.
             simpl in *.
             unfold validate_model.
-            intros.    
             simpl in *. 
             intros.
+            unfold not in *.
             destruct H0.
-            exists w. 
+            induction H with (M:=M) (w:=w).
+            split.
+            intros.
+            induction H0 with (w:=w).
+            intros.
+            apply H with (M:=M) (w:=w).
+            split.
+                + intros.
 Admitted.
+
+
+
+Fixpoint toImplic (f: formulaModal) : formulaModal :=
+match f with
+  | # x     => # x
+  | .~ a    => .~ (toImplic a)
+  | .[] a   => .[] (toImplic a)
+  | .<> a   => .<> (toImplic a)
+  | a ./\ b => .~ (.~ (toImplic a) .-> (toImplic b) ) 
+  | a .\/ b => .~ (.~ (toImplic a) .-> (toImplic b) ) 
+  | a .-> b => (toImplic a) .-> (toImplic b)
+end.
+
+Theorem toImplic_equiv : forall (f:formulaModal), f =|= (toImplic f).
+Proof.
+    intros.
+    split.
+        - unfold entails_teste.
+            unfold validate_model in *.
+            intros.
+            simpl in *.
+            unfold validate_model in *.
+            destruct H0.
+    Admitted.
+
+
+
+(***************** DEDUCTIVE SYSTEMS *************************)
+
+(**** HILBERT SYSTEM (axiomatic method) ****)
+
+Inductive axiom : Set :=
+    | ax1 : formulaModal -> formulaModal -> axiom
+    | ax2 : formulaModal -> formulaModal -> formulaModal -> axiom
+    | ax3 : formulaModal -> formulaModal -> axiom
+    | K   : formulaModal -> formulaModal -> axiom
+.
+
+Fixpoint instantiate (a:axiom) : formulaModal :=
+    match a with
+    | ax1 p1 p2       => p1 .-> (p2 .-> p1)
+    | ax2 p1 p2 p3    => (p1 .-> (p2 .-> p3)) .-> ((p1 .-> p2) .-> (p1 .-> p3))
+    | ax3 p1 p2       => (.~ p2 .-> .~ p1) .-> (p1 .-> p2)
+    | K   p1 p2       => .[] (p1 .-> p2) .-> (.[] p1 .-> .[] p2)
+    end.
+
+(* Tentar entender isso *)
+Inductive deduction : theory -> formulaModal -> Set :=
+    | Prem : forall (t:theory) (f:formulaModal) (i:nat), (nth_error t i = Some f) -> deduction t f
+    | Ax   : forall (t:theory) (f:formulaModal) (a:axiom), (instantiate a = f) -> deduction t f
+    | Mp   : forall (t:theory) (f g:formulaModal) (d1:deduction t (f .-> g)) (d2:deduction t f), deduction t g
+    | Nec  : forall (t:theory) (f g:formulaModal) (d1:deduction t f) , deduction t (.[] f)
+.
+
+
+
+Definition th1 := (#0 :: #0 .-> #1 :: nil). 
+Definition ded1 := (Prem th1        #0 0 eq_refl).
+Definition ded2 := (Prem th1 (#0.->#1) 1 eq_refl).
+Definition ded3 := (Mp   th1 #0 #1 ded2 ded1).
+Check ded3.
+Definition ded4 := (Ax th1 (#1 .-> #2 .-> #1) (ax1 #1 #2) eq_refl).
+Definition ded5 := (Prem th1        #0 0 eq_refl).
+Definition ded6 := (Nec th1  #0).
+Check ded6.
+
+Theorem System_K:
+    forall (M: Model) (p q : formulaModal),
+    (M |= .[](p ./\ q)) -> (M |= (.[]p ./\ .[]q)) .
+Proof.
+    unfold validate_model.
+    intros.
+    simpl in *.
+    split.
+    intros. destruct H with (w:=w) (w':=w'). apply H0. apply H1.
+    intros. destruct H with (w:=w) (w':=w'). apply H0. apply H2.
+Qed.
 
 
 (* ;-; *)
