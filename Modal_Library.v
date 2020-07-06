@@ -282,6 +282,7 @@ match f with
   | a .-> b => (toImplic a) .-> (toImplic b)
 end.
 
+
 Theorem toImplic_equiv : forall (f:formulaModal), f =|= (toImplic f).
 Proof.
     intros.
