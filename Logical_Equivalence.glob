@@ -1,0 +1,17 @@
+DIGEST e4b2895bc49eb05a418ba62a4c3ae5b3
+FLogical_Equivalence
+R15:27 Modal_Library <> <> lib
+prf 86:104 <> implies_to_or_modal
+R126:137 Modal_Library <> formulaModal ind
+R149:149 Modal_Library <> :::x_'=|='_x not
+R157:164 Modal_Library <> :::x_'=|='_x not
+R151:155 Modal_Library <> :::x_'.->'_x not
+R150:150 Logical_Equivalence <> a var
+R156:156 Logical_Equivalence <> b var
+R165:165 Modal_Library <> :::x_'.\/'_x not
+R170:175 Modal_Library <> :::x_'.\/'_x not
+R166:168 Modal_Library <> :::'.~'_x not
+R169:169 Logical_Equivalence <> a var
+R176:176 Logical_Equivalence <> b var
+R248:260 Modal_Library <> entails_teste def
+R359:372 Modal_Library <> validate_model def

@@ -1,0 +1,179 @@
+DIGEST 6bafe7ce229c4e92b1430bc6b1891317
+FDeductive_System
+R15:27 Modal_Library <> <> lib
+R29:32 Coq.Lists.List <> <> lib
+ind 94:98 <> axiom
+constr 115:117 <> ax1
+constr 165:167 <> ax2
+constr 231:233 <> ax3
+constr 281:281 <> K
+R133:136 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R149:152 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R153:157 Deductive_System <> axiom ind
+R137:148 Modal_Library <> formulaModal ind
+R121:132 Modal_Library <> formulaModal ind
+R183:186 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R199:202 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R215:218 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R219:223 Deductive_System <> axiom ind
+R203:214 Modal_Library <> formulaModal ind
+R187:198 Modal_Library <> formulaModal ind
+R171:182 Modal_Library <> formulaModal ind
+R249:252 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R265:268 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R269:273 Deductive_System <> axiom ind
+R253:264 Modal_Library <> formulaModal ind
+R237:248 Modal_Library <> formulaModal ind
+R299:302 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R315:318 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R319:323 Deductive_System <> axiom ind
+R303:314 Modal_Library <> formulaModal ind
+R287:298 Modal_Library <> formulaModal ind
+def 337:347 <> instantiate
+R352:356 Deductive_System <> axiom ind
+R361:372 Modal_Library <> formulaModal ind
+R387:387 Deductive_System <> a var
+R400:402 Deductive_System <> ax1 constr
+R421:426 Modal_Library <> :::x_'.->'_x not
+R436:436 Modal_Library <> :::x_'.->'_x not
+R429:433 Modal_Library <> :::x_'.->'_x not
+R444:446 Deductive_System <> ax2 constr
+R463:463 Modal_Library <> :::x_'.->'_x not
+R482:488 Modal_Library <> :::x_'.->'_x not
+R516:516 Modal_Library <> :::x_'.->'_x not
+R466:471 Modal_Library <> :::x_'.->'_x not
+R481:481 Modal_Library <> :::x_'.->'_x not
+R474:478 Modal_Library <> :::x_'.->'_x not
+R489:489 Modal_Library <> :::x_'.->'_x not
+R499:505 Modal_Library <> :::x_'.->'_x not
+R515:515 Modal_Library <> :::x_'.->'_x not
+R492:496 Modal_Library <> :::x_'.->'_x not
+R508:512 Modal_Library <> :::x_'.->'_x not
+R524:526 Deductive_System <> ax3 constr
+R543:543 Modal_Library <> :::x_'.->'_x not
+R559:565 Modal_Library <> :::x_'.->'_x not
+R575:575 Modal_Library <> :::x_'.->'_x not
+R549:553 Modal_Library <> :::x_'.->'_x not
+R544:546 Modal_Library <> :::'.~'_x not
+R554:556 Modal_Library <> :::'.~'_x not
+R568:572 Modal_Library <> :::x_'.->'_x not
+R583:583 Deductive_System <> K constr
+R617:622 Modal_Library <> :::x_'.->'_x not
+R640:640 Modal_Library <> :::x_'.->'_x not
+R602:606 Modal_Library <> :::'.[]'_x not
+R616:616 Modal_Library <> :::'.[]'_x not
+R609:613 Modal_Library <> :::x_'.->'_x not
+R629:633 Modal_Library <> :::x_'.->'_x not
+R623:626 Modal_Library <> :::'.[]'_x not
+R634:637 Modal_Library <> :::'.[]'_x not
+ind 689:697 <> deduction
+constr 740:743 <> Prem
+constr 839:840 <> Ax
+constr 935:936 <> Mp
+constr 1046:1048 <> Nec
+R707:710 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R723:726 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R711:722 Modal_Library <> formulaModal ind
+R701:706 Modal_Library <> theory def
+R707:710 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R723:726 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R711:722 Modal_Library <> formulaModal ind
+R701:706 Modal_Library <> theory def
+R757:762 Modal_Library <> theory def
+R768:779 Modal_Library <> formulaModal ind
+R785:787 Coq.Init.Datatypes <> nat ind
+R791:791 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R814:818 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R819:827 Deductive_System <> deduction ind
+R831:831 Deductive_System <> f var
+R829:829 Deductive_System <> t var
+R805:807 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R792:800 Coq.Lists.List <> nth_error def
+R804:804 Deductive_System <> i var
+R802:802 Deductive_System <> t var
+R808:811 Coq.Init.Datatypes <> Some constr
+R813:813 Deductive_System <> f var
+R856:861 Modal_Library <> theory def
+R867:878 Modal_Library <> formulaModal ind
+R884:888 Deductive_System <> axiom ind
+R892:892 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R910:914 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R915:923 Deductive_System <> deduction ind
+R927:927 Deductive_System <> f var
+R925:925 Deductive_System <> t var
+R906:908 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R893:903 Deductive_System <> instantiate def
+R905:905 Deductive_System <> a var
+R909:909 Deductive_System <> f var
+R952:957 Modal_Library <> theory def
+R965:976 Modal_Library <> formulaModal ind
+R983:991 Deductive_System <> deduction ind
+R997:1001 Modal_Library <> :::x_'.->'_x not
+R996:996 Deductive_System <> f var
+R1002:1002 Deductive_System <> g var
+R993:993 Deductive_System <> t var
+R1010:1018 Deductive_System <> deduction ind
+R1022:1022 Deductive_System <> f var
+R1020:1020 Deductive_System <> t var
+R1026:1034 Deductive_System <> deduction ind
+R1038:1038 Deductive_System <> g var
+R1036:1036 Deductive_System <> t var
+R1063:1068 Modal_Library <> theory def
+R1076:1087 Modal_Library <> formulaModal ind
+R1094:1102 Deductive_System <> deduction ind
+R1106:1106 Deductive_System <> f var
+R1104:1104 Deductive_System <> t var
+R1111:1119 Deductive_System <> deduction ind
+R1124:1127 Modal_Library <> :::'.[]'_x not
+R1128:1128 Deductive_System <> f var
+R1121:1121 Deductive_System <> t var
+def 1147:1149 <> th1
+R1157:1160 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1155:1155 Modal_Library <> :::'#'_x not
+R1170:1173 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1163:1167 Modal_Library <> :::x_'.->'_x not
+R1161:1161 Modal_Library <> :::'#'_x not
+R1168:1168 Modal_Library <> :::'#'_x not
+R1174:1176 Coq.Init.Datatypes <> nil constr
+def 1192:1195 <> ded1
+R1201:1204 Deductive_System <> Prem constr
+R1222:1228 Coq.Init.Logic <> eq_refl constr
+R1217:1217 Modal_Library <> :::'#'_x not
+R1206:1208 Deductive_System <> th1 def
+def 1243:1246 <> ded2
+R1252:1255 Deductive_System <> Prem constr
+R1273:1279 Coq.Init.Logic <> eq_refl constr
+R1264:1266 Modal_Library <> :::x_'.->'_x not
+R1262:1262 Modal_Library <> :::'#'_x not
+R1267:1267 Modal_Library <> :::'#'_x not
+R1257:1259 Deductive_System <> th1 def
+def 1294:1297 <> ded3
+R1303:1304 Deductive_System <> Mp constr
+R1323:1326 Deductive_System <> ded1 def
+R1318:1321 Deductive_System <> ded2 def
+R1315:1315 Modal_Library <> :::'#'_x not
+R1312:1312 Modal_Library <> :::'#'_x not
+R1308:1310 Deductive_System <> th1 def
+R1336:1339 Deductive_System <> ded3 def
+def 1353:1356 <> ded4
+R1362:1363 Deductive_System <> Ax constr
+R1400:1406 Coq.Init.Logic <> eq_refl constr
+R1389:1391 Deductive_System <> ax1 constr
+R1396:1396 Modal_Library <> :::'#'_x not
+R1393:1393 Modal_Library <> :::'#'_x not
+R1372:1376 Modal_Library <> :::x_'.->'_x not
+R1370:1370 Modal_Library <> :::'#'_x not
+R1379:1383 Modal_Library <> :::x_'.->'_x not
+R1377:1377 Modal_Library <> :::'#'_x not
+R1384:1384 Modal_Library <> :::'#'_x not
+R1365:1367 Deductive_System <> th1 def
+def 1421:1424 <> ded5
+R1430:1433 Deductive_System <> Prem constr
+R1451:1457 Coq.Init.Logic <> eq_refl constr
+R1446:1446 Modal_Library <> :::'#'_x not
+R1435:1437 Deductive_System <> th1 def
+def 1472:1475 <> ded6
+R1481:1483 Deductive_System <> Nec constr
+R1490:1490 Modal_Library <> :::'#'_x not
+R1485:1487 Deductive_System <> th1 def
+R1501:1504 Deductive_System <> ded6 def
