@@ -1,4 +1,4 @@
-Require Import Modal_Library.
+Require Import Modal_Library Classical.
 
 (* Implicação <-> Negação e Disjunção *)
 Theorem implies_to_or_modal : 
