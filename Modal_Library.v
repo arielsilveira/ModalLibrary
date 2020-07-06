@@ -283,6 +283,7 @@ match f with
 end.
 
 
+
 Theorem toImplic_equiv : forall (f:formulaModal), f =|= (toImplic f).
 Proof.
     intros.
