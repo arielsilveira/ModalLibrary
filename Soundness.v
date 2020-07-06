@@ -14,6 +14,7 @@ Proof.
 Admitted.
 
 
+
 Theorem Hilbert_Axiom_3:
     forall (M: Model) (w: W (F M)) (p q: formulaModal),
         (M ' w ||- (.~ q .-> .~ p) .-> (p .-> q)).
