@@ -32,7 +32,8 @@ Proof.
     simpl.
     intros.
     pose (classic (M ' w ||- q)) as Hip.
-    destruct Hip. auto. apply H in H1. contradiction.
+    destruct Hip. auto. 
+    apply H in H1. contradiction.
 Qed.
 
 
