@@ -269,7 +269,7 @@ Notation "A =|= B" := (equivalence A B) (at level 110, no associativity).
 Notation "A ≡ B " := (A =|= B) (at level 110, no associativity).
 
 
-
+(* MORRE *)
 Fixpoint toImplic (f: formulaModal) : formulaModal :=
 match f with
   | # x     => # x
