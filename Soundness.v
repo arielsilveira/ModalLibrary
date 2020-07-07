@@ -37,15 +37,32 @@ Proof.
 Qed.
 
 
-(* [](p /\ q) -> ([]p /\ []q) *)
+(* [](p -> q) -> ([]p -> []q) *)
 Theorem Axiom_K:
     forall (M: Model) (w: W (F M)) (p q : formulaModal),
-    (M ' w ||- .[](p ./\ q) .-> (.[]p ./\ .[]q)) .
+    (M ' w ||- .[](p .-> q) .-> (.[]p .-> .[]q)) .
 Proof.
-    intros.
     simpl in *.
-    split.
-    intros. destruct H with (w':=w'). apply H0. apply H1.
-    intros. destruct H with (w':=w'). apply H0. apply H2.
+    intros. apply H. apply H1. apply H0. auto.
 Qed.
 
+(* a /\ a->b -> b *)
+Theorem Modus_Ponens:
+    forall (M: Model) (w: W (F M)) (p q: formulaModal),
+    ((M ' w ||- p) /\ (M ' w ||- p .-> q)) -> (M ' w ||- q).
+Proof.
+    simpl in *.
+    intros.
+    destruct H.
+    apply H0. auto.
+Qed.
+
+
+Theorem Necessitation:
+    forall (M: Model) (w: W (F M)) (p: formulaModal),
+        (M ' w ||- p) -> (M ' w ||- .[]p).
+Proof.
+    simpl in *.
+    intros.
+    
+Admitted.
