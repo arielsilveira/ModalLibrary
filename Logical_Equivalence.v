@@ -112,9 +112,11 @@ Proof.
             intros.
             destruct H0.
             exists w. split.
-            
-
             destruct H0 with (w:=w); intros.
+            destruct H with (M:=M) (w:=w).
+            split. intros.
+            exists w'.
+
             pose (classic (M ' w' ||- a)) as Hip.
             
                 apply NNPP in H4. apply H3.
