@@ -1,4 +1,4 @@
-Require Import Modal_Library.
+Require Import Modal_Library Classical Logic.
 
 
 (* Prova de validação do Frame Reflexivo *)
@@ -86,7 +86,7 @@ Qed.
 Theorem validacao_frame_simetria_volta: 
     forall (M: Model) (p:formulaModal),
     ((M |= p .-> .[] .<> p) -> (simmetry_frame (F M))).
-Proof.
+Proof.    
 Admitted.
 
 (* Prova de validação do Frame Euclidiano *)
@@ -112,6 +112,10 @@ Theorem validacao_frame_eucliadiana_volta:
     forall (M: Model) (p: formulaModal),
     (((M |= .<> p .-> .[] .<> p) -> (euclidian_frame (F M)) )).
 Proof.
+    intros.
+    unfold euclidian_frame.
+    intros. unfold validate_model in *. simpl in *.
+    destruct H with (w:=w) (w':=w').
 Admitted.
 
 
@@ -162,15 +166,23 @@ Admitted.
 (* Prova de validação do Frame Denso *)
 Theorem validacao_frame_densa_ida:
     forall (M: Model) (p: formulaModal),
-    (dense_frame (F M)) -> (M |= .[] .[] p .-> .[] p).
+    (dense_frame (F M) ->  (M |= .[] .[] p .-> .[] p)).
 Proof.
+    unfold validate_model;
+    unfold dense_frame;
+    simpl in *;
+    intros.
 Admitted.
 
 
 Theorem validacao_frame_densa_volta:
     forall (M: Model) (p: formulaModal),
-    (dense_frame (F M)) -> (M |= .[] .[] p .-> .[] p).
+    ((M |= .[] .[] p .-> .[] p) -> dense_frame (F M)).
 Proof.
+    unfold validate_model;
+    unfold dense_frame;
+    simpl in *;
+    intros.
 Admitted.
 
 

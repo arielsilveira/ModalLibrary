@@ -1,0 +1,79 @@
+DIGEST 3ddb989ca3f9c9653d9679e8a0f8e7b2
+Fexemplos
+R48:60 Modal_Library <> <> lib
+def 106:110 <> form1
+R121:125 Modal_Library <> :::x_'.\/'_x not
+R115:118 Modal_Library <> :::'.[]'_x not
+R119:119 Modal_Library <> :::'#'_x not
+R126:126 Modal_Library <> :::'#'_x not
+def 141:145 <> form2
+R152:156 Modal_Library <> :::x_'.->'_x not
+R150:150 Modal_Library <> :::'#'_x not
+R166:170 Modal_Library <> :::x_'.->'_x not
+R157:159 Modal_Library <> :::'.~'_x not
+R160:163 Modal_Library <> :::'.[]'_x not
+R164:164 Modal_Library <> :::'#'_x not
+R173:177 Modal_Library <> :::x_'.\/'_x not
+R171:171 Modal_Library <> :::'#'_x not
+R178:181 Modal_Library <> :::'.[]'_x not
+R195:195 Modal_Library <> :::'.[]'_x not
+R188:192 Modal_Library <> :::x_'.\/'_x not
+R182:185 Modal_Library <> :::'.<>'_x not
+R186:186 Modal_Library <> :::'#'_x not
+R193:193 Modal_Library <> :::'#'_x not
+def 209:213 <> form3
+R225:229 Modal_Library <> :::x_'.->'_x not
+R218:219 Modal_Library <> :::'.~'_x not
+R220:222 Modal_Library <> :::'.~'_x not
+R223:223 Modal_Library <> :::'#'_x not
+R230:230 Modal_Library <> :::'#'_x not
+ind 287:288 <> W'
+constr 304:305 <> w1
+constr 317:318 <> w2
+constr 332:333 <> w3
+constr 346:347 <> w4
+R308:309 exemplos <> W' ind
+R322:323 exemplos <> W' ind
+R337:338 exemplos <> W' ind
+R351:352 exemplos <> W' ind
+def 367:368 <> R'
+R373:373 Modal_Library <> :::'['_x_';'_'..'_';'_x_']' not
+R382:383 Modal_Library <> :::'['_x_';'_'..'_';'_x_']' not
+R392:392 Modal_Library <> :::'['_x_';'_'..'_';'_x_']' not
+R374:374 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R377:378 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R381:381 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R375:376 exemplos <> w3 constr
+R379:380 exemplos <> w2 constr
+R384:384 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R387:388 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R391:391 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R385:386 exemplos <> w2 constr
+R389:390 exemplos <> w3 constr
+def 406:407 <> F'
+R413:423 Modal_Library <> Build_Frame constr
+R428:429 exemplos <> R' def
+R425:426 exemplos <> W' ind
+def 445:446 <> v'
+R451:451 Modal_Library <> :::'['_x_';'_'..'_';'_x_']' not
+R469:469 Modal_Library <> :::'['_x_';'_'..'_';'_x_']' not
+R452:452 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R454:455 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R468:468 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R456:456 Modal_Library <> :::'['_x_';'_'..'_';'_x_']' not
+R459:460 Modal_Library <> :::'['_x_';'_'..'_';'_x_']' not
+R463:464 Modal_Library <> :::'['_x_';'_'..'_';'_x_']' not
+R467:467 Modal_Library <> :::'['_x_';'_'..'_';'_x_']' not
+R457:458 exemplos <> w1 constr
+R461:462 exemplos <> w2 constr
+R465:466 exemplos <> w3 constr
+def 483:484 <> M'
+R490:500 Modal_Library <> Build_Model constr
+R505:506 exemplos <> v' def
+R502:503 exemplos <> F' def
+R518:518 Modal_Library <> W proj
+R520:521 exemplos <> F' def
+R532:545 Modal_Library <> fun_validation def
+R553:557 exemplos <> form1 def
+R550:551 exemplos <> w1 constr
+R547:548 exemplos <> M' def

@@ -59,10 +59,11 @@ Qed.
 
 
 Theorem Necessitation:
-    forall (M: Model) (w: W (F M)) (p: formulaModal),
-        (M ' w ||- p) -> (M ' w ||- .[]p).
+    forall (M: Model) (p: formulaModal),
+        (M |= p) -> (M |=.[]p).
 Proof.
+    unfold validate_model.
     simpl in *.
     intros.
-    
-Admitted.
+    apply H.
+Qed.

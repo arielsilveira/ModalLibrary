@@ -102,19 +102,44 @@ Theorem diamond_to_box_modal:
     forall (a : formulaModal),
     .<> a =|= .~ .[] .~ a.
 Proof.
-    intros.
+    (* intros. *)
     split.
-        - unfold entails_teste.
+        - intros. unfold entails_teste in *.
             simpl in *.
-            unfold validate_model.
+            unfold validate_model in *.
             simpl in *. 
-            intros.
             unfold not in *.
-            destruct H0. destruct H0 with (w:=w).
             intros.
-            apply H with (M:=M) (w:=w).
-            apply and_comm; split; auto.
-            intros. exists w'. apply and_comm.
-            split; auto.
+            destruct H0.
+            exists w. split.
+            
+
+            destruct H0 with (w:=w); intros.
+            pose (classic (M ' w' ||- a)) as Hip.
+            
+                apply NNPP in H4. apply H3.
+                + apply imply_to_or with (M:=M) (w:=w) in H. exists w. split.
+                    * admit. 
+                    * auto.
+                + exists w. split.
+                    *  unfold not in H2. apply imply_to_or in H2. destruct H2.
+                    *   admit.
+
+            (* 3º excluido :( *)
+            admit.
+        - intros. unfold entails_teste in *.
+            simpl in *.
+            unfold validate_model in *.
+            simpl in *. 
+            unfold not in *.
+            intros.
+            destruct H0.
+            destruct H with (M:=M) (w:=w).
+            split. intros.
+            destruct H0 with (w:=w) as [w' [H4 H5]].
+            destruct H1 with (w':=w'). auto. auto.
+            auto.
+            apply H1 with (w':=x). destruct H3 as [H3 H4]; auto. 
+            destruct H3 as [H3 H4]; auto.
             
 Admitted.

@@ -25,7 +25,7 @@ Fixpoint instantiate (a:axiom) : formulaModal :=
     | K   p1 p2       => .[] (p1 .-> p2) .-> (.[] p1 .-> .[] p2)
     end.
 
-(* Fazer para o B, 4, 5, D,  *)
+
 Fixpoint instantiate_frame (a: axiom_frame) : formulaModal :=
     match a with
     | D         p => .[] p .-> .<> p
@@ -35,13 +35,12 @@ Fixpoint instantiate_frame (a: axiom_frame) : formulaModal :=
     | B         p => p .-> .[].<> p
     end. 
 
-(* Tentar entender isso *)
 Inductive deduction : theory -> formulaModal -> Set :=
-    | Prem : forall (t:theory) (f:formulaModal) (i:nat), (nth_error t i = Some f) -> deduction t f
-    | Ax   : forall (t:theory) (f:formulaModal) (a:axiom), (instantiate a = f) -> deduction t f
-    | Ax_Frame : forall (t:theory) (f: formulaModal) (a:axiom_frame), (instantiate_frame a = f) -> deduction t f
-    | Mp   : forall (t:theory) (f g:formulaModal) (d1:deduction t (f .-> g)) (d2:deduction t f), deduction t g
-    | Nec  : forall (t:theory) (f:formulaModal) (d1:deduction t f) , deduction t (.[] f)
+    | Prem      : forall (t:theory) (f:formulaModal) (i:nat), (nth_error t i = Some f) -> deduction t f
+    | Ax        : forall (t:theory) (f:formulaModal) (a:axiom), (instantiate a = f) -> deduction t f
+    | Ax_Frame  : forall (t:theory) (f: formulaModal) (a:axiom_frame), (instantiate_frame a = f) -> deduction t f
+    | Mp        : forall (t:theory) (f g:formulaModal) (d1:deduction t (f .-> g)) (d2:deduction t f), deduction t g
+    | Nec       : forall (t:theory) (f:formulaModal) (d1:deduction t f) , deduction t (.[] f)
 .
 
 Definition Exemplo_2 := (.[](#0 .-> #1) :: .[](#1 .-> #2) :: nil).
