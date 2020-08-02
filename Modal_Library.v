@@ -275,9 +275,9 @@ match f with
   | # x     => # x
   | .~ a    => .~ (toImplic a)
   | .[] a   => .[] (toImplic a)
-  | .<> a   => .<> (toImplic a)
-  | a ./\ b => .~ (.~ (toImplic a) .-> (toImplic b) ) 
-  | a .\/ b => .~ (.~ (toImplic a) .-> (toImplic b) ) 
+  | .<> a   => .~ .[] .~ (toImplic a)
+  | a ./\ b => .~ ( (toImplic a) .-> .~ (toImplic b) ) 
+  | a .\/ b => (.~ (toImplic a) .-> (toImplic b) ) 
   | a .-> b => (toImplic a) .-> (toImplic b)
 end.
 
@@ -287,12 +287,28 @@ Theorem toImplic_equiv : forall (f:formulaModal), f =|= (toImplic f).
 Proof.
     intros.
     split.
-        - unfold entails_teste.
+        - unfold entails_teste;
+            unfold validate_model in *;
+            simpl in *;
+            unfold validate_model in *.
+            intros;
+            destruct H0 as (?, _).
+            pose (X := H).
+            edestruct classic.
+                + exact H1.
+                + 
+            admit.
+        - intros; unfold entails_teste in *.
+            simpl in *;
             unfold validate_model in *.
             intros.
-            simpl in *.
-            unfold validate_model in *.
+            destruct H0 as (?, _). 
+            
             destruct H0.
+            destruct classic with (M ' w ||- f).
+            auto. 
+            apply H0.
+
     Admitted.
 
 

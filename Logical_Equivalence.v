@@ -104,31 +104,20 @@ Theorem diamond_to_box_modal:
 Proof.
     (* intros. *)
     split.
-        - intros. unfold entails_teste in *.
-            simpl in *.
-            unfold validate_model in *.
-            simpl in *. 
-            unfold not in *.
-            intros.
-            destruct H0.
-            exists w. split.
-            destruct H0 with (w:=w); intros.
-            destruct H with (M:=M) (w:=w).
-            split. intros.
-            exists w'.
-
-            pose (classic (M ' w' ||- a)) as Hip.
-            
-                apply NNPP in H4. apply H3.
-                + apply imply_to_or with (M:=M) (w:=w) in H. exists w. split.
-                    * admit. 
-                    * auto.
-                + exists w. split.
-                    *  unfold not in H2. apply imply_to_or in H2. destruct H2.
-                    *   admit.
-
-            (* 3º excluido :( *)
-            admit.
+        - (* We don't need no stinking hypothesis. *)
+        intros; clear H.
+        unfold entails_teste, validate_model in *.
+        simpl in *; intros.
+        destruct H as (?, _).
+        unfold validate_model in H; simpl in H.
+        pose (X := H w).
+        (* Either it exists, or it doesn't, right? *)
+        edestruct classic.
+            + exact H0.
+            + exfalso.
+                apply X; intros; intro.
+                apply H0.
+                exists w'; auto.
         - intros. unfold entails_teste in *.
             simpl in *.
             unfold validate_model in *.
@@ -143,5 +132,4 @@ Proof.
             auto.
             apply H1 with (w':=x). destruct H3 as [H3 H4]; auto. 
             destruct H3 as [H3 H4]; auto.
-            
-Admitted.
+Qed.

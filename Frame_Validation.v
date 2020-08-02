@@ -1,4 +1,4 @@
-Require Import Modal_Library Classical Logic.
+Require Import Modal_Library Classical Logic Arith List ListSet Classical Logic Nat Notations Utf8 Tactics Relation_Definitions Classical_Prop.
 
 
 (* Prova de validação do Frame Reflexivo *)
@@ -14,17 +14,41 @@ Proof.
     simpl in *. auto.
 Qed.
 
+(* Theorem validacao_frame_reflexivo_volta:
+    forall (M: Model) (Ψ: formulaModal),
+    ~  ((M |= .[] Ψ .-> Ψ) -> (reflexivity_frame (F M))). *)
+
+
+
 Theorem validacao_frame_reflexivo_volta:
     forall (M: Model) (Ψ: formulaModal),
     (~ (reflexivity_frame (F M)) -> ~ (M |= .[] Ψ .-> Ψ)).
-Proof. 
-    unfold not.
-    unfold reflexivity_frame in *.
-    unfold validate_model in *.
+Proof.
+  intros.
+  unfold reflexivity_frame in H.
+  unfold validate_model; simpl.
+  intro; apply H; clear H; intro.
+  destruct classic with (forall w, In (pair w w) (R (F M))).
+  - apply H.
+  - exfalso.
+  
+Admitted.
+
+
+
+
+
+
+
     intros.
-    apply H.
-    intros.
-    simpl in *.
+    pose (classic (M ' w ||- Ψ)) as Hip.
+    destruct Hip. admit.
+    destruct H1. apply H0. intros.
+    pose (classic (M ' w' ||- Ψ)) as Hip.
+    destruct Hip. auto. 
+    apply H0. intros.
+    apply H1 in H0.
+ 
 Admitted.
 
 
@@ -47,21 +71,16 @@ Qed.
 
 Theorem validacao_frame_transitivo_volta: 
     forall (M: Model) (p: formulaModal),
-    (~ (transitivity_frame (F M)) -> ~ (M |= .[]p .-> .[].[]p)).
+    (M |= .[]p .-> .[].[]p) -> (transitivity_frame (F M)).
 Proof.
     unfold transitivity_frame.
     unfold validate_model.
     simpl in *.
     intros.
-    intro.
-    pose H as Hip. 
-    destruct Hip.
-    intros.
-    induction H1.
-    unfold not in *.
-    (* intros. *)
-    apply H0 with (w:=w) (w':=w') (w'0:=w'') in H1.
-    apply H0 with (w:=w') (w':=w'') (w'0:=w) in H2.
+    destruct H0.
+    apply H with (w:=w) (w':=w') (w'0:=w'') in H1.
+    apply H with (w:=w) (w':=w') (w'0:=w'') in H0.
+
     
 Admitted.
 
@@ -172,7 +191,13 @@ Proof.
     unfold dense_frame;
     simpl in *;
     intros.
-Admitted.
+    destruct H with (w:=w) (w':=w'). 
+    apply H2 in H1.
+    destruct H1;
+    apply H0 with (w':=x).
+        - auto.
+        - apply H0 in H3 as Hip. 
+    Admitted.
 
 
 Theorem validacao_frame_densa_volta:
@@ -182,7 +207,14 @@ Proof.
     unfold validate_model;
     unfold dense_frame;
     simpl in *;
-    intros.
+    intros. 
+    exists w. intros. 
+    apply H with (w':=w') in H0 .
+        - admit.
+        - intros. apply H with (w:=w'0). 
+            + intros. apply H in H4. auto.
+                intros. admit.
+            + auto.   
 Admitted.
 
 
@@ -205,6 +237,12 @@ Qed.
 
 Theorem validacao_frame_convergente_volta:
     forall (M: Model) (p: formulaModal),
-    (M |= .<> .[] p .-> .[] .<> p) -> (convergente_frame (F M)).
+     (* ~(convergente_frame (F M) -> ~(M |= .<> .[] p .-> .[] .<> p)). *)
+     ~ ((M |= .<> .[] p .-> .[] .<> p) -> convergente_frame (F M)).
 Proof.
+    unfold validate_model.
+    simpl in *.
+    unfold convergente_frame.
+    unfold not.
+    intros. 
 Admitted.
