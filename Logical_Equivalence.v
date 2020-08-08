@@ -1,135 +1,132 @@
 Require Import Modal_Library Classical.
 
-(* Implicação <-> Negação e Disjunção *)
+
 Theorem implies_to_or_modal : 
-    forall (a b: formulaModal),
-        (a .-> b)  =|=  (.~ a) .\/ b .
+    forall (φ ψ: modalFormula),
+        (φ .-> ψ)  =|=  (.~ φ) .\/ ψ .
 Proof.
     intros.
     split.
-        - intros. 
-            unfold entails_teste in *. 
+        - 
+            unfold entails_modal in *. 
             intros. 
             simpl in *.
-            destruct H0. 
+            destruct H as (?,_). 
             unfold validate_model in *. 
             simpl in *.
-            intro w.
-            apply or_to_imply. apply H0.
+            intros.
+            edestruct classic.
+                + exact H0.
+                + right. apply H.
+                    apply not_or_and in H0.
+                    destruct H0 as (?, _);
+                    apply NNPP in H0; auto.
         - intros.
-            unfold entails_teste in *. 
+            unfold entails_modal in *. 
             intros. 
             simpl in *.
-            destruct H0. 
+            destruct H as (?, _).
             unfold validate_model in *.
             intros.
-            simpl in *.
-            apply imply_to_or. auto. 
+            simpl in *. intros.
+            destruct H with(w:=w).
+                + contradiction.
+                + auto. 
 Qed.
 
 (* Dupla Negação *)
 Theorem double_neg_modal :
-    forall (a : formulaModal),
-    (.~ .~ a) =|= a.
+    forall (φ : modalFormula),
+    (.~ .~ φ) =|= φ.
 Proof.
     intros.
     split.
-        - unfold entails_teste.
+        - unfold entails_modal.
             simpl in *.
             unfold validate_model.    
             intros.
-            destruct H0.
+            destruct H as (?, _).
             simpl in *.
-            intro.
-            pose (classic (M ' w ||-.~.~ a)) as Hip.
-            destruct Hip. simpl in *. auto. auto.
-        - unfold entails_teste.
+            apply NNPP; auto.
+        - unfold entails_modal.
             simpl in *.
             unfold validate_model.    
             intros.
             simpl in *.
-            destruct H0.
-            apply NNPP. apply H0.
+            destruct H as (?, _).
+            edestruct classic.
+                + exact H0.
+                + apply NNPP in H0. 
+                    exfalso; eauto.
 Qed.
 
 (* Conjunção <-> Negação e Implicação  *)
 Theorem and_to_implies_modal: 
-    forall (a b: formulaModal),
-    ((a ./\ b) =|= .~ (a .-> .~ b)).
+    forall (φ ψ: modalFormula),
+    ((φ ./\ ψ) =|= .~ (φ .-> .~ ψ)).
 Proof.
     intros.
     split.
-        - unfold entails_teste.
+        - unfold entails_modal.
             unfold validate_model in *.
             simpl in *.
             intros.
             unfold validate_model in *.
             simpl in *.
-            split.
-            destruct H0.
-                *  pose (classic (M ' w ||- a)) as Hip. 
-                    destruct Hip; 
-                    auto.
-                    assert ((M ' w ||- .~ a) \/ (M ' w ||- .~ b)).
-                    left. auto.
-                    simpl in *.
-                    destruct H0 with (w:=w).
-                    intro. contradiction.
-                * pose (classic (M ' w ||- b)) as Hip. 
-                destruct Hip; 
-                auto. 
-                assert ((M ' w ||- .~ a) \/ (M ' w ||-.~  b)).
-                right. 
-                auto. 
-                simpl in *.
-                destruct H0.
-                destruct H0 with (w:=w).
-                intro. auto. 
-        - unfold entails_teste.
+            destruct H as (?, _).
+            unfold not. intros. 
+            apply H0.
+            destruct H with (w:=w); auto.
+            destruct H with (w:=w); auto.
+        - unfold entails_modal.
             simpl in *.
             intros.
             unfold validate_model in *.
             intros. 
             simpl in *.
-            destruct H0.
-            destruct H0 with (w:=w).
-            intro.
-            destruct H4. auto. auto.
+            destruct H as (?, _).
+            split.
+            edestruct classic.
+                + exact H0.
+                + exfalso. unfold not in H.
+                    apply H with (w:=w). intros;
+                    contradiction.
+                + edestruct classic.
+                    * exact H0.
+                    * exfalso; unfold not in H;
+                        apply H with (w:=w). intros;
+                        contradiction. 
 Qed.
 
 (* Diamante <-> Caixa *)
 Theorem diamond_to_box_modal:
-    forall (a : formulaModal),
-    .<> a =|= .~ .[] .~ a.
+    forall (φ : modalFormula),
+    .<> φ =|= .~ .[] .~ φ.
 Proof.
-    (* intros. *)
     split.
-        - (* We don't need no stinking hypothesis. *)
-        intros; clear H.
-        unfold entails_teste, validate_model in *.
+        - unfold entails_modal, validate_model in *.
         simpl in *; intros.
         destruct H as (?, _).
         unfold validate_model in H; simpl in H.
         pose (X := H w).
-        (* Either it exists, or it doesn't, right? *)
         edestruct classic.
             + exact H0.
-            + exfalso.
-                apply X; intros; intro.
-                apply H0.
-                exists w'; auto.
-        - intros. unfold entails_teste in *.
+            + unfold not; intros. 
+                destruct H with (w:=w). 
+                apply H1 with (w':=x).
+                destruct a; auto.
+                destruct a; auto.
+        - intros. unfold entails_modal in *.
             simpl in *.
             unfold validate_model in *.
             simpl in *. 
             unfold not in *.
             intros.
-            destruct H0.
-            destruct H with (M:=M) (w:=w).
-            split. intros.
-            destruct H0 with (w:=w) as [w' [H4 H5]].
-            destruct H1 with (w':=w'). auto. auto.
-            auto.
-            apply H1 with (w':=x). destruct H3 as [H3 H4]; auto. 
-            destruct H3 as [H3 H4]; auto.
+            destruct H as (?, _).
+            edestruct classic.
+                + exact H0.
+                + exfalso; apply H with (w:=w); 
+                    intros.
+                    apply H0; exists w'; 
+                    split; auto; auto. 
 Qed.

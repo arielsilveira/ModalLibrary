@@ -3,82 +3,83 @@ Require Import Modal_Library List.
 (**** HILBERT SYSTEM (axiomatic method) ****)
 
 Inductive axiom : Set :=
-    | ax1 : formulaModal -> formulaModal -> axiom
-    | ax2 : formulaModal -> formulaModal -> formulaModal -> axiom
-    | ax3 : formulaModal -> formulaModal -> axiom
-    | K   : formulaModal -> formulaModal -> axiom
+    | ax1 : modalFormula -> modalFormula -> axiom
+    | ax2 : modalFormula -> modalFormula -> modalFormula -> axiom
+    | ax3 : modalFormula -> modalFormula -> axiom
+    | K   : modalFormula -> modalFormula -> axiom
 .
 
 Inductive axiom_T : Set :=
-    | T : formulaModal -> axiom_T
+    | T : modalFormula -> axiom_T
 .
 
 Inductive axiom_D : Set :=
-    | D : formulaModal -> axiom_D
+    | D : modalFormula -> axiom_D
 .
 
 Inductive axiom_Quatro : Set :=
-    | Quatro : formulaModal -> axiom_Quatro
+    | Quatro : modalFormula -> axiom_Quatro
 .
 
 Inductive axiom_Cinco : Set :=
-    | Cinco : formulaModal -> axiom_Cinco
+    | Cinco : modalFormula -> axiom_Cinco
 .
 
 Inductive axiom_B : Set :=
-    | B : formulaModal -> axiom_B
+    | B : modalFormula -> axiom_B
 .
 
-Fixpoint instantiate (a:axiom) : formulaModal :=
+Fixpoint instantiate (a : axiom) : modalFormula :=
     match a with
-    | ax1 p1 p2       => p1 .-> (p2 .-> p1)
-    | ax2 p1 p2 p3    => (p1 .-> (p2 .-> p3)) .-> ((p1 .-> p2) .-> (p1 .-> p3))
-    | ax3 p1 p2       => (.~ p2 .-> .~ p1) .-> (p1 .-> p2)
-    | K   p1 p2       => .[] (p1 .-> p2) .-> (.[] p1 .-> .[] p2)
+    | ax1  φ   ψ         => φ .-> (ψ .-> φ)
+    | ax2  φ   ψ   Ɣ     => (φ .-> (ψ .-> Ɣ)) .-> ((φ .-> ψ) .-> (φ .-> Ɣ))
+    | ax3  φ   ψ         => (.~ ψ .-> .~ φ) .-> (φ .-> ψ)
+    | K    φ   ψ         => .[] (φ .-> ψ) .-> (.[] φ .-> .[] ψ)
     end.
 
 
-Fixpoint instantiate_D (a: axiom_D) : formulaModal :=
+Fixpoint instantiate_D (a: axiom_D) : modalFormula :=
     match a with
-    | D         p => .[] p .-> .<> p
+    | D         φ => .[] φ .-> .<> φ
 end. 
 
-Fixpoint instantiate_T (a: axiom_T) : formulaModal :=
+Fixpoint instantiate_T (a: axiom_T) : modalFormula :=
     match a with
-    | T         p => .[] p .-> p
+    | T         φ => .[] φ .-> φ
 end. 
 
-Fixpoint instantiate_Quatro (a: axiom_Quatro) : formulaModal :=
+Fixpoint instantiate_Quatro (a: axiom_Quatro) : modalFormula :=
     match a with
-    | Quatro    p => .[] p .-> .[].[] p
+    | Quatro    φ => .[] φ .-> .[].[] φ
 end. 
 
-Fixpoint instantiate_Cinco (a: axiom_Cinco) : formulaModal :=
+Fixpoint instantiate_Cinco (a: axiom_Cinco) : modalFormula :=
     match a with
-    | Cinco     p => .<> p .-> .[].<> p
+    | Cinco     φ => .<> φ .-> .[].<> φ
 end. 
 
-Fixpoint instantiate_B (a: axiom_B) : formulaModal :=
+Fixpoint instantiate_B (a: axiom_B) : modalFormula :=
     match a with
-    | B         p => p .-> .[].<> p
+    | B         φ => φ .-> .[].<> φ
 end. 
 
 
-Inductive deduction : theory -> formulaModal -> Set :=
-    | Prem      : forall (t:theory) (f:formulaModal) (i:nat), (nth_error t i = Some f) -> deduction t f
-    | Ax        : forall (t:theory) (f:formulaModal) (a:axiom), (instantiate a = f) -> deduction t f
-    | Ax_D      : forall (t:theory) (f: formulaModal) (a:axiom_D), (instantiate_D a = f) -> deduction t f
-    | Ax_Quatro : forall (t:theory) (f: formulaModal) (a:axiom_Quatro), (instantiate_Quatro a = f) -> deduction t f
-    | Ax_Cinco  : forall (t:theory) (f: formulaModal) (a:axiom_Cinco), (instantiate_Cinco a = f) -> deduction t f
-    | Ax_B      : forall (t:theory) (f: formulaModal) (a:axiom_B), (instantiate_B a = f) -> deduction t f
-    | Mp        : forall (t:theory) (f g:formulaModal) (d1:deduction t (f .-> g)) (d2:deduction t f), deduction t g
-    | Nec       : forall (t:theory) (f:formulaModal) (d1:deduction t f) , deduction t (.[] f)
+Inductive deduction : theory -> modalFormula -> Set :=
+    | Prem      : forall (t:theory) (f:modalFormula) (i:nat), (nth_error t i = Some f) -> deduction t f
+    | Ax        : forall (t:theory) (f:modalFormula) (a:axiom), (instantiate a = f) -> deduction t f
+    | Ax_T      : forall (t:theory) (f: modalFormula) (a:axiom_T), (instantiate_T a = f) -> deduction t f
+    | Ax_D      : forall (t:theory) (f: modalFormula) (a:axiom_D), (instantiate_D a = f) -> deduction t f
+    | Ax_Quatro : forall (t:theory) (f: modalFormula) (a:axiom_Quatro), (instantiate_Quatro a = f) -> deduction t f
+    | Ax_Cinco  : forall (t:theory) (f: modalFormula) (a:axiom_Cinco), (instantiate_Cinco a = f) -> deduction t f
+    | Ax_B      : forall (t:theory) (f: modalFormula) (a:axiom_B), (instantiate_B a = f) -> deduction t f
+    | Mp        : forall (t:theory) (f g:modalFormula) (d1:deduction t (f .-> g)) (d2:deduction t f), deduction t g
+    | Nec       : forall (t:theory) (f:modalFormula) (d1:deduction t f) , deduction t (.[] f)
 .
 
-Inductive deduction_T : theory -> formulaModal -> Set :=
-    | Prem      : forall (t:theory) (f:formulaModal) (i:nat), (nth_error t i = Some f) -> deduction_T t f
-    | Ax_T      : forall (t:theory) (f: formulaModal) (a:axiom_T), (instantiate_T a = f) -> deduction_T t f
-.
+(* Inductive deduction_T : theory -> modalFormula -> Set :=
+    | Prem      : forall (t:theory) (f:modalFormula) (i:nat), (nth_error t i = Some f) -> deduction_T t f
+    | Ax_T      : forall (t:theory) (f: modalFormula) (a:axiom_T), (instantiate_T a = f) -> deduction_T t f
+. *)
 
 
 Definition Exemplo_2 := (.[](#0 .-> #1) :: .[](#1 .-> #2) :: nil).
