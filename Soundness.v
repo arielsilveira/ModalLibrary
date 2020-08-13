@@ -35,15 +35,88 @@ Proof.
         intros.
         pose (classic (M ' w ||- ψ)) as Hip.
         destruct Hip. 
-        + auto. 
-        + apply H in H1. contradiction.
+            + auto. 
+            + apply H in H1. contradiction.
 Qed.
 
+
+Theorem Hilbert_Axiom_4: 
+    forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+        (M ' w ||- (φ .-> (ψ .-> (φ ./\ ψ)))).
+Proof.
+    - simpl.
+        intros.
+        split;
+        auto. 
+Qed.
+
+Theorem Hilbert_Axiom_5: 
+    forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+        (M ' w ||- (φ ./\ ψ) .-> φ).
+Proof.
+    - simpl.
+        intros.
+        destruct H as [Hip1 Hip2].
+            + apply Hip1.
+Qed.
+
+Theorem Hilbert_Axiom_6: 
+    forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+        (M ' w ||- (φ ./\ ψ) .-> ψ) .
+Proof.
+    - simpl.
+        intros.
+        destruct H as [Hip1 Hip2].
+            + apply Hip2. 
+Qed.
+
+Theorem Hilbert_Axiom_7: 
+    forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+        (M ' w ||- (φ .-> (φ .\/ ψ))).
+Proof.
+    - simpl.
+        intros.
+        left.
+        apply H.
+Qed.
+
+Theorem Hilbert_Axiom_8: 
+    forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+        (M ' w ||- (ψ .-> (φ .\/ ψ))).
+Proof.
+    - simpl.
+        intros.
+        right.
+        apply H.
+Qed.
+
+Theorem Hilbert_Axiom_9: 
+    forall (M: Model) (w: W (F M)) (φ ψ Ɣ: modalFormula),
+        (M ' w ||- (φ .-> Ɣ) .-> (ψ .-> Ɣ) .-> (φ .\/ ψ) .-> Ɣ).
+Proof.
+    - simpl.
+        intros.
+        destruct H1. 
+            + apply H.
+                apply H1.
+            + apply H0.
+                apply H1.
+Qed.    
+
+Theorem Hilbert_Axiom_10: 
+    forall (M: Model) (w: W (F M)) (φ: modalFormula),
+        (M ' w ||- .~.~φ .-> φ).
+Proof.
+    - simpl.
+        intros.
+        apply NNPP in H.
+        apply H.
+Qed.
 
 (* [](p -> q) -> ([]p -> []q) *)
 Theorem Axiom_K:
     forall (M: Model) (w: W (F M)) (φ ψ : modalFormula),
-    (M ' w ||- .[](φ .-> ψ) .-> (.[]φ .-> .[]ψ)) .
+        (M ' w ||- .[](φ .-> ψ) .-> (.[]φ .-> .[]ψ)) .
 Proof.
     - simpl in *.
         intros. apply H. 
@@ -54,7 +127,7 @@ Qed.
 (* a /\ a->b -> b *)
 Theorem Modus_Ponens:
     forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
-    ((M ' w ||- φ) /\ (M ' w ||- φ .-> ψ)) -> (M ' w ||- ψ).
+        ((M ' w ||- φ) /\ (M ' w ||- φ .-> ψ)) -> (M ' w ||- ψ).
 Proof.
     - simpl in *.
         intros.
@@ -65,7 +138,7 @@ Qed.
 
 Theorem Necessitation:
     forall (M: Model) (φ: modalFormula),
-        (M |= φ) -> (M |=.[]φ).
+        (M |= φ) -> (M |= .[]φ).
 Proof.
     - unfold validate_model.
         simpl in *.

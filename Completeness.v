@@ -1,1 +1,1 @@
-Require Export Modal_Library.
+Require Import Modal_Library.
