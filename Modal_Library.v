@@ -95,13 +95,13 @@ Fixpoint verification {M : Model} (v: list (nat * list (W (F M)))) (w: (W (F M))
 
 Fixpoint fun_validation (M : Model) (w : (W (F M))) (φ : modalFormula) : Prop :=
     match φ with
-    | Lit       x    => verification (v M) w x 
-    | Box      ψ    => forall w': (W (F M)), In (w, w') (R (F M)) -> fun_validation M w' ψ
-    | Dia      ψ    => exists w': (W (F M)), In (w, w') (R (F M)) /\ fun_validation M w' ψ
-    | Neg      ψ    => ~ fun_validation M w ψ
-    | And      ψ Ɣ => fun_validation M w ψ /\ fun_validation M w Ɣ
-    | Or       ψ Ɣ => fun_validation M w ψ \/ fun_validation M w Ɣ
-    | Implies  ψ Ɣ => fun_validation M w ψ -> fun_validation M w Ɣ 
+    | Lit      x     => verification (v M) w x 
+    | Box      ψ     => forall w': (W (F M)), In (w, w') (R (F M)) -> fun_validation M w' ψ
+    | Dia      ψ     => exists w': (W (F M)), In (w, w') (R (F M)) /\ fun_validation M w' ψ
+    | Neg      ψ     => ~ fun_validation M w ψ
+    | And      ψ  Ɣ  => fun_validation M w ψ /\ fun_validation M w Ɣ
+    | Or       ψ  Ɣ  => fun_validation M w ψ \/ fun_validation M w Ɣ
+    | Implies  ψ  Ɣ  => fun_validation M w ψ -> fun_validation M w Ɣ 
     end.
 
     (* World Satisfaziblity *)

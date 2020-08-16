@@ -1,4 +1,4 @@
-Require Import Modal_Library Classical.
+Require Import Modal_Library Classical List.
 
 
 (* p -> (q -> p) *)
@@ -113,6 +113,22 @@ Proof.
         apply H.
 Qed.
 
+(* <>(p \/ q) -> (<>p \/ <>q) *)
+Theorem Axiom_Possibility:
+    forall (M: Model) (w: W (F M)) (φ ψ : modalFormula),
+        (M ' w ||- .<> (φ .\/ ψ) .-> (.<> φ .\/ .<> ψ)) .
+Proof.
+    - simpl.
+        intros.
+        destruct H as [w' [Hip1 [Hip2 | Hip3] ]].
+            + left; exists w'; split.
+                * auto.
+                * auto.
+            + right; exists w'; split.
+                * auto.
+                * auto.
+Qed.
+    
 (* [](p -> q) -> ([]p -> []q) *)
 Theorem Axiom_K:
     forall (M: Model) (w: W (F M)) (φ ψ : modalFormula),
@@ -123,6 +139,12 @@ Proof.
         + apply H1. 
         + apply H0. auto.
 Qed.
+
+Theorem caso_2 :
+    forall (G : theory) (phi: modalFormula),
+        (In phi G) -> G ||= phi.
+Proof.
+Admitted.
 
 (* a /\ a->b -> b *)
 Theorem Modus_Ponens:

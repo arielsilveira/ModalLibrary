@@ -12,5 +12,6 @@
 - [ ] Prova serial volta
 - [X] Prova de equivalencia do diamante e caixa.
 - [ ] Prova toImplic_equiv
+- [ ] Caso_2 Soundness
 - [ ] Completude
 - [ ] Escrever ;-;

@@ -6,3 +6,7 @@
 (* Conjunto de fórmulas *)
 (* Γ : Gamma *)
 (* ẟ : Delta*)
+(* Δ : Delta *)
+(* Ⲧ : Tau *)
+(* Λ : Lambda *)
+(* Ω : Omega *)

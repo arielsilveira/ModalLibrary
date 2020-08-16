@@ -130,3 +130,12 @@ Proof.
                     apply H0; exists w'; 
                     split; auto; auto. 
 Qed.
+
+
+(* Theorem a:
+    forall (M: Model) (w : W (F M)) (a b c : modalFormula),
+    (M ' w ||- a .-> (b .\/ c) ) ->  (M ' w ||- (a .-> b) .\/ (a .-> c)) .
+Proof.
+intros. left. right.
+    
+Qed. *)
