@@ -65,6 +65,15 @@ Notation " ◇ φ" := (.<> φ)
 Notation " φ → ψ" := (φ .-> ψ)
     (at level 99, ψ at level 200, right associativity) : type_scope.
 
+(* Notation " φ ∧ ψ" := (φ ./\ ψ)
+(at level 80, ψ at level 80, right associativity) : type_scope.
+        
+Notation " φ ∨ ψ" := (φ .\/ ψ)
+(at level 99, ψ at level 200, right associativity) : type_scope.
+
+Notation " ¬ φ" := (.~ φ )
+(at level 99, ψ at level 200, right associativity) : type_scope. *)
+
 Notation " X ∈ Y " := (In X Y)
     (at level 250, no associativity) : type_scope.
 

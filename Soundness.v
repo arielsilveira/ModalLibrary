@@ -1,4 +1,4 @@
-Require Import Modal_Library Classical List.
+Require Import Modal_Library Classical List Utf8.
 
 
 (* p -> (q -> p) *)
@@ -144,6 +144,9 @@ Theorem caso_2 :
     forall (G : theory) (phi: modalFormula),
         (In phi G) -> G ||= phi.
 Proof.
+    - unfold entails_modal;
+        unfold validate_model.
+        intros. 
 Admitted.
 
 (* a /\ a->b -> b *)
