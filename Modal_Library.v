@@ -3,16 +3,16 @@
     Name: Ariel Agne da Silveira
 
     Advisor: Karina Girardi Roggia
+    Co-Advisor: Paulo Torrens
 
     Minion: Miguel
 
-    Agradecimentos: Torrens <3
-
     <Modal Logic Library>
+
     Description:
 *)
-
-Require Import Arith List ListSet Classical Logic Nat Notations Utf8 Tactics Relation_Definitions Classical_Prop.
+(* Biblitoeca não utilizada: Nat Logic Classical_Prop  Tactics Relation_Definitions*)
+Require Import Arith List ListSet Notations Utf8 Classical.
 
 Inductive modalFormula : Set :=
     | Lit          : nat -> modalFormula
@@ -24,7 +24,7 @@ Inductive modalFormula : Set :=
     | Implies      : modalFormula -> modalFormula -> modalFormula 
 .
 
-(* Calcula o tamanho de uma fórmula com base na lógica modal *)
+(* Calcula o tamanho de uma fórmula modal *)
 Fixpoint modalSize (f:modalFormula) : nat :=
     match f with 
     | Lit      x     => 1
@@ -65,15 +65,6 @@ Notation " ◇ φ" := (.<> φ)
 Notation " φ → ψ" := (φ .-> ψ)
     (at level 99, ψ at level 200, right associativity) : type_scope.
 
-(* Notation " φ ∧ ψ" := (φ ./\ ψ)
-(at level 80, ψ at level 80, right associativity) : type_scope.
-        
-Notation " φ ∨ ψ" := (φ .\/ ψ)
-(at level 99, ψ at level 200, right associativity) : type_scope.
-
-Notation " ¬ φ" := (.~ φ )
-(at level 99, ψ at level 200, right associativity) : type_scope. *)
-
 Notation " X ∈ Y " := (In X Y)
     (at level 250, no associativity) : type_scope.
 
@@ -90,27 +81,28 @@ Record Frame : Type :={
 
 Record Model : Type := {
     F : Frame; 
-    v : list (nat * list (W F));
+    v : (W F) -> nat -> Prop; (* Conversar sobre isso *)
 }.
 
 Check Build_Frame.
 Check Build_Model.
 
-Fixpoint verification {M : Model} (v: list (nat * list (W (F M)))) (w: (W (F M))) (p : nat) : Prop :=
+(* Fixpoint verification {M : Model} (v: list (nat * list (W (F M)))) (w: (W (F M))) (p : nat) : Prop :=
     match v with
     | [] => False
-    | h :: t => ((verification t w p) \/ (In p [(fst h)] /\ In w (snd h))) -> True
-    end.
+    | h :: t => ((verification t w p) \/ (p = fst h /\ In w (snd h)))
+    end. *)
 
 Fixpoint fun_validation (M : Model) (w : (W (F M))) (φ : modalFormula) : Prop :=
     match φ with
-    | Lit      x     => verification (v M) w x 
+    | Lit      x     => (v M) w x
+    (* | Lit      x     => verification (v M) w x  *)
     | Box      ψ     => forall w': (W (F M)), In (w, w') (R (F M)) -> fun_validation M w' ψ
     | Dia      ψ     => exists w': (W (F M)), In (w, w') (R (F M)) /\ fun_validation M w' ψ
     | Neg      ψ     => ~ fun_validation M w ψ
     | And      ψ  Ɣ  => fun_validation M w ψ /\ fun_validation M w Ɣ
     | Or       ψ  Ɣ  => fun_validation M w ψ \/ fun_validation M w Ɣ
-    | Implies  ψ  Ɣ  => fun_validation M w ψ -> fun_validation M w Ɣ 
+    | Implies  ψ  Ɣ  => fun_validation M w ψ -> fun_validation M w Ɣ
     end.
 
     (* World Satisfaziblity *)
@@ -168,7 +160,6 @@ Proof.
             + apply left.
             + apply IHΓ. apply right.
 Qed.
-         
 
 (* prova bottom-up *)
 Theorem  transitive_deduction_bu:
@@ -301,6 +292,20 @@ end.
 
 Theorem toImplic_equiv : forall (f : modalFormula), f =|= (toImplic f).
 Proof.
+    split.
+    - unfold entails_modal.
+        intros. simpl in *;
+        destruct H as (?, _);
+        unfold validate_model in *.
+        intros;
+        
+        admit. 
+    - unfold entails_modal;
+        simpl; intros. destruct H as (?, _).
+        unfold validate_model in *.
+        intros.
+         
+        
     (* intros.
     split.
         - unfold entails_teste;
@@ -329,7 +334,7 @@ Proof.
 
 
 
-(* ############## Logical Equivalence ############### *)
+
 
 
 (* ;-; *)
