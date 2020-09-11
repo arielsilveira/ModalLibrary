@@ -81,22 +81,15 @@ Record Frame : Type :={
 
 Record Model : Type := {
     F : Frame; 
-    v : (W F) -> nat -> Prop; (* Conversar sobre isso *)
+    v : (W F) -> nat -> Prop; 
 }.
 
 Check Build_Frame.
 Check Build_Model.
 
-(* Fixpoint verification {M : Model} (v: list (nat * list (W (F M)))) (w: (W (F M))) (p : nat) : Prop :=
-    match v with
-    | [] => False
-    | h :: t => ((verification t w p) \/ (p = fst h /\ In w (snd h)))
-    end. *)
-
 Fixpoint fun_validation (M : Model) (w : (W (F M))) (φ : modalFormula) : Prop :=
     match φ with
     | Lit      x     => (v M) w x
-    (* | Lit      x     => verification (v M) w x  *)
     | Box      ψ     => forall w': (W (F M)), In (w, w') (R (F M)) -> fun_validation M w' ψ
     | Dia      ψ     => exists w': (W (F M)), In (w, w') (R (F M)) /\ fun_validation M w' ψ
     | Neg      ψ     => ~ fun_validation M w ψ
@@ -105,7 +98,7 @@ Fixpoint fun_validation (M : Model) (w : (W (F M))) (φ : modalFormula) : Prop :
     | Implies  ψ  Ɣ  => fun_validation M w ψ -> fun_validation M w Ɣ
     end.
 
-    (* World Satisfaziblity *)
+(* World Satisfaziblity *)
 Notation "M ' w ||- φ" := (fun_validation M w φ) (at level 110, right associativity).
 Notation "M ☯ w ╟ φ  " := (fun_validation M w φ) (at level 110, right associativity).
 

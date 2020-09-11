@@ -1,4 +1,4 @@
-Require Import Modal_Library Classical List.
+Require Import Modal_Library Classical List Deductive_System.
 (*  Utf8*)
 
 (* p -> (q -> p) *)
@@ -141,10 +141,16 @@ Proof.
 Qed.
 
 Theorem caso_2 :
-    forall (G : theory) (phi: modalFormula),
-        (In phi G) -> G ||= phi.
+    forall (Γ : theory) (φ: modalFormula),
+        (In φ Γ) -> Γ ||= φ.
 Proof.
-Admitted.
+intros. unfold entails_modal, validate_model.
+intros. induction Γ. 
+    + simpl in *. contradiction. 
+    + simpl in *. destruct H0 as (?, ?). 
+        unfold validate_model in H0. inversion H. rewrite <- H2.
+         apply H0. auto.
+Qed.
 
 (* a /\ a->b -> b *)
 Theorem Modus_Ponens:
@@ -166,4 +172,18 @@ Proof.
         simpl in *.
         intros.
         apply H.
+Qed.
+
+
+
+Theorem soundness:
+    forall (G:theory) (p:modalFormula),
+    (G |-- p) -> (G ||= p) .
+Proof.
+    induction G.
+        - intros. 
+    unfold entails_modal.
+    intros. simpl in *. unfold validate_model.
+    intros. 
+    
 Qed.

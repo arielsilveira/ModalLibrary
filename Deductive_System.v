@@ -1,4 +1,4 @@
-Require Import Modal_Library List.
+Require Import Modal_Library List Classical.
 
 (**** HILBERT SYSTEM (axiomatic method) ****)
 
@@ -78,14 +78,14 @@ Fixpoint instantiate_B (a: axiom_B) : modalFormula :=
 end. 
 
 
-Inductive deduction : theory -> modalFormula -> Set :=
+Inductive deduction : theory -> modalFormula -> Prop :=
     | Prem      : forall (t:theory) (f:   modalFormula) (i:nat), (nth_error t i = Some f) -> deduction t f
     | Ax        : forall (t:theory) (f:   modalFormula) (a:axiom), (instantiate a = f) -> deduction t f
     | Mp        : forall (t:theory) (f g: modalFormula) (d1:deduction t (f .-> g)) (d2:deduction t f), deduction t g
     | Nec       : forall (t:theory) (f:   modalFormula) (d1:deduction t f), deduction t (.[] f)
 .
 
-Inductive deduction_T : theory -> modalFormula -> Set :=
+Inductive deduction_T : theory -> modalFormula -> Prop :=
     | Prem_T      : forall (t:theory) (f:   modalFormula) (i:nat), (nth_error t i = Some f) -> deduction_T t f
     | _Ax_T       : forall (t:theory) (f:   modalFormula) (a:axiom), (instantiate a = f) -> deduction_T t f
     | Ax_T        : forall (t:theory) (f:   modalFormula) (a:axiom_T), (instantiate_T a = f) -> deduction_T t f
@@ -93,9 +93,8 @@ Inductive deduction_T : theory -> modalFormula -> Set :=
     | Nec_T       : forall (t:theory) (f:   modalFormula) (d1:deduction_T t f), deduction_T t (.[] f)
 .
 
-
-Inductive deduction_D : theory -> modalFormula -> Set :=
-    | Prem_D      : forall (t:theory) (f:   modalFormula) (i:nat), deduction_D t f -> deduction_D t f
+Inductive deduction_D : theory -> modalFormula -> Prop :=
+    | Prem_D      : forall (t:theory) (f:   modalFormula) (i:nat),  (nth_error t i = Some f) -> deduction_D t f
     | _Ax_D       : forall (t:theory) (f:   modalFormula) (a:axiom), (instantiate a = f) -> deduction_D t f
     | Ax_D        : forall (t:theory) (f:   modalFormula) (a:axiom_D), (instantiate_D a = f) -> deduction_D t f
     | Mp_D        : forall (t:theory) (f g: modalFormula) (d1:deduction_D t (f .-> g)) (d2:deduction_D t f), deduction_D t g
@@ -103,8 +102,8 @@ Inductive deduction_D : theory -> modalFormula -> Set :=
 .
 
 
-Inductive deduction_Quatro : theory -> modalFormula -> Set :=
-    | Prem_Quatro      : forall (t:theory) (f:   modalFormula) (i:nat), deduction_Quatro t f -> deduction_Quatro t f
+Inductive deduction_Quatro : theory -> modalFormula -> Prop :=
+    | Prem_Quatro      : forall (t:theory) (f:   modalFormula) (i:nat),  (nth_error t i = Some f) -> deduction_Quatro t f
     | _Ax_Quatro       : forall (t:theory) (f:   modalFormula) (a:axiom), (instantiate a = f) -> deduction_Quatro t f
     | Ax_Quatro        : forall (t:theory) (f:   modalFormula) (a:axiom_Quatro), (instantiate_Quatro a = f) -> deduction_Quatro t f
     | Mp_Quatro        : forall (t:theory) (f g: modalFormula) (d1:deduction_Quatro t (f .-> g)) (d2:deduction_Quatro t f), deduction_Quatro t g
@@ -112,16 +111,16 @@ Inductive deduction_Quatro : theory -> modalFormula -> Set :=
 .
 
 
-Inductive deduction_Cinco : theory -> modalFormula -> Set :=
-    | Prem_Cinco      : forall (t:theory) (f:   modalFormula) (i:nat), deduction_Cinco t f -> deduction_Cinco t f
+Inductive deduction_Cinco : theory -> modalFormula -> Prop :=
+    | Prem_Cinco      : forall (t:theory) (f:   modalFormula) (i:nat),  (nth_error t i = Some f) -> deduction_Cinco t f
     | _Ax_Cinco       : forall (t:theory) (f:   modalFormula) (a:axiom), (instantiate a = f) -> deduction_Cinco t f
     | Ax_Cinco        : forall (t:theory) (f:   modalFormula) (a:axiom_Cinco), (instantiate_Cinco a = f) -> deduction_Cinco t f
     | Mp_Cinco        : forall (t:theory) (f g: modalFormula) (d1:deduction_Cinco t (f .-> g)) (d2:deduction_Cinco t f), deduction_Cinco t g
     | Nec_Cinco       : forall (t:theory) (f:   modalFormula) (d1:deduction_Cinco t f), deduction_Cinco t (.[] f)
 .
 
-Inductive deduction_S45 : theory -> modalFormula -> Set :=
-    | Prem_S45      : forall (t:theory) (f:   modalFormula) (i:nat), deduction_S45 t f -> deduction_S45 t f
+Inductive deduction_S45 : theory -> modalFormula -> Prop :=
+    | Prem_S45      : forall (t:theory) (f:   modalFormula) (i:nat),  (nth_error t i = Some f) -> deduction_S45 t f
     | _Ax_S45       : forall (t:theory) (f:   modalFormula) (a:axiom), (instantiate a = f) -> deduction_S45 t f
     | Ax_S4         : forall (t:theory) (f:   modalFormula) (a:axiom_Quatro), (instantiate_Quatro a = f) -> deduction_S45 t f
     | Ax_S5         : forall (t:theory) (f:   modalFormula) (a:axiom_Cinco), (instantiate_Cinco a = f) -> deduction_S45 t f
@@ -129,9 +128,8 @@ Inductive deduction_S45 : theory -> modalFormula -> Set :=
     | Nec_S45       : forall (t:theory) (f:   modalFormula) (d1:deduction_S45 t f), deduction_S45 t (.[] f)
 .
 
-
-Inductive deduction_B : theory -> modalFormula -> Set :=
-    | Prem_B      : forall (t:theory) (f:   modalFormula) (i:nat), deduction_B t f -> deduction_B t f
+Inductive deduction_B : theory -> modalFormula -> Prop :=
+    | Prem_B      : forall (t:theory) (f:   modalFormula) (i:nat),  (nth_error t i = Some f) -> deduction_B t f
     | _Ax_B       : forall (t:theory) (f:   modalFormula) (a:axiom), (instantiate a = f) -> deduction_B t f
     | Ax_B        : forall (t:theory) (f:   modalFormula) (a:axiom_B), (instantiate_B a = f) -> deduction_B t f
     | Mp_B        : forall (t:theory) (f g: modalFormula) (d1:deduction_B t (f .-> g)) (d2:deduction_B t f), deduction_B t g
@@ -158,3 +156,87 @@ Definition ded16 := (Nec_T Exemplo_2 ((#0 .-> #2)) ded15).
 
 
 Check ded16.
+
+
+(* Notations and Theorems *)
+
+(* Conversar com Paulo exists d, d:deduction *)
+Notation "G |-- A" := (deduction G A) 
+    (at level 110, no associativity).
+
+
+Compute (Exemplo_2 |-- (#1)).
+
+Lemma derive_self :
+    forall (a:modalFormula) (G:theory), 
+    ( G |-- (a .-> a)).
+Proof.
+    intros.
+    apply Mp with (f:= a.-> a .-> a).
+    apply Mp with (f:= a .-> (a .-> a) .-> a).
+    apply Ax with (a:= (ax2 a (a .-> a) a)). simpl. auto.
+    apply Ax with (a:= (ax1 a (a .-> a))). simpl. auto.
+    apply Ax with (a:= (ax1 a a)). simpl. auto.
+Qed.
+
+Lemma derive_refl : 
+    forall (Gamma: theory) (phi: modalFormula),
+    (phi :: Gamma) |-- phi.
+Proof.
+    intros.
+    apply Prem with (i:=0).
+    simpl.
+    auto.
+Qed.
+
+(* Tem algo errado nesse Fixpoint, foi tirado do artigo da proposicional *)
+(* 
+Fixpoint addTheory (x a:modalFormula) (G:theory)
+            (d1: deduction G a) : (deduction (x::G) a)  :=
+match d1 with 
+    | Prem _ f i d   => Prem (x::G) f (S i) d
+    | Ax _ f a d     => Ax   (x::G) f a d
+    | Mp _ f g d1 d2 => Mp   (x::G) f g (addTheory x (f .-> g) G d1) (addTheory x f G d2)
+    | Nec _ f d1     => Nec  (x::G) f (addTheory x f G d1) 
+end.  *)
+
+Lemma derive_weakening_left :
+    forall (H G: theory) (phi:modalFormula), 
+    ( G |-- phi) -> ((H ++ G) |-- phi).
+Proof.
+Admitted.
+
+Theorem deduction_theorem_hilbert :
+    forall (Gamma: theory) (phi psi :modalFormula), 
+    ((phi::Gamma) |-- psi) -> (Gamma |--(phi .-> psi)). 
+
+Proof.
+    intros. induction H.
+        - subst. pose (Hip:= Prem Gamma (phi .-> f) i).
+        apply Hip. induction i. clear Hip; simpl in *. auto. 
+                    
+Admitted.
+
+Theorem deduction_theorem :
+    forall (Gamma : theory) (phi psi: modalFormula),
+    ((phi::Gamma) |-- psi) -> (Gamma |-- phi .-> psi) .
+Proof.
+Admitted.
+
+Theorem derive_modus_ponens:
+    forall (phi psi: modalFormula) (Gamma: theory),
+    (phi::Gamma |-- psi) ->
+    (Gamma |-- phi) ->
+    (Gamma |-- psi).
+Proof.
+    intros. induction H0.
+        - inversion H. subst.
+            + subst. apply Prem with (i:=i0). 
+                induction Gamma. simpl in *. inversion H. simpl in *. 
+Admitted.
+
+Theorem derive_double_neg:
+    forall (Gamma: theory) (phi: modalFormula),
+    (Gamma |-- phi) <-> (Gamma |-- .~ .~ phi) .
+Proof.
+Admitted.

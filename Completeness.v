@@ -1,16 +1,20 @@
-Require Import Modal_Library   List Classical FSetInterface Utf8 MSetInterface.
-(* Logic *)
-Definition Consistency (Γ : theory) : Prop := 
-    forall (M : Model) (φ : modalFormula), 
-        ~ (M '' Γ |- φ ./\ .~ φ).
+Require Import Modal_Library Deductive_System Soundness List ClassicalFacts Classical FSetInterface Utf8 MSetInterface.
 
-Print Consistency.
+Definition Consistency (Γ : theory) : Prop := 
+  forall (φ : modalFormula),
+  ~ (Γ |-- φ ./\ .~φ).
+
+
+Lemma not_derive_spec :
+  forall (Γ: theory) (phi: modalFormula),
+  ~(Γ |-- phi) <-> Consistency (phi::Γ).
+Proof.
+Admitted.
 
 Definition Maximal_Consistency (Γ : theory) : Prop :=
-    forall (φ : modalFormula), 
-        (In φ Γ \/ In (.~φ) Γ) /\ Consistency Γ.
+  forall (φ: modalFormula),
+  (In φ Γ \/ In .~ φ Γ) /\  (Consistency Γ).
 
-Print Maximal_Consistency.
 
 (* Interpretação intuicionista de subconjunto *)
 Definition subset (Γ Δ : theory) : Prop :=
@@ -20,45 +24,26 @@ Definition subset (Γ Δ : theory) : Prop :=
 Notation "A ⊆ B" := (subset A B)
     (at level 70, no associativity) : type_scope.
 
-(* Lemma t: 
-    forall (G D : theory) (φ: modalFormula),
-    (~ (Consistency G) /\ subset G D) -> ~ Consistency D.
-Proof.
-    intros; destruct H as (?, ?).
-    unfold Consistency in *; unfold not in *.
-    intros. apply H. intros.
-    edestruct H1 with (M:=M) (φ:=φ0).
-    eapply H0.
-    (* unfold entails in *. intros. *)
-    apply H2.
-    destruct H1 with (w:=w).
-    
-Qed. *)
-
-
-Lemma t2:
-  forall (Δ Γ : theory) (M: Model) (phi : modalFormula),
-  (M '' Γ++Δ |- phi) /\ subset Γ Δ -> (M '' Δ |- phi).
+Lemma lema_1 :
+  forall (Δ Γ : theory),
+  ((Consistency Δ) /\ (subset Γ Δ)) -> Consistency Γ.
 Proof.
   intros.
-  unfold entails in *. (*split.*)
-  intros.
-  destruct H. apply H.
-  edestruct classic.
-    + exact H2.
-          
-Admitted.
+  destruct H as (?, ?).
+  unfold Consistency in *. intros.
+  (* apply deMorgan3. left. apply caso_2. *)
+  unfold subset in H0.
+  unfold not in *.
+  intros. apply H with φ.   destruct H1. as (?, ?). split.
+    + apply caso_2. apply H0.
 
-
-Lemma t:
-  forall (Δ Γ : theory) (M: Model) (phi : modalFormula),
-    ((M '' Γ |- phi) /\ (subset Γ Δ)) -> (M '' Δ |- phi).
-Proof.
-  - intros. destruct H as (?, ?).
-  apply monotonicity with (ẟ:=Δ) in H .
-  (* apply t2 in H; eauto. *)
-Admitted.
-
+  
+  apply caso_2 with φ in H0 . in . apply outro_test in H1.
+  apply H0. auto.
+  destruct H1 as (?, ?).
+  apply outro_test. apply outro_test in H2.
+  apply H0; auto.
+Qed.
 
 Lemma lema_1 :
     forall (Δ Γ : theory),
@@ -67,13 +52,15 @@ Proof.
     - intros.
         (* unfold not in *. intros. *)
         destruct H as (?, Subset).
+        unfold Consistency in *.
         edestruct classic.
             + exact H0.
-            + unfold Consistency in *. intros. unfold not in *.
-              intros; eapply H with M φ.
+            +  
+            unfold Consistency in *. intros. unfold not in *.
+              intros; eapply H with M φ. unfold subset in Subset.
               unfold entails in *. 
               unfold validate_model in *.
-              intros. 
+              intros. split. destruct H1 with w. 
               
               destruct H1 with w.         
             assert(Hip: forall phi: modalFormula, In phi Γ -> In phi Δ -> subset Γ Δ).
