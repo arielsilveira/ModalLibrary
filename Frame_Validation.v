@@ -4,29 +4,26 @@ Require Import Modal_Library Classical          .
 (* Prova de validação do Frame Reflexivo *)
 
 Theorem validacao_frame_reflexivo_ida:
-    forall (M: Model) (Ψ: modalFormula),
-        (~(M |= .[] Ψ .-> Ψ) -> ~(reflexivity_frame (F M))). 
+	forall M Ψ,
+	reflexivity_frame (F M) ->
+	(M |= .[] Ψ .-> Ψ).
 Proof.
-    intros.
-    unfold not in *.
-    unfold reflexivity_frame.
-    unfold validate_model in *. 
-    simpl in *. auto.
+	intros;
+	unfold validate_model in *;
+	simpl in *; intuition.
 Qed.
 
-(* Theorem validacao_frame_reflexivo_volta:
-    forall (M: Model) (Ψ: modalFormula),
-   (M |= .[] Ψ .-> Ψ) -> (reflexivity_frame (F M)). *)
-
-
-
 Theorem validacao_frame_reflexivo_volta:
-    forall (M: Model) (Ψ: modalFormula),
-    (~ (reflexivity_frame (F M)) -> ~ (M |= .[] Ψ .-> Ψ)).
+	forall M Ψ,
+	~ reflexivity_frame (F M) ->
+	~ (M |= .[] Ψ .-> Ψ).
 Proof.
+	intros;
+	unfold reflexivity_frame, not, validate_model in *;
+	simpl in H.
+	intros.
+	apply H.	
 Admitted.
-
-
 
 
 (* Prova de validação do Frame Transitivo *)

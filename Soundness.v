@@ -1,189 +1,217 @@
 Require Import Modal_Library Classical List Deductive_System.
-(*  Utf8*)
 
 (* p -> (q -> p) *)
-Theorem Hilbert_Axiom_1:
-    forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
-        (M ' w ||- (φ .-> (ψ .-> φ))).
+Lemma Hilbert_Axiom_1_soundness:
+  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+  M ' w ||- φ .-> (ψ .-> φ).
 Proof.
-    - intros.
-        simpl in *.
-        intros. 
-        apply H.
+  simpl; intros.
+  assumption.
 Qed.
-
 
 (* (p -> (q -> r)) -> ((p -> q) -> (p -> r)) *)
-Theorem Hilbert_Axiom_2:
-    forall (M: Model) (w: W (F M)) (φ ψ Ɣ: modalFormula),
-        (M ' w ||- (φ .-> (ψ .-> Ɣ)) .-> ((φ .-> ψ) .-> (φ .-> Ɣ))).
+Lemma Hilbert_Axiom_2_soundness:
+  forall (M: Model) (w: W (F M)) (φ ψ Ɣ: modalFormula),
+  M ' w ||- (φ .-> (ψ .-> Ɣ)) .-> ((φ .-> ψ) .-> (φ .-> Ɣ)).
 Proof.
-    - simpl.
-        intros.
-        apply H. 
-            + auto.
-            + apply H0. auto.
+  simpl; intros.
+  apply H.
+  - auto.
+  - apply H0; auto.
 Qed.
-
 
 (* (~ q -> ~ p) -> (p -> q) *)
-Theorem Hilbert_Axiom_3:
-    forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
-        (M ' w ||- (.~ ψ .-> .~ φ) .-> (φ .-> ψ)).
+Lemma Hilbert_Axiom_3_soundness:
+  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+  M ' w ||- (.~ ψ .-> .~ φ) .-> (φ .-> ψ).
 Proof.
-    - simpl.
-        intros.
-        pose (classic (M ' w ||- ψ)) as Hip.
-        destruct Hip. 
-            + auto. 
-            + apply H in H1. contradiction.
+  simpl; intros.
+  pose (classic (M ' w ||- ψ)) as Hip.
+  destruct Hip.
+  - auto.
+  - apply H in H1.
+    contradiction.
 Qed.
 
-
-Theorem Hilbert_Axiom_4: 
-    forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
-        (M ' w ||- (φ .-> (ψ .-> (φ ./\ ψ)))).
+(* p -> (q -> (p /\ q)) *)
+Lemma Hilbert_Axiom_4_soundness: 
+  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+  M ' w ||- φ .-> (ψ .-> (φ ./\ ψ)).
 Proof.
-    - simpl.
-        intros.
-        split;
-        auto. 
+  simpl; intros.
+  split; auto.
 Qed.
 
-Theorem Hilbert_Axiom_5: 
-    forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
-        (M ' w ||- (φ ./\ ψ) .-> φ).
+(* (p /\ q) -> p *)
+Lemma Hilbert_Axiom_5_soundness: 
+  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+  M ' w ||- (φ ./\ ψ) .-> φ.
 Proof.
-    - simpl.
-        intros.
-        destruct H as [Hip1 Hip2].
-            + apply Hip1.
+  simpl; intros.
+  destruct H as [Hip1 Hip2].
+  assumption.
 Qed.
 
-Theorem Hilbert_Axiom_6: 
-    forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
-        (M ' w ||- (φ ./\ ψ) .-> ψ) .
+(* (p /\ q) -> q *)
+Lemma Hilbert_Axiom_6_soundness: 
+  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+  M ' w ||- (φ ./\ ψ) .-> ψ.
 Proof.
-    - simpl.
-        intros.
-        destruct H as [Hip1 Hip2].
-            + apply Hip2. 
+  simpl; intros.
+  destruct H as [Hip1 Hip2].
+  assumption.
 Qed.
 
-Theorem Hilbert_Axiom_7: 
-    forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
-        (M ' w ||- (φ .-> (φ .\/ ψ))).
+(* p -> (p \/ q) *)
+Lemma Hilbert_Axiom_7_soundness: 
+  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+  M ' w ||- (φ .-> (φ .\/ ψ)).
 Proof.
-    - simpl.
-        intros.
-        left.
-        apply H.
+  simpl; intros.
+  left.
+  assumption.
 Qed.
 
-Theorem Hilbert_Axiom_8: 
-    forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
-        (M ' w ||- (ψ .-> (φ .\/ ψ))).
+(* q -> (p \/ q) *)
+Lemma Hilbert_Axiom_8_soundness: 
+  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+  M ' w ||- (ψ .-> (φ .\/ ψ)).
 Proof.
-    - simpl.
-        intros.
-        right.
-        apply H.
+  simpl; intros.
+  right.
+  assumption.
 Qed.
 
-Theorem Hilbert_Axiom_9: 
-    forall (M: Model) (w: W (F M)) (φ ψ Ɣ: modalFormula),
-        (M ' w ||- (φ .-> Ɣ) .-> (ψ .-> Ɣ) .-> (φ .\/ ψ) .-> Ɣ).
+(* (p -> r) -> (q -> r) -> (p \/ q) -> r *)
+Lemma Hilbert_Axiom_9_soundness: 
+  forall (M: Model) (w: W (F M)) (φ ψ Ɣ: modalFormula),
+  M ' w ||- (φ .-> Ɣ) .-> (ψ .-> Ɣ) .-> (φ .\/ ψ) .-> Ɣ.
 Proof.
-    - simpl.
-        intros.
-        destruct H1. 
-            + apply H.
-                apply H1.
-            + apply H0.
-                apply H1.
-Qed.    
+  simpl; intros.
+  destruct H1.
+  - apply H.
+    assumption.
+  - apply H0.
+    assumption.
+Qed.
 
-Theorem Hilbert_Axiom_10: 
-    forall (M: Model) (w: W (F M)) (φ: modalFormula),
-        (M ' w ||- .~.~φ .-> φ).
+(* ~~p -> p *)
+Lemma Hilbert_Axiom_10_soundness: 
+  forall (M: Model) (w: W (F M)) (φ: modalFormula),
+  M ' w ||- .~.~φ .-> φ.
 Proof.
-    - simpl.
-        intros.
-        apply NNPP in H.
-        apply H.
+  simpl; intros.
+  apply NNPP in H.
+  assumption.
 Qed.
 
 (* <>(p \/ q) -> (<>p \/ <>q) *)
-Theorem Axiom_Possibility:
-    forall (M: Model) (w: W (F M)) (φ ψ : modalFormula),
-        (M ' w ||- .<> (φ .\/ ψ) .-> (.<> φ .\/ .<> ψ)) .
+Lemma Axiom_Possibility_soundness:
+  forall (M: Model) (w: W (F M)) (φ ψ : modalFormula),
+  M ' w ||- .<> (φ .\/ ψ) .-> (.<> φ .\/ .<> ψ).
 Proof.
-    - simpl.
-        intros.
-        destruct H as [w' [Hip1 [Hip2 | Hip3] ]].
-            + left; exists w'; split.
-                * auto.
-                * auto.
-            + right; exists w'; split.
-                * auto.
-                * auto.
+  simpl; intros.
+  destruct H as [ w' [ Hip1 [ Hip2 | Hip3 ] ]].
+  - left; exists w'; split.
+    + assumption.
+    + assumption.
+  - right; exists w'; split.
+    + assumption.
+    + assumption.
 Qed.
-    
+
 (* [](p -> q) -> ([]p -> []q) *)
-Theorem Axiom_K:
-    forall (M: Model) (w: W (F M)) (φ ψ : modalFormula),
-        (M ' w ||- .[](φ .-> ψ) .-> (.[]φ .-> .[]ψ)) .
+Lemma Axiom_K_soundness:
+  forall (M: Model) (w: W (F M)) (φ ψ : modalFormula),
+  M ' w ||- .[](φ .-> ψ) .-> (.[]φ .-> .[]ψ).
 Proof.
-    - simpl in *.
-        intros. apply H. 
-        + apply H1. 
-        + apply H0. auto.
+  simpl; intros.
+  apply H.
+  - assumption.
+  - apply H0.
+    assumption.
 Qed.
 
-Theorem caso_2 :
-    forall (Γ : theory) (φ: modalFormula),
-        (In φ Γ) -> Γ ||= φ.
+Lemma caso_2 :
+  forall (Γ : theory) (φ: modalFormula),
+  In φ Γ -> Γ ||= φ.
 Proof.
-intros. unfold entails_modal, validate_model.
-intros. induction Γ. 
-    + simpl in *. contradiction. 
-    + simpl in *. destruct H0 as (?, ?). 
-        unfold validate_model in H0. inversion H. rewrite <- H2.
-         apply H0. auto.
+  unfold entails_modal, validate_model; intros.
+  apply exact_deduction with Γ.
+  - assumption.
+  - assumption.
 Qed.
 
-(* a /\ a->b -> b *)
-Theorem Modus_Ponens:
-    forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
-        ((M ' w ||- φ) /\ (M ' w ||- φ .-> ψ)) -> (M ' w ||- ψ).
+(* a /\ (a -> b) -> b *)
+Lemma Modus_Ponens_soundness:
+  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+  ((M ' w ||- φ) /\ (M ' w ||- φ .-> ψ)) -> (M ' w ||- ψ).
 Proof.
-    - simpl in *.
-        intros.
-        destruct H.
-        apply H0. auto.
+  simpl; intros.
+  destruct H.
+  apply H0; auto.
 Qed.
 
-
-Theorem Necessitation:
-    forall (M: Model) (φ: modalFormula),
-        (M |= φ) -> (M |= .[]φ).
+Lemma Necessitation_soundness:
+  forall (M: Model) (φ: modalFormula),
+  (M |= φ) -> (M |= .[]φ).
 Proof.
-    - unfold validate_model.
-        simpl in *.
-        intros.
-        apply H.
+  unfold validate_model; simpl; intros.
+  apply H.
 Qed.
-
-
 
 Theorem soundness:
-    forall (G:theory) (p:modalFormula),
-    (G |-- p) -> (G ||= p) .
+  forall (A: axiom -> Prop) (G: theory) (p: modalFormula),
+  (A; G |-- p) -> (G ||= p).
 Proof.
-    induction G.
-        - intros. 
-    unfold entails_modal.
-    intros. simpl in *. unfold validate_model.
-    intros. 
-    
+  induction 1.
+  - intros M ?H.
+    apply exact_deduction with t.
+    + apply nth_error_In with i.
+      assumption.
+    + assumption.
+  - destruct a; destruct H0; simpl.
+    + intros M ?H w.
+      apply Hilbert_Axiom_1_soundness.
+    + intros M ?H w.
+      apply Hilbert_Axiom_2_soundness.
+    + intros M ?H w.
+      apply Hilbert_Axiom_3_soundness.
+    + intros M ?H w.
+      apply Hilbert_Axiom_4_soundness.
+    + intros M ?H w.
+      apply Hilbert_Axiom_5_soundness.
+    + intros M ?H w.
+      apply Hilbert_Axiom_6_soundness.
+    + intros M ?H w.
+      apply Hilbert_Axiom_7_soundness.
+    + intros M ?H w.
+      apply Hilbert_Axiom_8_soundness.
+    + intros M ?H w.
+      apply Hilbert_Axiom_9_soundness.
+    + intros M ?H w.
+      apply Hilbert_Axiom_10_soundness.
+    + intros M ?H w.
+      apply Axiom_K_soundness.
+  - intros M ?H w.
+    apply Modus_Ponens_soundness with f.
+    split.
+    + apply IHdeduction2.
+      assumption.
+    + apply IHdeduction1.
+      assumption.
+  - intros M ?H w.
+    apply Necessitation_soundness.
+    apply IHdeduction.
+    assumption.
+Qed.
+
+Corollary soundness2:
+  forall (M: Model) (w: W (F M)) (G: theory) (p: modalFormula),
+  theoryModal M G -> (K; G |-- p) -> M ' w ||- p.
+Proof.
+  intros.
+  eapply soundness.
+  - eassumption.
+  - assumption.
 Qed.

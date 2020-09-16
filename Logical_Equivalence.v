@@ -130,25 +130,3 @@ Proof.
                     apply H0; exists w'; 
                     split; auto; auto. 
 Qed.
-
-Theorem outro_test:
-    forall (Γ : theory) (φ: modalFormula),
-    (In φ Γ) <-> (Γ ||= φ).
-Proof.
-    intros. split.
-    - intros. unfold entails_modal, validate_model.
-        intros. induction Γ. 
-            + simpl in *. contradiction. 
-            + simpl in *. destruct H0 as (?, ?). 
-                unfold validate_model in H0. inversion H. rewrite <- H2.
-                 apply H0. auto.
-    - intros. unfold entails_modal, validate_model in H.
-        edestruct classic.
-            + exact H0.
-            + induction Γ. simpl in *. admit.
-                * simpl in *. right. apply IHΓ. intros.
-                apply H. split. admit.
-                auto. unfold not in H0. unfold not.
-                intro. apply H0. right. auto.
-                
-Admitted.
