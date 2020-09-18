@@ -6,15 +6,7 @@ Definition Consistency (A: axiom -> Prop) (Γ : theory) : Prop :=
 
 Definition Maximal_Consistency (A: axiom -> Prop) (Γ : theory) : Prop :=
   forall (φ: modalFormula),
-  (In φ Γ \/ In .~ φ Γ) /\  (Consistency A Γ).
-
-
-(* Interpretação intuicionista de subconjunto *)
-
-
-Notation "A ⊆ B" := (subset A B)
-    (at level 70, no associativity) : type_scope.
-
+  ~(In φ Γ /\  In .~ φ Γ) /\ Consistency A Γ.
 
 Lemma lema_1 :
   forall A Δ Γ,
@@ -35,61 +27,81 @@ Section Lindebaum.
 Variable P: nat -> modalFormula.
 Variable Γ: theory.
 
-Inductive Lindebaum_set (A: axiom -> Prop): nat -> theory -> Prop :=
-  | Lindebaum_zero:
-    Lindebaum_set A 0 Γ
-  | Lindebaum_succ1:
+Inductive Lindenbaum_set (A: axiom -> Prop): nat -> theory -> Prop :=
+  | Lindenbaum_zero:
+    Lindenbaum_set A 0 Γ
+  | Lindenbaum_succ1:
     forall n Δ,
-    Lindebaum_set A n Δ ->
+    Lindenbaum_set A n Δ ->
     Consistency A (P n :: Δ) ->
-    Lindebaum_set A (S n) (P n :: Δ)
-  | Lindebaum_succ2:
+    Lindenbaum_set A (S n) (P n :: Δ)
+  | Lindenbaum_succ2:
     forall n Δ,
-    Lindebaum_set A n Δ ->
+    Lindenbaum_set A n Δ ->
     ~Consistency A (P n :: Δ) ->
-    Lindebaum_set A (S n) Δ.
+    Lindenbaum_set A (S n) Δ.
 
 Lemma construct_set:
-  forall (A: axiom -> Prop) n,
-  exists Δ, Lindebaum_set A n Δ.
+  forall A n,
+  exists Δ, 
+  Lindenbaum_set A n Δ.
 Proof.
-  intros.
-  induction n.
+  intros; induction n.
   - exists Γ.
     constructor.
-  - destruct IHn as (Δ, ?H).
+  - destruct IHn as (Δ, ?H). 
     edestruct classic with (Consistency A (P n :: Δ)).
     + eexists.
-      apply Lindebaum_succ1; eauto.
+      apply Lindenbaum_succ1; eauto.
     + eexists.
-      apply Lindebaum_succ2; eauto.
+      apply Lindenbaum_succ2; eauto.
 Qed.
 
-Lemma Lindebaum_subset:
+Lemma Lindenbaum_subset:
   forall A n Δ,
-  Lindebaum_set A n Δ -> subset Γ Δ.
+  Lindenbaum_set A n Δ -> 
+  subset Γ Δ.
 Proof.
-Admitted.
-
-End Lindebaum.
-
-Lemma Lindenbaum:
-    forall (Γ : theory),
-    Consistency Γ -> 
-    exists (Δ : theory), 
-    (Maximal_Consistency Δ /\ subset Γ Δ).
-Proof.
-    
-Admitted.
+  unfold subset; intros.
+  induction H.
+  - assumption.
+  - intuition.
+  - assumption.
+Qed.
 
 Lemma lema_3:
-    forall (Δ Ⲧ: theory),
-    Maximal_Consistency Δ -> Consistency Δ /\ (Consistency (Δ++Ⲧ) -> subset Ⲧ Δ).
+  forall A Gamma Delta n,
+  Lindenbaum_set A n Delta /\
+  subset Gamma Delta ->
+  Lindenbaum_set A n Gamma.
 Proof.
+  admit.  
 Admitted.
 
-Lemma lema_4: 
-    forall (W Γ Γ' : theory) (R : list (theory * theory)) (φ : modalFormula),
-        (canonical_relation R Γ Γ') -> ((In (.[] φ) Γ) -> (In φ Γ')).
+
+Lemma lema_9:
+  forall A Δ n phi,
+  Lindenbaum_set A n Δ ->
+  (Consistency A (phi::Δ) ->
+  In phi Δ).
 Proof.
+  admit.
+Admitted.
+ 
+End Lindebaum.
+
+
+
+Lemma Lindenbaum:
+  forall A (Γ : theory),
+  Consistency A Γ -> 
+  exists (Δ : theory), 
+  (Maximal_Consistency A Δ /\ subset Γ Δ).
+Proof.
+  intros. exists Γ. split.
+  - unfold Maximal_Consistency; intros.
+    split.
+    + admit.
+    + assumption.
+  - admit. 
 Admitted.

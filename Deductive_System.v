@@ -32,7 +32,7 @@ Definition instantiate (a: axiom): modalFormula :=
   | ax9  φ   ψ   Ɣ   => (φ .-> Ɣ) .-> ((ψ .-> Ɣ) .-> ((φ .\/ ψ) .-> Ɣ))
   | ax10 φ   ψ       => .~ .~ φ .-> φ
   | axK  φ   ψ       => .[] (φ .-> ψ) .-> (.[] φ .-> .[] ψ)
-  | axT  φ           => φ .-> .[]φ
+  | axT  φ           => .[]φ .-> φ
   | axB  φ           => φ .-> .[] .<> φ
   | axK4 φ           => .[] φ .-> .[] .[] φ
   | axD  φ           => .[] φ .-> .<> φ 
@@ -83,7 +83,7 @@ Inductive T: axiom -> Prop :=
 (* Reflexive and Symmetry *)
 Inductive B: axiom -> Prop :=
   | B_T: forall a, T a -> B a
-  | B_axT: forall p , B (axB p).
+  | B_axB: forall p , B (axB p).
 
 (* Transitive *)
 Inductive K4: axiom -> Prop :=
@@ -119,7 +119,7 @@ Inductive S5_2: axiom -> Prop :=
 
 (* Notations and Theorems *)
 
-Coercion T_K: K >-> T.
+(* Coercion T_K: K >-> T. *)
 
 Notation "A ; G |-- p" := (deduction A G p) 
     (at level 110, no associativity).
@@ -153,7 +153,10 @@ Qed.
 
 
 Definition subset (Γ Δ : theory) : Prop :=
-    forall (φ : modalFormula), In φ Γ -> In φ Δ.
+  forall (φ : modalFormula), In φ Γ -> In φ Δ.
+
+Notation "A ⊆ B" := (subset A B)
+  (at level 70, no associativity) : type_scope.
 
 
 Lemma derive_In:
@@ -182,7 +185,7 @@ Proof.
     + assumption.
     + assumption.
   - eapply Mp;
-     eauto. 
+     eauto.
   - apply Nec; 
     intuition.
 Qed.
@@ -200,14 +203,33 @@ Proof.
   - assumption.
 Qed.
 
-Theorem derive_modus_ponens:
+Require Import Equality.
+
+Lemma derive_modus_ponens:
   forall (phi psi: modalFormula) (Gamma: theory),
   (K; phi::Gamma |-- psi) ->
   (K; Gamma |-- phi) ->
   (K; Gamma |-- psi).
 Proof.
-  intros; inversion H. 
-  admit. 
-Admitted.
-
-
+  intros; dependent induction H.
+  - apply nth_error_In in H. 
+    destruct H.
+    + destruct H.
+      assumption.
+    + apply derive_In.
+      assumption.  
+  - apply Ax with (a:=a).
+    + assumption.
+    + reflexivity.
+  - eapply Mp.
+    + eapply IHdeduction1. 
+      * eauto.
+      * assumption. 
+    + eapply IHdeduction2. 
+      * eauto.
+      * assumption. 
+  - apply Nec.
+    + eapply IHdeduction. 
+      * eauto.
+      * assumption. 
+Qed.

@@ -55,7 +55,7 @@ Notation " .[] φ "    := (Box φ)       (at level 9, right associativity).
 Notation " .<> φ "    := (Dia φ)       (at level 9, right associativity).
 Notation " # φ "      := (Lit φ)       (at level 1, no associativity).
 
-(*
+
 Notation " ☐ φ" := (.[] φ)
     (at level 1, φ at level 200, right associativity): type_scope.
 
@@ -64,7 +64,7 @@ Notation " ◇ φ" := (.<> φ)
 
 Notation " φ → ψ" := (φ .-> ψ)
     (at level 99, ψ at level 200, right associativity) : type_scope.
-*)
+
 
 Notation " X ∈ Y " := (In X Y)
     (at level 250, no associativity) : type_scope.
@@ -395,58 +395,5 @@ Notation "φ =|= ψ" := (equivalence φ ψ)
 Notation "φ ≡ ψ " := (φ =|= ψ)
   (at level 110, only printing, no associativity).
 
-(*
-Fixpoint toImplic (φ : modalFormula): modalFormula :=
-  match φ with
-  | # x     => # x
-  | .~  ψ    => .~ (toImplic ψ)
-  | .[] ψ   => .[] (toImplic ψ)
-  | .<> ψ   => .~ .[] .~ (toImplic ψ)
-  | ψ ./\ Ɣ => .~ ( (toImplic ψ) .-> .~ (toImplic Ɣ) ) 
-  | ψ .\/ Ɣ => (.~ (toImplic ψ) .-> (toImplic Ɣ) ) 
-  | ψ .-> Ɣ => (toImplic ψ) .-> (toImplic Ɣ)
-  end.
-
-Theorem toImplic_equiv : forall (f : modalFormula), f =|= (toImplic f).
-Proof.
-    split.
-    - unfold entails_modal.
-        intros. simpl in *;
-        destruct H as (?, _);
-        unfold validate_model in *.
-        intros;
-
-        admit.
-    - unfold entails_modal;
-        simpl; intros. destruct H as (?, _).
-        unfold validate_model in *.
-        intros.
-
-    (* intros.
-    split.
-        - unfold entails_teste;
-            unfold validate_model in *;
-            simpl in *;
-            unfold validate_model in *.
-            intros;
-            destruct H0 as (?, _).
-            pose (X := H).
-            edestruct classic.
-                + exact H1.
-                +
-            admit.
-        - intros; unfold entails_teste in *.
-            simpl in *;
-            unfold validate_model in *.
-            intros.
-            destruct H0 as (?, _).
-            destruct H0.
-            destruct classic with (M ' w ||- f).
-            auto. 
-            apply H0. *)
-
-    Admitted.
-
-*)
 
 (* ;-; *)

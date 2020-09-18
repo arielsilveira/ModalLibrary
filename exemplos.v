@@ -1,156 +1,53 @@
 (* Arquivo para criar testes. *)
-Require Import Modal_Library.
+Require Import Modal_Library Deductive_System.
 
-(* Construçao de fórmulas *)
-Definition form1 := .[] #0 .\/ #1.
-Definition form2 := #1 .-> .~ .[] #2 .-> #0 .\/ .[](.<> #1 .\/ #2).
-Definition form3 := .~.~ #0 .-> #1.
-
-(* Definição do Mundos e Relações *)
-
-Inductive W': Set :=
-    | w1: W'
-    | w2 : W' 
-    | w3 : W'
-    | w4 : W'.
-
-Definition R' := [(w3, w2); (w2, w3)].
-Definition F' := (Build_Frame W' R').
-
-Definition v' := [(1, [w1; w2; w3])].
-Definition M' := (Build_Model F' v').
-
-Check (W F').
-
-Check fun_validation M' w1 form1.
-
-(* Compute relacao (R F) (w 0) (w 18). *)
-
-(* Definition a := validate_formula (W F) [(# 1,[w 1; w 2]); (# 2, [w 3; w 8])]. *)
-
-(* Check a. *)
-
-(* Definition M := model F [(1,[w 1; w 2]); (2, [w 3; w 8]); (3, [w 1; w 2; w 3])].
-
-Compute fun_validation M (w 1) (.[] # 1).
-
-Compute validate_model M (# 1). *)
-
-(* 
-
-Print or.
-Print and. 
-*)
-
-(* Definition world_w := (w 1). *)
-
-(* Compute True /\ True. *)
-(* Compute M |= (# 0 ./\ # 1).
-Compute M → (w 1) ||- (# 0 ./\ # 1).
-Compute M ← [# 0; # 1; # 2] |- # 1. *)
-
-(* Definition a  := frame world relation_world. *)
-
-(* Talvez seja útil *)
-(* Inicio dos exemplos de Relação *)
-(* Example ex1: Relation [1; 2; 3] 2 3.
+Lemma Example:
+  T; (.[](#0 .-> #1):: .[](#1 .-> #2):: nil) |-- .[](#0 .-> #2) .
 Proof.
-  apply r.
-    - simpl. auto.
-    - simpl. auto.
+  (* Line: 16 *)
+  apply Nec.
+  (* Line: 15 *)
+  apply Mp with (f:=(#0 .-> #1)).
+    (* Line: 14 *)
+  - apply Mp with (f:=(#1 .-> #2)).
+      (* Line: 9 *)
+    + apply Mp with (f:=((#1 .-> #2) .-> ((#0 .-> (#1 .-> #2))))).
+        (* Line: 7 *)
+      * apply Mp with (f:=(#1 .-> #2) .-> ((#0 .-> (#1 .-> #2)) .-> (#0 .-> #1) .-> (#0 .-> #2)) ).
+          (* Line: 6 *)
+        -- apply Ax with (a:=ax2 (#1 .-> #2) (#0 .-> (#1 .-> #2)) ((#0 .-> #1) .-> (#0 .-> #2))).
+          ++ constructor. constructor.
+          ++ reflexivity.
+        (* Line: 5 *)
+        -- apply Mp with (f:=(#0 .-> (#1 .-> #2)) .-> ((#0 .-> #1) .-> (#0 .-> #2))).
+          (* Line: 3 *)
+          ++ apply Ax with (a:= ax1 ((#0 .-> (#1 .-> #2)) .-> ((#0 .-> #1) .-> (#0 .-> #2))) (#1 .-> #2)).
+            ** constructor. constructor.
+            ** reflexivity.   
+          (* Line: 4 *)
+          ++ apply Ax with (a:= ax2 #0 #1 #2).
+            ** constructor; constructor.
+            ** reflexivity.
+        (* Line: 8 *)
+      * apply Ax with (a:=ax1 (#1 .-> #2) #0).
+        -- constructor; constructor.
+        -- reflexivity.
+      (* Line: 11 *)
+    + apply Mp with (f:=.[](#1 .-> #2)).
+      * apply Ax with (a:= axT (#1 .-> #2)).
+        -- constructor; constructor.
+        -- reflexivity.
+        (* Line: 2 *)
+      * apply Prem with (i:=1).
+        reflexivity.
+    (* Line: 13 *)
+  - apply Mp with (f:=.[](#0 .-> #1)).
+      (* Line: 12 *)
+    + apply Ax with (a:= axT (#0 .-> #1)).
+      * constructor; constructor.
+      * reflexivity.
+      (* Line: 1 *)
+    + apply Prem with (i:=0).
+      reflexivity.
 Qed.
-
-Example ex2: ~Relation [1; 2; 3] 1 5.
-Proof.
-  unfold not. intros. inversion H. inversion H1. discriminate H4. inversion H4. 
-  discriminate H5. inversion H5. discriminate H6. inversion H6.
-Qed.
-
-Example ex3: Relation [1;2;3] 2 5 -> False.
-Proof.
-  intros. inversion H. inversion H1. discriminate H4. inversion H4. 
-  discriminate H5. inversion H5. discriminate H6. inversion H6.
-Qed. *)
-
-
-
-
-
-
-
-
-(* Arquivo para criar testes.
-Require Import Modal_Library.
-
-(* Construçao de fórmulas *)
-Definition form1 := .[] #0 .\/ #1.
-Definition form2 := #1 .-> .~ .[] #2 .-> #0 .\/ .[](.<> #1 .\/ #2).
-Definition form3 := .~.~ #0 .-> #1.
-
-(* Definição do Mundos e Relações *)
-Definition world_in_model := [w # 0; w # 1;w # 2; w # 3; w # 4]. 
-Definition relation_world :=  [ (w 1, w 9); (w 0, w 1); (w 1, w 1);
-                                (w 1, w 2); (w 2, w 0); (w 2, w 3);
-                                (w 3, w 1); (w 3, w 3); (w 3, w 4)
-                              ].
-
-(* Valida as relações entre mundos *)
-(* Definition rel := validate_relation world_in_model relation_world. *)
-Definition F := frame world_in_model relation_world.
-
-(* Declaração do Frame *)
-(* Definition F := frame world_in_model rel. *)
-
-(* Check F. *)
-(* Compute (W F). *)
-(* Compute (R F). *)
-
-(* Compute relacao (R F) (w 0) (w 18). *)
-
-Definition a := validate_formula (W F) [(# 1,[w 1; w 2]); (# 2, [w 3; w 8])].
-
-(* Check a. *)
-
-Definition M := model F [(1,[w 1; w 2]); (2, [w 3; w 8]); (3, [w 1; w 2; w 3])].
-
-Compute fun_validation M (w 1) (.[] # 1).
-
-Compute validate_model M (# 1).
-
-(* 
-
-Print or.
-Print and. 
-*)
-
-(* Definition world_w := (w 1). *)
-
-(* Compute True /\ True. *)
-Compute M |= (# 0 ./\ # 1).
-Compute M → (w 1) ||- (# 0 ./\ # 1).
-Compute M ← [# 0; # 1; # 2] |- # 1.
-
-(* Definition a  := frame world relation_world. *)
-
-(* Talvez seja útil *)
-(* Inicio dos exemplos de Relação *)
-(* Example ex1: Relation [1; 2; 3] 2 3.
-Proof.
-  apply r.
-    - simpl. auto.
-    - simpl. auto.
-Qed.
-
-Example ex2: ~Relation [1; 2; 3] 1 5.
-Proof.
-  unfold not. intros. inversion H. inversion H1. discriminate H4. inversion H4. 
-  discriminate H5. inversion H5. discriminate H6. inversion H6.
-Qed.
-
-Example ex3: Relation [1;2;3] 2 5 -> False.
-Proof.
-  intros. inversion H. inversion H1. discriminate H4. inversion H4. 
-  discriminate H5. inversion H5. discriminate H6. inversion H6.
-Qed. *)
-
- *)
+ 
