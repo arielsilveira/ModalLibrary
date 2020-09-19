@@ -85,20 +85,20 @@ Record Model : Type := {
     v : (W F) -> nat -> Prop; 
 }.
 
-(*
+
 Check Build_Frame.
 Check Build_Model.
-*)
+
 
 Fixpoint fun_validation (M: Model) (w: W (F M)) (φ: modalFormula): Prop :=
   match φ with
-  | Lit     x   => v M w x
+  | Lit     x      => v M w x
   | Box     ψ      => forall w': W (F M), R (F M) w w' -> fun_validation M w' ψ
   | Dia     ψ      => exists w': W (F M), R (F M) w w' /\ fun_validation M w' ψ
   | Neg     ψ      => ~fun_validation M w ψ
-  | And     ψ  Ɣ  => fun_validation M w ψ /\ fun_validation M w Ɣ
-  | Or      ψ  Ɣ  => fun_validation M w ψ \/ fun_validation M w Ɣ
-  | Implies ψ  Ɣ  => fun_validation M w ψ -> fun_validation M w Ɣ
+  | And     ψ  Ɣ   => fun_validation M w ψ /\ fun_validation M w Ɣ
+  | Or      ψ  Ɣ   => fun_validation M w ψ \/ fun_validation M w Ɣ
+  | Implies ψ  Ɣ   => fun_validation M w ψ -> fun_validation M w Ɣ
   end.
 
 (* World Satisfaziblity *)

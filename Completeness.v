@@ -69,20 +69,12 @@ Proof.
   - assumption.
 Qed.
 
-Lemma lema_3:
-  forall A Gamma Delta n,
-  Lindenbaum_set A n Delta /\
-  subset Gamma Delta ->
-  Lindenbaum_set A n Gamma.
-Proof.
-  admit.  
-Admitted.
-
-
 Lemma lema_9:
-  forall A Δ n phi,
-  Lindenbaum_set A n Δ ->
-  (Consistency A (phi::Δ) ->
+  forall A Δ n,
+  Lindenbaum_set A n Δ /\
+  Maximal_Consistency A Δ ->
+  Consistency A Δ /\
+  (forall phi, Consistency A (phi::Δ) ->
   In phi Δ).
 Proof.
   admit.
@@ -90,18 +82,11 @@ Admitted.
  
 End Lindebaum.
 
-
-
 Lemma Lindenbaum:
   forall A (Γ : theory),
   Consistency A Γ -> 
   exists (Δ : theory), 
   (Maximal_Consistency A Δ /\ subset Γ Δ).
 Proof.
-  intros. exists Γ. split.
-  - unfold Maximal_Consistency; intros.
-    split.
-    + admit.
-    + assumption.
   - admit. 
 Admitted.
