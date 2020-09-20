@@ -1,20 +1,7 @@
-# TCC
+# Trabalho de Conclusão de Curso
 
-### A fazer de implementação
-- [ ] Prova densa ida
-- [ ] Prova reflexiva volta
-- [ ] Prova transitiva volta
-- [ ] Prova simétrica volta
-- [ ] Prova funcional volta
-- [ ] Prova euclidiana volta
-- [ ] Prova densa volta
-- [ ] Prova convergente volta
-- [ ] Prova serial volta
-- [ ] Completude
-- [ ] Escrever ;-;
+## Resumo
+A modelagem de determinados tipos de sistemas computacionais com a lógica clássica possui fatores limitantes. Neste contexto, a apresentação de outros sistemas lógicos, como a lógica modal, e a construção de uma biblioteca para o assistente de provas Coq tem o intuito de auxiliar na modelagem e facilitar o uso para a verificação de propriedades de sistemas. A semântica da lógica modal é representada pela semântica dos mundos possíveis, onde existe uma relação de acessibilidade que conecta os mundos de um modelo. Diferentes restrições impostas na relação de acessibilidade constroem sistemas da lógica modal que auxiliam na representação de propriedades nas mais diversas áreas de estudo. O desenvolvimento da biblioteca tem como objetivo sustentar a formalização de propriedades de \textit{softwares} e prová-los em Coq.
 
-### Trabalho futuro
-- Prova do Soundness para cada sistema
-
-### Perguntas ao Torrens
-- Anotar direito o Coercion
+## Abstract
+The modelling of certain types of computational systems with classical logic includes limiting factors. In this context, the presentation of other logical systems, such as modal logic, and the construction of a library for the proof assistant Coq intents to help in the modelling and facilitate usage on the verification of systems' properties. The semantics of modal logic is represented by the semantics of possible worlds, where there is an accessibility relationship that connects the worlds of a model. Different restrictions imposed on the accessibility relation build modal logic systems that help representation of properties on a wide array of research areas. The libary development aims to held the formalization of properties in softwares and prove them on Coq.

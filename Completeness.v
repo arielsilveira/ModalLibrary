@@ -26,25 +26,26 @@ Section Lindebaum.
 
 Variable P: nat -> modalFormula.
 Variable Γ: theory.
+Variable A: axiom -> Prop.
 
-Inductive Lindenbaum_set (A: axiom -> Prop): nat -> theory -> Prop :=
+Inductive Lindenbaum_set : nat -> theory -> Prop :=
   | Lindenbaum_zero:
-    Lindenbaum_set A 0 Γ
+    Lindenbaum_set 0 Γ
   | Lindenbaum_succ1:
     forall n Δ,
-    Lindenbaum_set A n Δ ->
+    Lindenbaum_set n Δ ->
     Consistency A (P n :: Δ) ->
-    Lindenbaum_set A (S n) (P n :: Δ)
+    Lindenbaum_set (S n) (P n :: Δ)
   | Lindenbaum_succ2:
     forall n Δ,
-    Lindenbaum_set A n Δ ->
+    Lindenbaum_set n Δ ->
     ~Consistency A (P n :: Δ) ->
-    Lindenbaum_set A (S n) Δ.
+    Lindenbaum_set (S n) Δ.
 
 Lemma construct_set:
-  forall A n,
+  forall n,
   exists Δ, 
-  Lindenbaum_set A n Δ.
+  Lindenbaum_set n Δ.
 Proof.
   intros; induction n.
   - exists Γ.
@@ -58,8 +59,8 @@ Proof.
 Qed.
 
 Lemma Lindenbaum_subset:
-  forall A n Δ,
-  Lindenbaum_set A n Δ -> 
+  forall n Δ,
+  Lindenbaum_set n Δ -> 
   subset Γ Δ.
 Proof.
   unfold subset; intros.
@@ -69,18 +70,8 @@ Proof.
   - assumption.
 Qed.
 
-Lemma lema_9:
-  forall A Δ n,
-  Lindenbaum_set A n Δ /\
-  Maximal_Consistency A Δ ->
-  Consistency A Δ /\
-  (forall phi, Consistency A (phi::Δ) ->
-  In phi Δ).
-Proof.
-  admit.
-Admitted.
- 
 End Lindebaum.
+
 
 Lemma Lindenbaum:
   forall A (Γ : theory),

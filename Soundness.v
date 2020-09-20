@@ -161,8 +161,8 @@ Proof.
 Qed.
 
 Theorem soundness:
-  forall (A: axiom -> Prop) (G: theory) (p: modalFormula),
-  (A; G |-- p) -> (G ||= p).
+  forall (G: theory) (p: modalFormula),
+  (K; G |-- p) -> (G ||= p).
 Proof.
   induction 1.
   - intros M ?H.
@@ -170,7 +170,7 @@ Proof.
     + apply nth_error_In with i.
       assumption.
     + assumption.
-  - destruct a; destruct H0; simpl.
+  - destruct H; destruct H0; simpl.
     + intros M ?H w.
       apply Hilbert_Axiom_1_soundness.
     + intros M ?H w.
@@ -193,6 +193,8 @@ Proof.
       apply Hilbert_Axiom_10_soundness.
     + intros M ?H w.
       apply Axiom_K_soundness.
+    + intros M ?H w.
+      apply Axiom_Possibility_soundness.
   - intros M ?H w.
     apply Modus_Ponens_soundness with f.
     split.

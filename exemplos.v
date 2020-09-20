@@ -1,6 +1,7 @@
-(* Arquivo para criar testes. *)
+(*File to create tests. *)
 Require Import Modal_Library Deductive_System.
 
+(* Page proof: 22 *)
 Lemma Example:
   T; (.[](#0 .-> #1):: .[](#1 .-> #2):: nil) |-- .[](#0 .-> #2) .
 Proof.

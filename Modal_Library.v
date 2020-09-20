@@ -82,7 +82,7 @@ Record Frame : Type :={
 
 Record Model : Type := {
     F : Frame; 
-    v : (W F) -> nat -> Prop; 
+    v : nat -> (W F) -> Prop; 
 }.
 
 
@@ -92,7 +92,7 @@ Check Build_Model.
 
 Fixpoint fun_validation (M: Model) (w: W (F M)) (φ: modalFormula): Prop :=
   match φ with
-  | Lit     x      => v M w x
+  | Lit     x      => v M x w 
   | Box     ψ      => forall w': W (F M), R (F M) w w' -> fun_validation M w' ψ
   | Dia     ψ      => exists w': W (F M), R (F M) w w' /\ fun_validation M w' ψ
   | Neg     ψ      => ~fun_validation M w ψ
@@ -394,6 +394,3 @@ Notation "φ =|= ψ" := (equivalence φ ψ)
 
 Notation "φ ≡ ψ " := (φ =|= ψ)
   (at level 110, only printing, no associativity).
-
-
-(* ;-; *)
