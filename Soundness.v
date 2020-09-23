@@ -2,7 +2,7 @@ Require Import Modal_Library Classical List Deductive_System.
 
 (* p -> (q -> p) *)
 Lemma Hilbert_Axiom_1_soundness:
-  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+  forall M w φ ψ,
   M ' w ||- φ .-> (ψ .-> φ).
 Proof.
   simpl; intros.
@@ -11,7 +11,7 @@ Qed.
 
 (* (p -> (q -> r)) -> ((p -> q) -> (p -> r)) *)
 Lemma Hilbert_Axiom_2_soundness:
-  forall (M: Model) (w: W (F M)) (φ ψ Ɣ: modalFormula),
+  forall M w φ ψ Ɣ,
   M ' w ||- (φ .-> (ψ .-> Ɣ)) .-> ((φ .-> ψ) .-> (φ .-> Ɣ)).
 Proof.
   simpl; intros.
@@ -22,7 +22,7 @@ Qed.
 
 (* (~ q -> ~ p) -> (p -> q) *)
 Lemma Hilbert_Axiom_3_soundness:
-  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+  forall M w φ ψ,
   M ' w ||- (.~ ψ .-> .~ φ) .-> (φ .-> ψ).
 Proof.
   simpl; intros.
@@ -35,7 +35,7 @@ Qed.
 
 (* p -> (q -> (p /\ q)) *)
 Lemma Hilbert_Axiom_4_soundness: 
-  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+  forall M w φ ψ,
   M ' w ||- φ .-> (ψ .-> (φ ./\ ψ)).
 Proof.
   simpl; intros.
@@ -44,7 +44,7 @@ Qed.
 
 (* (p /\ q) -> p *)
 Lemma Hilbert_Axiom_5_soundness: 
-  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+  forall M w φ ψ,
   M ' w ||- (φ ./\ ψ) .-> φ.
 Proof.
   simpl; intros.
@@ -54,7 +54,7 @@ Qed.
 
 (* (p /\ q) -> q *)
 Lemma Hilbert_Axiom_6_soundness: 
-  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+  forall M w φ ψ,
   M ' w ||- (φ ./\ ψ) .-> ψ.
 Proof.
   simpl; intros.
@@ -64,7 +64,7 @@ Qed.
 
 (* p -> (p \/ q) *)
 Lemma Hilbert_Axiom_7_soundness: 
-  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+  forall M w φ ψ,
   M ' w ||- (φ .-> (φ .\/ ψ)).
 Proof.
   simpl; intros.
@@ -74,7 +74,7 @@ Qed.
 
 (* q -> (p \/ q) *)
 Lemma Hilbert_Axiom_8_soundness: 
-  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
+  forall M w φ ψ,
   M ' w ||- (ψ .-> (φ .\/ ψ)).
 Proof.
   simpl; intros.
@@ -84,7 +84,7 @@ Qed.
 
 (* (p -> r) -> (q -> r) -> (p \/ q) -> r *)
 Lemma Hilbert_Axiom_9_soundness: 
-  forall (M: Model) (w: W (F M)) (φ ψ Ɣ: modalFormula),
+  forall M w φ ψ Ɣ,
   M ' w ||- (φ .-> Ɣ) .-> (ψ .-> Ɣ) .-> (φ .\/ ψ) .-> Ɣ.
 Proof.
   simpl; intros.
@@ -97,7 +97,7 @@ Qed.
 
 (* ~~p -> p *)
 Lemma Hilbert_Axiom_10_soundness: 
-  forall (M: Model) (w: W (F M)) (φ: modalFormula),
+  forall M w φ,
   M ' w ||- .~.~φ .-> φ.
 Proof.
   simpl; intros.
@@ -107,7 +107,7 @@ Qed.
 
 (* <>(p \/ q) -> (<>p \/ <>q) *)
 Lemma Axiom_Possibility_soundness:
-  forall (M: Model) (w: W (F M)) (φ ψ : modalFormula),
+  forall M w φ ψ,
   M ' w ||- .<> (φ .\/ ψ) .-> (.<> φ .\/ .<> ψ).
 Proof.
   simpl; intros.
@@ -122,7 +122,7 @@ Qed.
 
 (* [](p -> q) -> ([]p -> []q) *)
 Lemma Axiom_K_soundness:
-  forall (M: Model) (w: W (F M)) (φ ψ : modalFormula),
+  forall M w φ ψ,
   M ' w ||- .[](φ .-> ψ) .-> (.[]φ .-> .[]ψ).
 Proof.
   simpl; intros.
@@ -132,9 +132,11 @@ Proof.
     assumption.
 Qed.
 
-Lemma caso_2 :
-  forall (Γ : theory) (φ: modalFormula),
-  In φ Γ -> Γ ||= φ.
+(* φ ∈ Γ -> Γ ||= φ  *)
+Lemma case_two :
+  forall Γ φ,
+  In φ Γ -> 
+  Γ ||= φ.
 Proof.
   unfold entails_modal, validate_model; intros.
   apply exact_deduction with Γ.
@@ -144,8 +146,10 @@ Qed.
 
 (* a /\ (a -> b) -> b *)
 Lemma Modus_Ponens_soundness:
-  forall (M: Model) (w: W (F M)) (φ ψ: modalFormula),
-  ((M ' w ||- φ) /\ (M ' w ||- φ .-> ψ)) -> (M ' w ||- ψ).
+  forall M w φ ψ,
+  ((M ' w ||- φ) /\ 
+  (M ' w ||- φ .-> ψ)) -> 
+  (M ' w ||- ψ).
 Proof.
   simpl; intros.
   destruct H.
@@ -153,16 +157,18 @@ Proof.
 Qed.
 
 Lemma Necessitation_soundness:
-  forall (M: Model) (φ: modalFormula),
-  (M |= φ) -> (M |= .[]φ).
+  forall M φ,
+  (M |= φ) -> 
+  (M |= .[]φ).
 Proof.
   unfold validate_model; simpl; intros.
   apply H.
 Qed.
 
 Theorem soundness:
-  forall (G: theory) (p: modalFormula),
-  (K; G |-- p) -> (G ||= p).
+  forall (G: theory) (φ: modalFormula),
+  (K; G |-- φ) -> 
+  (G ||= φ).
 Proof.
   induction 1.
   - intros M ?H.
@@ -209,8 +215,9 @@ Proof.
 Qed.
 
 Corollary soundness2:
-  forall (M: Model) (w: W (F M)) (G: theory) (p: modalFormula),
-  theoryModal M G -> (K; G |-- p) -> M ' w ||- p.
+  forall M G w φ, 
+  theoryModal M G -> 
+  (K; G |-- φ) -> M ' w ||- φ.
 Proof.
   intros.
   eapply soundness.

@@ -50,5 +50,4 @@ Proof.
       (* Line: 1 *)
     + apply Prem with (i:=0).
       reflexivity.
-Qed.
- 
+Qed. 

@@ -1,16 +1,12 @@
-(*  Introduction
-
+(*  
     Name: Ariel Agne da Silveira
 
     Advisor: Karina Girardi Roggia
     Co-Advisor: Paulo Torrens
 
     Minion: Miguel
-
-    <Modal Logic Library>
-
-    Description:
 *)
+
 Require Import Arith List ListSet Notations Utf8 Classical.
 
 Inductive modalFormula : Set :=
@@ -23,7 +19,7 @@ Inductive modalFormula : Set :=
     | Implies      : modalFormula -> modalFormula -> modalFormula 
 .
 
-(* Calcula o tamanho de uma fórmula modal *)
+(* Size modal formula *)
 Fixpoint modalSize (f:modalFormula) : nat :=
     match f with 
     | Lit      x     => 1
@@ -161,7 +157,7 @@ Qed.
 
 (* reflexivity *)
 Theorem reflexive_deduction:
-  forall (M: Model) (Γ: theory) (φ: modalFormula),
+  forall M Γ φ,
   M '' φ::Γ |- φ.
 Proof.
   intros.
@@ -170,8 +166,10 @@ Proof.
 Qed.
 
 Lemma theoryModal_union:
-  forall (M: Model) (Γ ẟ: theory),
-  theoryModal M (Γ ++ ẟ) -> (theoryModal M Γ /\ theoryModal M ẟ).
+  forall M Γ ẟ,
+  theoryModal M (Γ ++ ẟ) -> 
+  (theoryModal M Γ /\ 
+  theoryModal M ẟ).
 Proof.
     intros.
     induction Γ.
@@ -187,8 +185,10 @@ Qed.
 
 (* prova bottom-up *)
 Theorem  transitive_deduction_bu:
-  forall (M: Model) (Γ ẟ: theory) (φ ψ Ɣ: modalFormula),
-  (M '' φ::Γ |- ψ) /\ (M '' ψ::ẟ |- Ɣ) -> (M '' φ::Γ++ẟ |- Ɣ).
+  forall M Γ ẟ φ ψ Ɣ,
+  (M '' φ::Γ |- ψ) /\ 
+  (M '' ψ::ẟ |- Ɣ) -> 
+  (M '' φ::Γ++ẟ |- Ɣ).
 Proof.
   intros.
   unfold entails in *.
@@ -199,8 +199,10 @@ Proof.
   tauto.
 Qed.
 
-Theorem exchange: forall (M : Model) (Γ : theory) (φ ψ Ɣ : modalFormula),
-  (M '' φ::ψ::Γ |- Ɣ) -> (M '' ψ::φ::Γ |- Ɣ).
+Theorem exchange: 
+  forall M Γ φ ψ Ɣ,
+  (M '' φ::ψ::Γ |- Ɣ) -> 
+  (M '' ψ::φ::Γ |- Ɣ).
 Proof.
   intros.
   unfold entails in *; intros.
@@ -216,26 +218,26 @@ Qed.
 
 Inductive transpose {T}: list T -> list T -> Prop :=
   | tranpose_head:
-    forall a b tail,
-    transpose (a :: b :: tail) (b :: a :: tail)
+    forall φ ψ tail,
+    transpose (φ:: ψ :: tail) (ψ :: φ:: tail)
   | transpose_tail:
-    forall a tail1 tail2,
-    transpose tail1 tail2 -> transpose (a :: tail1) (a :: tail2)
+    forall φ tail1 tail2,
+    transpose tail1 tail2 -> transpose (φ :: tail1) (φ :: tail2)
   | transpose_refl:
-    forall x,
-    transpose x x
+    forall ψ,
+    transpose ψ ψ
   | transpose_trans:
-    forall a b c,
-    transpose a b -> transpose b c -> transpose a c
+    forall φ ψ Ɣ,
+    transpose φ ψ -> transpose ψ Ɣ -> transpose φ Ɣ
   | transpose_sym:
-    forall a b,
-    transpose a b -> transpose b a.
+    forall φ ψ,
+    transpose φ ψ -> transpose ψ φ.
 
 Lemma transpose_in:
   forall {T} xs ys,
   transpose xs ys ->
-  forall x: T,
-  In x xs <-> In x ys.
+  forall φ: T,
+  In φ xs <-> In φ ys.
 Proof.
   induction 1; intros.
   - split; intros.
@@ -272,9 +274,10 @@ Proof.
 Qed.
 
 Theorem tranpose_deduction:
-  forall (M: Model) (Γ ẟ: theory) (φ: modalFormula),
+  forall M Γ ẟ φ,
   transpose Γ ẟ ->
-  (M '' Γ |- φ) <-> (M '' ẟ |- φ).
+  (M '' Γ |- φ) <-> 
+  (M '' ẟ |- φ).
 Proof.
   induction 1.
   - split; intros.
@@ -312,8 +315,9 @@ Proof.
 Qed.
 
 Theorem idempotence:
-  forall (M : Model) (Γ : theory) (φ ψ : modalFormula),
-  (M '' φ::φ::Γ |- ψ) -> (M '' φ::Γ |- ψ).
+  forall M Γ φ ψ,
+  (M '' φ::φ::Γ |- ψ) -> 
+  (M '' φ::Γ |- ψ).
 Proof.
   intros.
   unfold entails in *; intros.
@@ -326,14 +330,14 @@ Proof.
 Qed.
 
 Theorem monotonicity:
-  forall (M: Model) (Γ ẟ: theory) (φ: modalFormula),
-  (M '' Γ |- φ) -> (M '' Γ++ẟ |- φ).
+  forall M Γ ẟ φ,
+  (M '' Γ |- φ) -> 
+  (M '' Γ++ẟ |- φ).
 Proof.
-  intros.
   unfold entails in *; intros.
   apply H.
   apply theoryModal_union with (ẟ := ẟ).
-  apply H0.
+  assumption.
 Qed.
 
 (* Reflexividade *)
@@ -343,17 +347,22 @@ Definition reflexivity_frame (F: Frame): Prop :=
 (* Transitividade *)
 Definition transitivity_frame (F: Frame): Prop :=
   forall w w' w'': W F,
-  (R F w w' /\ R F w' w'') -> R F w w''.
+  (R F w w' /\ 
+  R F w' w'') -> 
+  R F w w''.
 
 (* Simetria *)
 Definition simmetry_frame (F: Frame): Prop :=
   forall w w',
-  R F w w' -> R F w' w.
+  R F w w' -> 
+  R F w' w.
 
 (* Euclidiana *)
 Definition euclidian_frame (F: Frame): Prop :=
   forall w w' w'',
-  (R F w w' /\ R F w w'') -> R F w' w''.
+  (R F w w' /\ 
+  R F w w'') -> 
+  R F w' w''.
 
 (* Serial *)
 Definition serial_frame (F: Frame): Prop :=
@@ -363,31 +372,39 @@ Definition serial_frame (F: Frame): Prop :=
 (* Funcional *)
 Definition functional_frame (F: Frame) : Prop :=
   forall w w' w'',
-  (R F w w' /\ R F w w'') -> w' = w''.
+  (R F w w' /\ 
+  R F w w'') -> 
+  w' = w''.
 
 (* Densa*)
 Definition dense_frame (F: Frame) : Prop :=
   forall w w',
   exists w'',
-  R F w w' -> (R F w w'' /\ R F w' w'').
+  R F w w' -> 
+  (R F w w'' /\ 
+  R F w' w'').
 
 (* Convergente *)
 Definition convergente_frame (F: Frame): Prop :=
   forall w x y,
   exists z,
-  (R F w x /\ R F w y) -> (R F x z /\ R F y z).
+  (R F w x /\ 
+  R F w y) -> 
+  (R F x z /\ R F y z).
 
 (* Equivalencia lógica *)
 
 Definition entails_modal (Γ: theory) (φ: modalFormula): Prop :=
-  forall M: Model,
-  theoryModal M Γ -> validate_model M φ.
+  forall M,
+  theoryModal M Γ -> 
+  validate_model M φ.
 
 Notation "Γ ||= φ" := (entails_modal Γ φ)
   (at level 110, no associativity).
 
 Definition equivalence (φ ψ: modalFormula) : Prop := 
-  ([φ] ||= ψ ) /\ ([ψ] ||= φ).
+  ([φ] ||= ψ ) /\ 
+  ([ψ] ||= φ).
 
 Notation "φ =|= ψ" := (equivalence φ ψ)
   (at level 110, only parsing, no associativity).

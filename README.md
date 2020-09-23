@@ -1,4 +1,4 @@
-# Trabalho de Conclusão de Curso
+# Library Modal Logic in Coq
 
 ## Resumo
 A modelagem de determinados tipos de sistemas computacionais com a lógica clássica possui fatores limitantes. Neste contexto, a apresentação de outros sistemas lógicos, como a lógica modal, e a construção de uma biblioteca para o assistente de provas Coq tem o intuito de auxiliar na modelagem e facilitar o uso para a verificação de propriedades de sistemas. A semântica da lógica modal é representada pela semântica dos mundos possíveis, onde existe uma relação de acessibilidade que conecta os mundos de um modelo. Diferentes restrições impostas na relação de acessibilidade constroem sistemas da lógica modal que auxiliam na representação de propriedades nas mais diversas áreas de estudo. O desenvolvimento da biblioteca tem como objetivo sustentar a formalização de propriedades de \textit{softwares} e prová-los em Coq.

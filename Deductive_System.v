@@ -65,59 +65,58 @@ Inductive deduction (A: axiom -> Prop): theory -> modalFormula -> Prop :=
          deduction A t (.[] f).
 
 Inductive K: axiom -> Prop :=
-  | K_ax1: forall p q, K (ax1 p q)
-  | K_ax2: forall p q r, K (ax2 p q r)
-  | K_ax3: forall p q, K (ax3 p q)
-  | K_ax4: forall p q, K (ax4 p q)
-  | K_ax5: forall p q, K (ax5 p q)
-  | K_ax6: forall p q, K (ax6 p q)
-  | K_ax7: forall p q, K (ax7 p q)
-  | K_ax8: forall p q, K (ax8 p q)
-  | K_ax9: forall p q r, K (ax9 p q r)
-  | K_ax10: forall p q, K (ax10 p q)
-  | K_axK: forall p q, K (axK p q)
-  | K_axPos: forall p q, K (axPos p q)
-  .
+  | K_ax1: forall φ ψ, K (ax1 φ ψ)
+  | K_ax2: forall φ ψ Ɣ, K (ax2 φ ψ Ɣ)
+  | K_ax3: forall φ ψ, K (ax3 φ ψ)
+  | K_ax4: forall φ ψ, K (ax4 φ ψ)
+  | K_ax5: forall φ ψ, K (ax5 φ ψ)
+  | K_ax6: forall φ ψ, K (ax6 φ ψ)
+  | K_ax7: forall φ ψ, K (ax7 φ ψ)
+  | K_ax8: forall φ ψ, K (ax8 φ ψ)
+  | K_ax9: forall φ ψ Ɣ, K (ax9 φ ψ Ɣ)
+  | K_ax10: forall φ ψ, K (ax10 φ ψ)
+  | K_axK: forall φ ψ, K (axK φ ψ)
+  | K_axPos: forall φ ψ, K (axPos φ ψ).
 
 (* Reflexive *)
 Inductive T: axiom -> Prop :=
-  | T_K: forall a, K a -> T a
-  | T_axT: forall p , T (axT p).
+  | T_K: forall φ, K φ -> T φ
+  | T_axT: forall φ , T (axT φ).
 
 (* Reflexive and Symmetry *)
 Inductive B: axiom -> Prop :=
-  | B_T: forall a, T a -> B a
-  | B_axB: forall p , B (axB p).
+  | B_T: forall φ, T φ -> B φ
+  | B_axB: forall φ , B (axB φ).
 
 (* Transitive *)
 Inductive K4: axiom -> Prop :=
-  | K4_K: forall a, K a -> K4 a
-  | K4_axK4: forall p , K4 (axK4 p).
+  | K4_K: forall φ, K φ -> K4 φ
+  | K4_axK4: forall φ , K4 (axK4 φ).
 
 (* Serial *)
 Inductive D: axiom -> Prop :=
-  | D_K: forall a, K a -> D a
-  | D_axD: forall p , D (axD p).
+  | D_K: forall φ, K φ -> D φ
+  | D_axD: forall φ , D (axD φ).
 
 (* Euclidean *)
 Inductive K5: axiom -> Prop :=
-  | K5_K: forall a, K a -> K5 a
-  | K5_axK5: forall p , K5 (axK5 p).
+  | K5_K: forall φ, K φ -> K5 φ
+  | K5_axK5: forall φ , K5 (axK5 φ).
 
 (* Reflexive and Transitive*)
 Inductive S4: axiom -> Prop :=
-  | S4_T: forall a, T a -> S4 a
-  | S4_axK4: forall p , S4 (axK4 p).
+  | S4_T: forall φ, T φ -> S4 φ
+  | S4_axK4: forall φ , S4 (axK4 φ).
 
 (* Symmetry and S4 *)
 Inductive S5: axiom -> Prop :=
-  | S5_B: forall a, B a -> S5 a
-  | S5_S4: forall a , S4 a -> S5 a.
+  | S5_B: forall φ, B φ -> S5 φ
+  | S5_S4: forall φ , S4 φ -> S5 φ.
 
 (* Reflexive and Euclidean *)
 Inductive S5_2: axiom -> Prop :=
-  | S5_2_T: forall a, T a -> S5_2 a
-  | S5_2_K5: forall a , K5 a -> S5_2 a.
+  | S5_2_T: forall φ, T φ -> S5_2 φ
+  | S5_2_K5: forall φ , K5 φ -> S5_2 φ.
 
 
 (* Notations and Theorems *)
@@ -128,26 +127,26 @@ Notation "A ; G |-- p" := (deduction A G p)
     (at level 110, no associativity).
 
 Lemma derive_identity:
-  forall (a: modalFormula) (G: theory), 
-  K; G |-- a .-> a.
+  forall Γ φ, 
+  K; Γ |-- φ .-> φ.
 Proof.
   intros.
-  apply Mp with (f := a.-> a .-> a).
-  - apply Mp with (f := a .-> (a .-> a) .-> a).
-    + apply Ax with (a := (ax2 a (a .-> a) a)).
+  apply Mp with (f := φ.-> φ .-> φ).
+  - apply Mp with (f := φ .-> (φ .-> φ) .-> φ).
+    + apply Ax with (a := (ax2 φ (φ .-> φ) φ)).
       * constructor.
       * reflexivity.
-    + apply Ax with (a := (ax1 a (a .-> a))).
+    + apply Ax with (a := (ax1 φ (φ .-> φ))).
       * constructor.
       * reflexivity.
-  - apply Ax with (a := (ax1 a a)).
+  - apply Ax with (a := (ax1 φ φ)).
     + constructor.
     + reflexivity.
 Qed.
 
 Lemma derive_refl : 
-  forall (A: axiom -> Prop) (Gamma: theory) (phi: modalFormula),
-  A; phi :: Gamma |-- phi.
+  forall A Γ φ,
+  A; φ :: Γ |-- φ.
 Proof.
   intros.
   apply Prem with (i := 0).
@@ -156,16 +155,18 @@ Qed.
 
 
 Definition subset (Γ Δ : theory) : Prop :=
-  forall (φ : modalFormula), In φ Γ -> In φ Δ.
+  forall φ, 
+  In φ Γ -> 
+  In φ Δ.
 
 Notation "A ⊆ B" := (subset A B)
-  (at level 70, no associativity) : type_scope.
+  (at level 70, only printing, no associativity) : type_scope.
 
 
 Lemma derive_In:
-  forall A G phi ,
-  In phi G ->
-  A; G |-- phi.
+  forall A Γ φ ,
+  In φ Γ ->
+  A; Γ |-- φ.
 Proof.
   intros; eapply In_nth_error in H.
   destruct H.
@@ -174,10 +175,11 @@ Proof.
 Qed.
 
 Lemma derive_weak: 
-  forall G D,
-  subset G D ->
-  forall A p,
-  (A; G |-- p) -> (A; D |-- p).
+  forall Γ ẟ,
+  subset Γ ẟ ->
+  forall A φ,
+  (A; Γ |-- φ) -> 
+  (A; ẟ |-- φ).
 Proof.
   intros.
   induction H0.
@@ -194,13 +196,14 @@ Proof.
 Qed.
 
 Lemma derive_monotonicity :
-  forall A (H G: theory) (phi:modalFormula), 
-  (A; G |-- phi) -> (A; (H ++ G) |-- phi).
+  forall ẟ Γ φ, 
+  (K; Γ |-- φ) -> 
+  (K; ẟ ++ Γ |-- φ).
 Proof.
   intros.
-  apply derive_weak with G.
+  apply derive_weak with Γ.
   - unfold subset. intros. 
-    induction H.
+    induction ẟ.
     + simpl; assumption.
     + simpl in *; right; assumption.
   - assumption.
@@ -209,10 +212,10 @@ Qed.
 Require Import Equality.
 
 Lemma derive_modus_ponens:
-  forall (phi psi: modalFormula) (Gamma: theory),
-  (K; phi::Gamma |-- psi) ->
-  (K; Gamma |-- phi) ->
-  (K; Gamma |-- psi).
+  forall Γ φ ψ,
+  (K; φ::Γ |-- ψ) ->
+  (K; Γ |-- φ) ->
+  (K; Γ |-- ψ).
 Proof.
   intros; dependent induction H.
   - apply nth_error_In in H. 

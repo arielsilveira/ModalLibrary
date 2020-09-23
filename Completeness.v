@@ -1,16 +1,18 @@
-Require Import Modal_Library Deductive_System List ClassicalFacts Classical FSetInterface Utf8 MSetInterface.
+Require Import Modal_Library Deductive_System List Classical.
 
 Definition Consistency (A: axiom -> Prop) (Γ : theory) : Prop := 
-  forall (φ : modalFormula),
+  forall φ,
   ~ (A; Γ |-- φ ./\ .~φ).
 
 Definition Maximal_Consistency (A: axiom -> Prop) (Γ : theory) : Prop :=
-  forall (φ: modalFormula),
-  ~(In φ Γ /\  In .~ φ Γ) /\ Consistency A Γ.
+  forall φ,
+  ~(In φ Γ /\  In .~ φ Γ) /\ 
+  Consistency A Γ.
 
 Lemma lema_1 :
   forall A Δ Γ,
-  (Consistency A Δ /\ subset Γ Δ) -> 
+  (Consistency A Δ /\ 
+  subset Γ Δ) -> 
   Consistency A Γ.
 Proof.
   intros.
@@ -72,12 +74,12 @@ Qed.
 
 End Lindebaum.
 
-
 Lemma Lindenbaum:
-  forall A (Γ : theory),
+  forall A Γ,
   Consistency A Γ -> 
-  exists (Δ : theory), 
-  (Maximal_Consistency A Δ /\ subset Γ Δ).
+  exists Δ, 
+  (Maximal_Consistency A Δ /\ 
+  subset Γ Δ).
 Proof.
-  - admit. 
+  admit. 
 Admitted.
