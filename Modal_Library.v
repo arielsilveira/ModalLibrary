@@ -71,14 +71,14 @@ Notation "x :: l" := (cons x l)
 Notation "[ x ; .. ; y ]" := (cons x .. (cons y nil) ..).
 
 
-Record Frame : Type :={
-    W : Set;
-    R : W -> W -> Prop;
+Record Frame : Type := {
+  W : Set;
+  R : W -> W -> Prop;
 }.
 
 Record Model : Type := {
-    F : Frame; 
-    v : nat -> (W F) -> Prop; 
+  F : Frame; 
+  v : nat -> (W F) -> Prop; 
 }.
 
 
