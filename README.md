@@ -33,17 +33,17 @@ Search Group: [FUNÇÃO](https://www.udesc.br/cct/funcao)
         <td>
             <img style="border-radius: 50%;" src="https://avatars1.githubusercontent.com/u/19842910?v=4" width="100px;" alt="">
             <br/>
-            <sub>Author: <a href="github.com/arielsilveira"><b>Ariel Agne da Silveira</b></sub> </a>
+            <sub>Author: <a href="https://github.com/arielsilveira"><b>Ariel Agne da Silveira</b></sub> </a>
         </td>
         <td>
             <img style="border-radius: 50%;" src="https://avatars2.githubusercontent.com/u/6727632?v=4" width="100px;" alt="">
             <br/>
-            <sub>Advisor: <a href="github.com/kaqui"><b>Karina Girardi Roggia</b></sub> </a>
+            <sub>Advisor: <a href="https://github.com/kaqui"><b>Karina Girardi Roggia</b></sub> </a>
         </td>
         <td>
             <img style="border-radius: 50%;" src="https://avatars3.githubusercontent.com/u/394865?v=4" width="100px;" alt="">
             <br/>
-            <sub>Co-Advisor: <a href="github.com/takanuva"><b>Paulo Henrique Torrens</b></sub> </a>
+            <sub>Co-Advisor: <a href="https://github.com/takanuva"><b>Paulo Henrique Torrens</b></sub> </a>
         </td>
     </tr>
 </table>
