@@ -8,10 +8,11 @@
 ## Tabela de conteúdos
 
 <!--ts-->
-   * [Abstract](#Abstract)
-   * [Technology](#Technology)
-   * [License](#tabela-de-conteudos)
-   * [Authors](#Authors)
+* [Abstract](#Abstract)
+* [Technology](#Technology)
+* [Compile](#Compile)
+* [License](#tabela-de-conteudos)
+* [Authors](#Authors)
 <!--te-->
 
 ## Abstract
@@ -19,6 +20,14 @@ The modelling of certain types of computational systems with classical logic inc
 
 ## Technology
 - [Coq](https://coq.inria.fr/)
+
+## Compile
+
+In the project directory, you can run:
+
+`
+$ make
+` 
 
 ## License
 
