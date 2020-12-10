@@ -33,6 +33,10 @@ $ make
 
 [BSD-2-Clause](https://github.com/arielsilveira/ModalLibrary/blob/master/LICENSE)
 
+## Reference
+
+SILVEIRA, Ariel Agne da; ROGGIA, Karina Girardi; TORRENS, Paulo Henrique. Implementação de uma biblioteca de lógica modal em COQ. 2020. 65 f. Trabalhos de Conclusão de Curso (Graduação)-Universidade do Estado de Santa Catarina, Centro de Ciências Tecnológicas, Curso de Curso de Ciência da Computação, Joinville, 2020. 
+
 ## Authors
 ---
 Search Group: [FUNÇÃO](https://www.udesc.br/cct/funcao)
