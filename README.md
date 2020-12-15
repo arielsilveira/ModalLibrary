@@ -36,7 +36,7 @@ $ make
 
 ## Reference
 
-SILVEIRA, Ariel Agne da; ROGGIA, Karina Girardi; TORRENS, Paulo Henrique. [Implementação de uma biblioteca de lógica modal em Coq](sistemabu.udesc.br/pergamumweb/vinculos/000082/0000820a.pdf). 2020. 65 f. Trabalhos de Conclusão de Curso (Graduação)-Universidade do Estado de Santa Catarina, Centro de Ciências Tecnológicas, Curso de Curso de Ciência da Computação, Joinville, 2020. 
+SILVEIRA, Ariel Agne da; ROGGIA, Karina Girardi; TORRENS, Paulo Henrique. [Implementação de uma biblioteca de lógica modal em Coq](http://sistemabu.udesc.br/pergamumweb/vinculos/000082/0000820a.pdf). 2020. 65 f. Trabalhos de Conclusão de Curso (Graduação)-Universidade do Estado de Santa Catarina, Centro de Ciências Tecnológicas, Curso de Curso de Ciência da Computação, Joinville, 2020. 
 
 ## Authors
 ---
